@@ -6,6 +6,7 @@ use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RoleRepository;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 class Utilisateur
@@ -39,6 +40,8 @@ class Utilisateur
 
     public function __construct()
     {
+        $citoyen = RoleRepository::find(1);
+        dd($citoyen);
         $this->articles = new ArrayCollection();
     }
 
