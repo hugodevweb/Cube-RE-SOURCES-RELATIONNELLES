@@ -2,23 +2,23 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
-class Categorie
+#[ORM\Entity(repositoryClass: TypeRepository::class)]
+class Type
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categories')]
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Article::class)]
     private Collection $articles;
 
     public function __construct()
@@ -55,7 +55,7 @@ class Categorie
     {
         if (!$this->articles->contains($article)) {
             $this->articles->add($article);
-            $article->addCategory($this);
+            $article->setType($this);
         }
 
         return $this;
@@ -64,7 +64,10 @@ class Categorie
     public function removeArticle(Article $article): static
     {
         if ($this->articles->removeElement($article)) {
-            $article->removeCategory($this);
+            // set the owning side to null (unless already changed)
+            if ($article->getType() === $this) {
+                $article->setType(null);
+            }
         }
 
         return $this;

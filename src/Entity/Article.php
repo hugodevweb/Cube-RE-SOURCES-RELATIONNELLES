@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Monolog\DateTimeImmutable;
+use DateTimeZone;
+
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -26,9 +29,6 @@ class Article
     private ?bool $validation = null;
 
     #[ORM\Column]
-    private ?bool $exploitation = null;
-
-    #[ORM\Column]
     private ?int $nombreVu = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
@@ -37,12 +37,21 @@ class Article
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Categorie::class)]
+    #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private Collection $categories;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Type $type = null;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentaire::class)]
+    private Collection $commentaires;
 
     public function __construct()
     {
+        $this->nombreVu = 0;
+        $this->created_at = new DateTimeImmutable(false, new DateTimeZone('Europe/Paris'));
         $this->categories = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,18 +91,6 @@ class Article
     public function setValidation(bool $validation): static
     {
         $this->validation = $validation;
-
-        return $this;
-    }
-
-    public function isExploitation(): ?bool
-    {
-        return $this->exploitation;
-    }
-
-    public function setExploitation(bool $exploitation): static
-    {
-        $this->exploitation = $exploitation;
 
         return $this;
     }
@@ -146,7 +143,6 @@ class Article
     {
         if (!$this->categories->contains($category)) {
             $this->categories->add($category);
-            $category->setArticle($this);
         }
 
         return $this;
@@ -154,10 +150,47 @@ class Article
 
     public function removeCategory(Categorie $category): static
     {
-        if ($this->categories->removeElement($category)) {
+        $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): static
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
+            $commentaire->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): static
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
             // set the owning side to null (unless already changed)
-            if ($category->getArticle() === $this) {
-                $category->setArticle(null);
+            if ($commentaire->getArticle() === $this) {
+                $commentaire->setArticle(null);
             }
         }
 
