@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\Commentaire;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentaireRepository;
-
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -24,12 +23,12 @@ class CommentaireCrudController extends AbstractCrudController
         $this->articleRepository = $articleRepository;
         $this->commentaireRepository = $commentaireRepository;
     }
-
+  
     public static function getEntityFqcn(): string
     {
         return Commentaire::class;
     }
-
+  
     public function configureFields(string $pageName): iterable
     {
         $res =  [

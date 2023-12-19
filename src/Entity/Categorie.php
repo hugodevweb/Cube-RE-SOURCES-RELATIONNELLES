@@ -50,12 +50,20 @@ class Categorie
     {
         return $this->articles;
     }
-
     public function addArticle(Article $article): static
     {
         if (!$this->articles->contains($article)) {
             $this->articles->add($article);
             $article->addCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): static
+    {
+        if ($this->articles->removeElement($article)) {
+            $article->removeCategory($this);
         }
 
         return $this;

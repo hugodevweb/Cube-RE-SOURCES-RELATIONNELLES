@@ -20,7 +20,7 @@ class CommentaireRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Commentaire::class);
     }
-
+  
     public function findCommentsByArticle($article)
     {
         return $this->createQueryBuilder('c')
@@ -29,7 +29,7 @@ class CommentaireRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
+  
 //    /**
 //     * @return Commentaire[] Returns an array of Commentaire objects
 //     */

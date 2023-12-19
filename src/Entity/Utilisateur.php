@@ -40,6 +40,8 @@ class Utilisateur
 
     public function __construct()
     {
+        $citoyen = RoleRepository::find(1);
+        dd($citoyen);
         $this->articles = new ArrayCollection();
     }
 

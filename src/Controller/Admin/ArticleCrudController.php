@@ -23,7 +23,7 @@ class ArticleCrudController extends AbstractCrudController
     {
         $this->utilisateurRepository = $utilisateurRepository;
     }
-
+  
     public static function getEntityFqcn(): string
     {
         return Article::class;
@@ -31,8 +31,6 @@ class ArticleCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
-        $utilisateurs = $this->utilisateurRepository->findall();
-
         return [
             TextField::new('titre'),
             TextEditorField::new('corps'),

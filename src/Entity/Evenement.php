@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Monolog\DateTimeImmutable;
 use DateTimeZone;
 
-
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
 {
@@ -39,7 +38,7 @@ class Evenement
     {
         $this->created_at = new DateTimeImmutable(false, new DateTimeZone('Europe/Paris'));
     }
-
+  
     public function getId(): ?int
     {
         return $this->id;

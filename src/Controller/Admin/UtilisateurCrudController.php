@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\Utilisateur;
 use App\Entity\Role;
 use App\Repository\RoleRepository;
-
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;

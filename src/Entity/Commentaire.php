@@ -30,7 +30,7 @@ class Commentaire
     {
         $this->est_actif = false;
     }
-
+  
     public function getId(): ?int
     {
         return $this->id;
