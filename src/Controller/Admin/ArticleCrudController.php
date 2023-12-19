@@ -31,6 +31,8 @@ class ArticleCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
+        $utilisateurs = $this->utilisateurRepository->findall();
+
         return [
             TextField::new('titre'),
             TextEditorField::new('corps'),
