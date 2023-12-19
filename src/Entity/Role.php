@@ -43,14 +43,14 @@ class Role
         return $this;
     }
 
-    public function getUtlisateur(): ?Utilisateur
+    public function getUtilisateur(): ?Utilisateur
     {
-        return $this->utlisateur;
+        return $this->utilisateur;
     }
 
-    public function setUtlisateur(?Utilisateur $utlisateur): static
+    public function setUtilisateur(?Utilisateur $utilisateur): static
     {
-        $this->utlisateur = $utlisateur;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

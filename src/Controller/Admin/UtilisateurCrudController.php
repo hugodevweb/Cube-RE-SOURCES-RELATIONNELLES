@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 class UtilisateurCrudController extends AbstractCrudController
 {
@@ -32,25 +33,36 @@ class UtilisateurCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $roles = $this->roleRepository->findAll();
+        // dd($roles);
 
         return [
-            IdField::new('id'),
+            IdField::new('id')->onlyOnIndex(),
             TextField::new('pseudo'),
             TextField::new('nom'),
             TextField::new('prenom'),
             EmailField::new('mail'),
-            ChoiceField::new('role')->setChoices($this->formatRolesForChoices($roles)),
+            TextField::new('password')->onlyWhenCreating(),
+            // TextField::new('role')->onlyOnIndex(),
+            ChoiceField::new('role')->setChoices($this->formatRolesForChoices($roles))->onlyOnForms(),
+            AssociationField::new('role')
+            ->setFormTypeOptions([
+                'by_reference' => false, // This is important for handling associations correctly
+            ])
+            ->autocomplete() // Use an autocomplete field for a better user experience
+            ->setCustomOptions([
+                'widget' => 'native',
+            ])
+            ->setRequired(true)
+            ->onlyOnIndex(),
         ];
     }
 
     private function formatRolesForChoices(array $roles): array
     {
         $formattedRoles = [];
-
         foreach ($roles as $role) {
             $formattedRoles[$role->getNom()] = $role;
         }
-
         return $formattedRoles;
     }
 }
