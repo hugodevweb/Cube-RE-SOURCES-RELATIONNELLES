@@ -188,10 +188,13 @@
             align-items: center;
             margin: 0 auto;
             font-size: 40px;
-            color: #212529;
             cursor: pointer;
             padding-top:5%;
             padding-bottom:5%;
+
+            --bs-btn-color: #212529;
+            --bd-btn-color: #fff;
+
         }
         #toggle:checked + .nav.col-12.col-md-auto.mb-2.mb-md-0 {
           display: flex;
