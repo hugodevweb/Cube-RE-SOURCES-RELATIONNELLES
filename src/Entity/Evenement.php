@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\EvenementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Monolog\DateTimeImmutable;
+use DateTimeZone;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
@@ -32,6 +34,11 @@ class Evenement
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
+    public function __construct()
+    {
+        $this->created_at = new DateTimeImmutable(false, new DateTimeZone('Europe/Paris'));
+    }
+  
     public function getId(): ?int
     {
         return $this->id;

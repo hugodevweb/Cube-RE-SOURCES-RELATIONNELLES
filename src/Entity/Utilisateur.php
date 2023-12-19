@@ -149,16 +149,13 @@ class Utilisateur
     {
         // unset the owning side of the relation if necessary
         if ($role === null && $this->role !== null) {
-            $this->role->setUtlisateur(null);
+            $this->role->setUtilisateur(null);
         }
-
         // set the owning side of the relation if necessary
-        if ($role !== null && $role->getUtlisateur() !== $this) {
-            $role->setUtlisateur($this);
+        if ($role !== null && $role->getUtilisateurs() !== $this) {
+            $role->setUtilisateur($this);
         }
-
         $this->role = $role;
-
         return $this;
     }
 }
