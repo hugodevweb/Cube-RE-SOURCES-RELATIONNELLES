@@ -63,9 +63,28 @@
       setTheme(getPreferredTheme())
     }
   })
-
+  const updateLogo = theme => {
+    const logoElement = document.querySelector('.theme-logo');
+  
+    // Chemin relatif par rapport au fichier HTML qui charge le script
+    let imagePath;
+    if (isParentPage) {
+      imagePath = './ressources/Images/';
+    } else {
+      imagePath = '../ressources/Images/';
+    }
+    if (theme === 'dark') {
+      logoElement.src = imagePath + 'logoFN.png';
+      logoElement.alt = 'Dark Logo';
+    } else {
+      logoElement.src = imagePath + 'logoFB.png';
+      logoElement.alt = 'Light Logo';
+    }
+  };  
+  
   window.addEventListener('DOMContentLoaded', () => {
     showActiveTheme(getPreferredTheme())
+    
 
     document.querySelectorAll('[data-bs-theme-value]')
       .forEach(toggle => {
@@ -74,6 +93,7 @@
           setStoredTheme(theme)
           setTheme(theme)
           showActiveTheme(theme, true)
+          updateLogo(theme)
         })
       })
   })
