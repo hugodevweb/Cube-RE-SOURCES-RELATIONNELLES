@@ -12,7 +12,7 @@ body {
   
   /* Carousel base class */
   .carousel {
-    margin-bottom: 4rem;
+    margin-bottom: 0;
   }
   /* Since positioning the image, we need to help out the caption */
   .carousel-caption {
@@ -24,10 +24,7 @@ body {
   .carousel-item {
     height: 32rem;
   }
-  
-  
-  /* RESPONSIVE CSS
-  -------------------------------------------------- */
+
   
   @media (min-width: 40em) {
     /* Bump up size of carousel content */
@@ -75,7 +72,7 @@ body {
   }
   
   .b-example-divider {
-    margin-top: 75px;
+    margin-top: 0;
   }
   
   .btn.btn-outline-secondary {
@@ -96,6 +93,8 @@ body {
   }
   
   
+
+  
   @media screen and (max-width:767px) {
     .h-100.p-5.bg-body-tertiary.border.rounded-3 {
       margin-top:13%;
@@ -107,7 +106,7 @@ body {
       margin-top:4%;
     }
     .row {
-      padding: 0 6% 6% 6%;
+      padding: 10% 6% 6% 6%;
     }
     h1 {
       margin-bottom:6%;
@@ -242,9 +241,21 @@ a {
         margin-bottom: 4%;
     }
     .titre_actu {
-        margin-left:2.5%;
+        text-align:center;
     }
 }
 
 
 /*------------ R-POPULAIRES ------------*/
+
+.row.mb-2 {
+    margin-top:4%;
+}
+ 
+
+
+
+
+
+
+

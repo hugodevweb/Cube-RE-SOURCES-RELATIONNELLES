@@ -180,7 +180,7 @@ li.nav-item.mb-2:hover {
 }
 
 .py-5 {
-    padding-bottom: 0!important;
+    padding-bottom: 1!important;
 }
 
 .mb-3 {
@@ -203,6 +203,9 @@ li.nav-item.mb-2:hover {
 
 @media (max-width: 768px) {
     .row {
-        flex-direction: column;
+      flex-direction: column;
+      width:100%;
+      align-items: center;
+      text-align: center;
     }
 }
