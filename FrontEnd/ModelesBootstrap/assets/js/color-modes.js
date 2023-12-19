@@ -93,7 +93,7 @@
           setStoredTheme(theme)
           setTheme(theme)
           showActiveTheme(theme, true)
-          updateLogo(theme)
+          updateLogo(theme) 
         })
       })
   })
