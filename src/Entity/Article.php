@@ -49,6 +49,7 @@ class Article
     public function __construct()
     {
         $this->nombreVu = 0;
+        $this->validation = false;
         $this->created_at = new DateTimeImmutable(false, new DateTimeZone('Europe/Paris'));
         $this->categories = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
