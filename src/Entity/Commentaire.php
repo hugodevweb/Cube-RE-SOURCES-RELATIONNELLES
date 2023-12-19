@@ -26,6 +26,11 @@ class Commentaire
     #[ORM\Column(nullable: true)]
     private ?int $parent = null;
 
+    public function __construct()
+    {
+        $this->est_actif = false;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
