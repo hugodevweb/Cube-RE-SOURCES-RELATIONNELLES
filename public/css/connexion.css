@@ -47,9 +47,18 @@ p {
 a.decor {
   text-decoration:none;
 }
+.form-floating>label {
+  padding: 0rem 0.75rem;
+}
 
 @media (max-width: 768px) {
   .mb-3 {
     text-align: center;
   }
 }
+@media (max-width: 991px){
+  label {
+    padding-bottom:0!important;
+  }
+}
+
