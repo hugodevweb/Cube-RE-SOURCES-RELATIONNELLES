@@ -1,56 +1,112 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello ArticleController!{% endblock %}
-
-{% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Titre de l'article</h1>
-            <p>Date de publication: 20 décembre 2023</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...</p>
-
-            <!-- Section de téléchargement de fichier -->
-            <div class="mb-4">
-                <h2>Télécharger le fichier lié</h2>
-                <p>Description du fichier, informations, etc.</p>
-                <a href="chemin/vers/le/fichier.pdf" download="nom-du-fichier.pdf" class="btn btn-primary">Télécharger le fichier</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section de commentaires -->
-    <div class="row">
+{% extends 'base.html.twig' %} {% block title %}Hello ArticleController!{%
+    endblock %} {% block stylesheets %}
+    <link rel="stylesheet" href="../../public/css/blog.css" />
+    <link rel="stylesheet" href="../../public/css/blog.css" />
+    {% endblock %} {% block body %}
     
-        <div class="col-md-12">
-        <!-- Liste des commentaires -->
-            <div class="mt-4">
-                <h3>Commentaires existants</h3>
-                <ul class="list-unstyled">
-                    <!-- Exemple de commentaire -->
-                    <li>
-                        <strong>Nom de l'utilisateur</strong>
-                        <p>Contenu du commentaire...</p>
-                    </li>
-                </ul>
+    
+    
+    <article class="blog-post" style="padding: 15px;">
+        
+        <!-- Titre de la ressource -->
+        <h2 class="display-5 link-body-emphasis mb-1">Titre de la ressource</h2>
+        
+        <!-- Métadonnées -->
+        <p class="blog-post-meta">4 Janvier, 2023 par <a href="#">Mark</a></p>
+        
+        <!-- Contenu principal -->
+        <p>
+            lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+            posuere erat a ante. Lorem ipsum dolor sit amet, consectetur
+        </p>
+        <div class="d-flex justify-content-center align-items-center mt-4">
+        <button class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+          </svg>
+            Télécharger la ressource
+        </button>
+    </div>
+        <hr />
+        
+        <!-- Commentaires -->
+        <h2>Commentaires</h2>
+        
+        <!-- Commentaire 1 -->
+        <div class="comment border p-3 mb-2">
+            <p><strong>John Doe</strong> a dit :</p>
+            <p>C'est un excellent article! J'ai vraiment apprécié la lecture.</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="text-muted align-items-center mb-0">4 Janvier, 2023</p>
+            <button type="button" class="btn btn-primary mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chat-left" viewBox="0 0 16 16">
+                    <path
+                        d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                </svg>
+            </button>
+        </div>        </div>
+        
+        <!-- Commentaire 2 -->
+        <div class="comment border p-3 mb-2 d-flex ">
+            <div>
+                <p><strong>Jane Smith</strong> a dit :</p>
+                <p>Je suis d'accord avec John, c'est vraiment informatif. Merci pour le partage!</p>
+                
+        
+                <!-- Réponse à Commentaire 2 -->
+                <div class="comment border p-3 ml-3">
+                    <p><strong>Mark</strong> a répondu :</p>
+                    <p>Merci Jane! Je suis ravi que vous ayez trouvé cela informatif.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="text-muted align-items-center mb-0">4 Janvier, 2023</p>
+                    <button type="button" class="btn btn-primary mt-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-chat-left" viewBox="0 0 16 16">
+                            <path
+                                d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                        </svg>
+                    </button>
+                </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="text-muted align-items-center mb-0">4 Janvier, 2023</p>
+                <button type="button" class="btn btn-primary mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-chat-left" viewBox="0 0 16 16">
+                        <path
+                            d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                    </svg>
+                </button>
             </div>
-            <h2>Commentaires</h2>
-            <!-- Formulaire pour ajouter un commentaire -->
-            <form>
-                <div class="mb-3">
-                    <label for="nom">Nom</label>
-                    <input type="text" class="form-control" id="nom" name="nom" required>
-                </div>
-                <div class="mb-3">
-                    <label for="commentaire">Commentaire</label>
-                    <textarea class="form-control" id="commentaire" name="commentaire" rows="3" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Ajouter un commentaire</button>
-            </form>
-
+            </div>
+        
+            <!-- Bouton de réponse -->
             
         </div>
-    </div>
-</div>
-
-{% endblock %}
+        
+        
+        <!-- Ajouter un nouveau commentaire -->
+        <div class="comment border p-3 mb-2">
+            <form>
+                <div class="form-group">
+                    <h3 for="userComment">Votre Commentaire</h3>
+                    <textarea class="form-control" id="userComment" rows="3" placeholder="Écrivez votre commentaire ici..."></textarea>
+                </div>
+                <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary mt-3 ">Ajouter un commentaire</button>
+            </div>
+            </form>
+        </div>
+    </article>
+    
+    
+    
+    <!-- Add Bootstrap JS and Popper.js scripts here -->
+    
+    
+    
+    
+    
+    {% endblock %}
+    
