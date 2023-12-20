@@ -93,8 +93,6 @@ body {
   }
   
   
-
-  
   @media screen and (max-width:767px) {
     .h-100.p-5.bg-body-tertiary.border.rounded-3 {
       margin-top:13%;
@@ -112,65 +110,6 @@ body {
       margin-bottom:6%;
     }
   }
-
-  
-/*------------ BADGES ------------*/
-
-.badge > a {
-    color: inherit;
-  }
-
-.style {
-  line-height: 2rem;
-}
-
-/*--- Survolage des badges ---*/
-.text-bg-primary:hover {
-  background-color: #cfe2ff!important;
-  color:#052c65!important;
-}
-.text-bg-secondary:hover {
-  background-color: #e2e3e5!important;
-  color:#2b2f32!important;
-}
-.text-bg-success:hover {
-  background-color: #d1e7dd!important;
-  color:#0a3622!important;
-}
-.text-bg-danger:hover {
-  background-color: #f8d7da!important;
-  color:#58151c!important;
-}
-.text-bg-warning:hover {
-  background-color: #fff3cd!important;
-  color:#664d03!important;
-}
-.text-bg-info:hover {
-  background-color: #cff4fc!important;
-  color:#055160!important;
-}
-.text-bg-dark:hover {
-  background-color: #ced4da!important;
-  color:#495057!important;
-}
-
-.border {
-  border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important;
-}
-
-.rounded-pill {
-  margin:1rem;
-  padding:10px 20px 10px 20px;
-  font-size:16px;
-  border-radius: var(--bs-border-radius-pill)!important;
-}
-  
-.h1, h2 {
-  margin-bottom:20px;
-  font-family: 'MarianneMedium';
-}
-
-
 
 /*------------ ARTICLES ------------*/
 
