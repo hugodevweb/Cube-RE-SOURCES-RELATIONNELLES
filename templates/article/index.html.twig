@@ -3,18 +3,54 @@
 {% block title %}Hello ArticleController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Titre de l'article</h1>
+            <p>Date de publication: 20 décembre 2023</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...</p>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <!-- Section de téléchargement de fichier -->
+            <div class="mb-4">
+                <h2>Télécharger le fichier lié</h2>
+                <p>Description du fichier, informations, etc.</p>
+                <a href="chemin/vers/le/fichier.pdf" download="nom-du-fichier.pdf" class="btn btn-primary">Télécharger le fichier</a>
+            </div>
+        </div>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/hugo4/OneDrive/Documents/CESI_CDA/CUBE 1/Cube-RE-SOURCES-RELATIONNELLES/src/Controller/ArticleController.php'|file_link(0) }}">src/Controller/ArticleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/hugo4/OneDrive/Documents/CESI_CDA/CUBE 1/Cube-RE-SOURCES-RELATIONNELLES/templates/article/index.html.twig'|file_link(0) }}">templates/article/index.html.twig</a></code></li>
-    </ul>
+    <!-- Section de commentaires -->
+    <div class="row">
+    
+        <div class="col-md-12">
+        <!-- Liste des commentaires -->
+            <div class="mt-4">
+                <h3>Commentaires existants</h3>
+                <ul class="list-unstyled">
+                    <!-- Exemple de commentaire -->
+                    <li>
+                        <strong>Nom de l'utilisateur</strong>
+                        <p>Contenu du commentaire...</p>
+                    </li>
+                </ul>
+            </div>
+            <h2>Commentaires</h2>
+            <!-- Formulaire pour ajouter un commentaire -->
+            <form>
+                <div class="mb-3">
+                    <label for="nom">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" required>
+                </div>
+                <div class="mb-3">
+                    <label for="commentaire">Commentaire</label>
+                    <textarea class="form-control" id="commentaire" name="commentaire" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Ajouter un commentaire</button>
+            </form>
+
+            
+        </div>
+    </div>
 </div>
+
 {% endblock %}
