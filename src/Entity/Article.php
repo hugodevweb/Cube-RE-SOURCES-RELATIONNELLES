@@ -46,6 +46,9 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentaire::class)]
     private Collection $commentaires;
 
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->nombreVu = 0;
@@ -53,6 +56,11 @@ class Article
         $this->created_at = new DateTimeImmutable(false, new DateTimeZone('Europe/Paris'));
         $this->categories = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getTitre();
     }
 
     public function getId(): ?int
@@ -194,6 +202,18 @@ class Article
                 $commentaire->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
