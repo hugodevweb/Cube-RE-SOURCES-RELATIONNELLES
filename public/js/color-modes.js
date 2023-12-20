@@ -68,10 +68,11 @@
   
     // Chemin relatif par rapport au fichier HTML qui charge le script
     let imagePath;
+    let isParentPage = window.location.pathname === '/index.html' || window.location.pathname === '/';
     if (isParentPage) {
-      imagePath = './ressources/Images/';
+      imagePath = '../../../public/img/';
     } else {
-      imagePath = '../ressources/Images/';
+      imagePath = './../../public/img/';
     }
     if (theme === 'dark') {
       logoElement.src = imagePath + 'logoFN.png';
