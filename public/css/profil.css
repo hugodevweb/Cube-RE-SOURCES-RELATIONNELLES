@@ -36,6 +36,11 @@ body {
 font-family: 'MarianneNormal';
 }  
 
+h3.mb-0 {
+  font-family: 'MarianneMedium';
+  font-weight:1000;
+}
+
 .form-control-dark {
 border-color: var(--bs-gray);
 }
@@ -193,32 +198,35 @@ label, #toggle{
 display: none;
 }
 
+hr {
+  margin:0;
+}
+
 @media all and (max-width: 991px){    
   .nav.col-12.col-md-auto.mb-2.mb-md-0 {
-      display: none;
-      flex-direction: column;
-      height: 320px;
+    display: none;
+    flex-direction: column;
+    height: 320px;
   }
   label{
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto;
-      font-size: 40px;
-      cursor: pointer;
-      padding-top:5%;
-      padding-bottom:5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-size: 40px;
+    cursor: pointer;
+    padding-top:5%;
+    padding-bottom:5%;
 
-      --bs-btn-color: #212529;
-      --bd-btn-color: #fff;
-
+    --bs-btn-color: #212529;
+    --bd-btn-color: #fff;
   }
   #toggle:checked + .nav.col-12.col-md-auto.mb-2.mb-md-0 {
     display: flex;
     flex-wrap: revert-layer;
     align-items: center;
-}
+  }
 }
 
 
@@ -251,10 +259,13 @@ margin-top:2%;
 }
 
 @media (max-width: 768px) {
-.row {
-flex-direction: column;
-width:100%;
-align-items: center;
-text-align: center;
-}
+  .row {
+  flex-direction: column;
+  width:100%;
+  align-items: center;
+  text-align: center;
+  }
+  .p-4 {
+    text-align: left;
+  }
 }

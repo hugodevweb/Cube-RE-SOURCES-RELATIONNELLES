@@ -69,15 +69,6 @@ class Categorie
         return $this;
     }
 
-    public function removeArticle(Article $article): static
-    {
-        if ($this->articles->removeElement($article)) {
-            $article->removeCategory($this);
-        }
-
-        return $this;
-    }
-
     public function __toString(): string
     {
         return $this->getNom();
