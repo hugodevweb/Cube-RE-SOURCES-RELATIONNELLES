@@ -1,194 +1,141 @@
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="auto">
-  <head>
-    <script src="../bootstrap-5.3.2-examples/assets/js/color-modes.js"></script>
+    <script src="../../public/js/color-modes.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Connexion à la plateforme (RE)Sources Relationnelles">
     <title>Connexion</title>
-
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-
-    <link href="../bootstrap-5.3.2-examples/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-      .b-example-divider {
-        width: 100%;
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .btn-primary {
-        --bs-btn-color: #fff;
-        --bs-btn-bg: #000091;
-        --bs-btn-border-color: #000091;
-        --bs-btn-hover-color: #fff;
-        --bs-btn-hover-bg: #1212ff;
-        --bs-btn-hover-border-color: #1212ff;
-        --bs-btn-focus-shadow-rgb: 49,132,253;
-        --bs-btn-active-color: #fff;
-        --bs-btn-active-bg: #1212ff;
-        --bs-btn-active-border-color: #000091;
-        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-        --bs-btn-disabled-color: #fff;
-        --bs-btn-disabled-bg: #0d6efd;
-        --bs-btn-disabled-border-color: #0d6efd;
-      }
-
-      .btn-bd-primary {
-        --bd-violet-bg: #000091;
-        --bd-violet-rgb: 49,132,253;
-
-        --bs-btn-font-weight: 600;
-        --bs-btn-color: var(--bs-white);
-        --bs-btn-bg: var(--bd-violet-bg);
-        --bs-btn-border-color: var(--bd-violet-bg);
-        --bs-btn-hover-color: var(--bs-white);
-        --bs-btn-hover-bg: #1212ff;
-        --bs-btn-hover-border-color: #1212ff;
-        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-        --bs-btn-active-color: var(--bs-btn-hover-color);
-        --bs-btn-active-bg: #0d6efd;
-        --bs-btn-active-border-color: #0d6efd;
-      }
-
-      .bd-mode-toggle {
-        z-index: 1500;
-      }
-
-      .bd-mode-toggle .dropdown-menu .active .bi {
-        display: block !important;
-      }
-    </style>
-
-    
-    <!-- Custom styles for this template -->
-    <link href="connexion.css" rel="stylesheet">
-  </head>
-  <body class="d-flex align-items-center py-4 bg-body-tertiary">
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-      <symbol id="check2" viewBox="0 0 16 16">
-        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-      </symbol>
-      <symbol id="circle-half" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
-      </symbol>
-      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
-        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
-      </symbol>
-      <symbol id="sun-fill" viewBox="0 0 16 16">
-        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
-      </symbol>
-    </svg>
-
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-              id="bd-theme"
-              type="button"
-              aria-expanded="false"
-              data-bs-toggle="dropdown"
-              aria-label="Toggle theme (auto)">
-        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
-        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-            Clair
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
-            Sombre
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#circle-half"></use></svg>
-            Auto
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-      </ul>
-    </div>
-
-
-  <main class="form-signin w-100 m-auto">
-    <form>
-      <a href="../Accueil/accueil.html"><img class="mb-4" src="logo.png" alt="" width="300" height="175"></a>
-      <h1 class="h3 mb-3 fw-normal">Veuillez vous connecter</h1>
-
-      <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Adresse Email</label>
-      </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Mot de passe</label>
-      </div>
-
-      <div class="form-check text-start my-3">
-        <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-          Se souvenir de moi
-        </label>
-      </div>
-      <button class="btn btn-primary w-100 py-2" type="submit">Connexion</button>
-    </form>
-  </main>
-  <script src="../bootstrap-5.3.2-examples/assets/dist/js/bootstrap.bundle.min.js"></script>
-
-  </body>
+    <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../public/css/connexion.css" rel="stylesheet">
+    <link href="../../public/css/headerXfooter.css" rel="stylesheet">
+<!-- ---------- HEADER ---------- -->
+    <header class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                <img class="mb-4 theme-logo" src="../logoFB.png" alt="" width="200" height="115">
+                </a>
+            </div>
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2"><a href="connexion.html" class="style-none">Connexion</a></button>
+                <button type="button" class="btn btn-primary"><a href="sign_in.html" class="style-none-white">S'inscrire</a></button>
+            </div>
+        </div>
+        <label for="toggle">☰</label>
+        <input type="checkbox" id="toggle">
+        <ul class="nav col-12 col-md-auto mb-2 mb-md-0">
+            <li><a href="#" class="nav-link px-2 link-secondary">Accueil</a></li>
+            <li><a href="#" class="nav-link px-2">Actualités</a></li>            
+            <li><a href="#" class="nav-link px-2">Articles</a></li>
+            <li><a href="#" class="nav-link px-2">Ressources</a></li>
+            <li><a href="#" class="nav-link px-2">About</a></li>
+        </ul>
+    </header>
+<!-- ---------- BODY ---------- --> 
+    <body>
+        <!-- ---------- BOOTSTRAP | MODE CLAIR/SOMBRE ---------- -->   
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+            <symbol id="check2" viewBox="0 0 16 16">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+            </symbol>
+            <symbol id="circle-half" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+            </symbol>
+            <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+                <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+                <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+            </symbol>
+            <symbol id="sun-fill" viewBox="0 0 16 16">
+                <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+            </symbol>
+        </svg>
+        <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+            <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+                    id="bd-theme"
+                    type="button"
+                    aria-expanded="false"
+                    data-bs-toggle="dropdown"
+                    aria-label="Toggle theme (auto)">
+                <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+                <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                        <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+                        Clair
+                        <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                        <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+                        Sombre
+                        <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                        <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#circle-half"></use></svg>
+                        Auto
+                        <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+                    </button>
+                </li>
+            </ul>
+        </div>   
+<!-- ---------- MAIN ---------- --> 
+        <main class="form-signin w-100 m-auto">
+            <form>
+                <h1 class="h3 mb-3 fw-normal">Veuillez vous connecter</h1>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Adresse Email</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Mot de passe</label>
+                    </div>
+                    <div class="form-check text-start my-3">
+                        <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Se souvenir de moi</label>
+                    </div>
+                <button class="btn btn-primary w-100 py-2" type="submit">Connexion</button>
+                <p><a class="decor" href="../index.html">Mot de passe oublié</a></p>
+            </form>
+        </main>
+    </body>
+<!-- ---------- FOOTER ---------- -->   
+    <footer>
+        <hr />
+        <div class="container">
+            <div class="py-5">
+                <div class="row">
+                    <div class="col-6 col-md-2 mb-3">
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2">À propos</li>
+                            <li class="nav-item mb-2">Importation des contacts</li>
+                            <li class="nav-item mb-2">FAQs</li>
+                            <li class="nav-item mb-2">Signaler un problème</li>
+                            <li class="nav-item mb-2">Aide</li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-2 mb-3">
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2">Accessibilité</li>
+                            <li class="nav-item mb-2">Mentions légales</li>
+                            <li class="nav-item mb-2">Données personnelles</li>
+                            <li class="nav-item mb-2">Politique de confidentialité</li>
+                            <li class="nav-item mb-2">Gestion des cookies</li>
+                        </ul>
+                    </div>
+                </div>
+                    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                        <p>&copy; Sauf mention contraire, tous les contenus de ce site sont fictifs.</p>
+                    </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../../public/js/bootstrap.bundle.min.js"></script>
 </html>

@@ -1,0 +1,22 @@
+  .modal-sheet .modal-dialog {
+    width: 380px;
+    transition: bottom .75s ease-in-out;
+  }
+  .modal-sheet .modal-footer {
+    padding-bottom: 2rem;
+  }
+
+  .form-floating label {
+    font-size:16px;
+  }
+
+  @media (max-width: 768px) {
+    .modal-sheet .modal-dialog {
+      width:375px;
+    }
+    .modal {
+      display:flex!important;
+    }
+  }
+
+  
