@@ -30,9 +30,8 @@ class LogInFormAuthenticator extends AbstractLoginFormAuthenticator
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
-        dump($email);
-
-        $request->getSession()->set(Security::LAST_USERNAME, $email);
+        
+        // $request->getSession()->set(Security::LAST_USERNAME, $email);
         $password = $request->request->get('password', '');
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT, $cost = [15]);
         // dd($hashedPassword, $password);
