@@ -87,7 +87,7 @@ class ArticleController extends AbstractController
         $article->setNombreVu($article->getNombreVu() + 1);
         $entityManager->persist($article);
         $entityManager->flush();
-        dd($commentaireRepository->findCommentsParents($article));
+        // dd($commentaireRepository->findCommentsParents($article));
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'commentairesParent' => $commentaireRepository->findCommentsParents($article),
