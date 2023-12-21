@@ -4,6 +4,49 @@ endblock %} {% block stylesheets %}
 <link rel="stylesheet" href="../../public/css/blog.css" />
 {% endblock %} {% block body %}
 
+<main>
+    <div class="album py-0 bg-body-tertiary">
+        <div class="container my-5">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-chevron p-3">
+                    <li class="breadcrumb-item">
+                        <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Accueil</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Articles
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Espace Articles</h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for article in articles %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img class="bd-placeholder-img card-img-top" width="100%" height="200" src="https://www.gouvernement.fr/upload/media/content/0001/07/a55d231483a76164d2dbc1cf62ca6d7e949c09d0.jpg" alt=""/>
+                    <div class="card-body">
+                        <small class="text-categorie">{{ article.getCategoriesString() }}</small>
+                        <p class="card-text"><a href="/actualite/les-4-actus-de-la-semaine-du-27-novembre-au-3-decembre-2023">{{ article.titre }}}</a></p>
+                        <p class="card-text">
+                        {{ article.corps | slice(0, 90) }}
+                        {% if article.corps|length > 100 %}
+                        ...
+                        {% endif %}
+                        </p>
+                        <p class="card-text">Vu {{ article.nombreVu }} fois</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{{ path('show_article', {'id': article.id}) }}" class="btn btn-sm btn-outline-secondary">Ouvrir</a>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
+                            </div>
+                            <small class="text-body-secondary">{{ article.getDate() }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
 <article class="blog-post" style="padding: 15px">
   <!-- Titre de la ressource -->
   <div class="d-flex justify-content-between">
@@ -113,8 +156,6 @@ endblock %} {% block stylesheets %}
             </svg>
           </button>
         </div>
-      </div>
-
     </div>
 
     <!-- Bouton de réponse -->
@@ -143,10 +184,6 @@ endblock %} {% block stylesheets %}
 <script src="path/to/jquery.min.js"></script>
 <script src="path/to/popper.min.js"></script>
 <script src="path/to/bootstrap.min.js"></script>
-
-
-
-
 
 
 <!-- Add Bootstrap JS and Popper.js scripts here -->

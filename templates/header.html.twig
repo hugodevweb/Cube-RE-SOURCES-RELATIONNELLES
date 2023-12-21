@@ -72,26 +72,33 @@
         <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
     </symbol>
 </svg>
-<main>
-    <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <div class="col-md-3 mb-2 mb-md-0">
-                <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                <img class="mb-4 theme-logo" src="{{ asset('img/logoFN.png') }}" alt="" width="200" height="115">
-                </a>
-            </div>
-            <div class="col-md-3 text-end">
-                <button type="button" class="btn btn-outline-primary me-2"><a href="../Connect/connexion.html" class="style-none">Connexion</a></button>
-                <button type="button" class="btn btn-primary"><a href="../Connect/sign_in.html" class="style-none-white">S'inscrire</a></button>
-            </div>
-        </header>
-    <div>
-        <ul class="nav col-12 col-md-auto mb-2 mb-md-0">
-            <li><a href="#" class="nav-link px-2 link-secondary">Accueil</a></li>
-            <li><a href="#" class="nav-link px-2">Actualités</a></li>            
-            <li><a href="#" class="nav-link px-2">Articles</a></li>
-            <li><a href="#" class="nav-link px-2">Ressources</a></li>
-            <li><a href="#" class="nav-link px-2">About</a></li>
-        </ul>
-    </div>
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <div class="col-md-3 mb-2 mb-md-0">
+            <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+            <img class="mb-4 theme-logo" src="{{ asset('img/logoFB.png') }}" alt="" width="200" height="115">
+            </a>
+        </div>
+        <div class="col-md-3 text-end">
+            {% if app.user %}
+                <button type="button" class="btn btn-outline-primary me-2"><a href="{{ path('app_logout') }}" class="style-none">Déconnexion</a></button>
+                {% for row in app.user.roles %}
+                    {% if row == 'ADMIN' %}
+                        <button type="button" class="btn btn-outline-primary me-2"><a href="{{ path('admin') }}" class="style-none">Administration</a></button>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <button type="button" class="btn btn-outline-primary me-2"><a href="{{ path('app_login') }}" class="style-none">Connexion</a></button>
+                <button type="button" class="btn btn-primary"><a href="{{ path('app_user_new') }}" class="style-none-white">S'inscrire</a></button>
+            {% endif %}
+        </div>
+    </header>
+    <label for="toggle">☰</label>
+    <input type="checkbox" id="toggle">
+    <ul class="nav col-12 col-md-auto mb-2 mb-md-0">
+        <li><a href="{{ path('app_index')}}" class="nav-link px-2">Accueil</a></li>
+        <li><a href="#" class="nav-link px-2">Actualités</a></li>            
+        <li><a href="{{ path('articles')}}" class="nav-link px-2">Articles</a></li>
+        <li><a href="#" class="nav-link px-2">Ressources</a></li>
+    </ul>
 </div>

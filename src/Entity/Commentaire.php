@@ -26,6 +26,12 @@ class Commentaire
     #[ORM\Column(nullable: true)]
     private ?int $parent = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Utilisateur $utilisateur = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->est_actif = false;
@@ -80,6 +86,30 @@ class Commentaire
     public function setParent(?int $parent): static
     {
         $this->parent = $parent;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): static
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
