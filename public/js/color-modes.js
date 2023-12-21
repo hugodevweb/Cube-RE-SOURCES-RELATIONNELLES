@@ -63,6 +63,21 @@
       setTheme(getPreferredTheme())
     }
   })
+  const updateOutlinedBtn = theme => {
+    document.querySelectorAll('.dark-mode-btn').forEach(btn => {
+      if (theme === 'dark') {
+        btn.classList.remove('btn-outline-dark');
+        btn.classList.add('btn-outline-light');
+      } else {
+        btn.classList.remove('btn-outline-light');
+        btn.classList.add('btn-outline-dark');
+      }
+    });
+  };
+
+
+
+
   const updateLogo = theme => {
     const logoElement = document.querySelector('.theme-logo');
   
@@ -95,6 +110,7 @@
           setTheme(theme)
           showActiveTheme(theme, true)
           updateLogo(theme) 
+          updateOutlinedBtn(theme)
         })
       })
   })
