@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\CommentaireRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Monolog\DateTimeImmutable;
+use DateTimeZone;
 
 #[ORM\Entity(repositoryClass: CommentaireRepository::class)]
 class Commentaire
@@ -32,9 +34,13 @@ class Commentaire
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+
     public function __construct()
     {
         $this->est_actif = false;
+        $this->created_at = new DateTimeImmutable(false, new DateTimeZone('Europe/Paris'));
     }
   
     public function getId(): ?int
@@ -49,7 +55,7 @@ class Commentaire
 
     public function setContenu(string $contenu): static
     {
-        $this->contenu = $contenu;
+        $this->contenu = strip_tags($contenu);
 
         return $this;
     }
@@ -112,5 +118,22 @@ class Commentaire
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getDate(): string
+    {
+        return $this->created_at->format('m/d/Y H:i');
     }
 }

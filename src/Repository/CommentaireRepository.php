@@ -34,7 +34,7 @@ class CommentaireRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.article = :article')
-            ->andWhere('c.parent IS NOT NULL')
+            ->andWhere('c.parent IS NULL')
             ->setParameter('article', $article)
             ->orderBy('c.id', 'DESC')
             ->getQuery()
@@ -45,7 +45,7 @@ class CommentaireRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.article = :article')
-            ->andWhere('c.parent IS NULL')
+            ->andWhere('c.parent IS NOT NULL')
             ->setParameter('article', $article)
             ->orderBy('c.id', 'DESC')
             ->getQuery()
