@@ -49,6 +49,9 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $user = null;
 
+    #[ORM\OneToOne(mappedBy: 'article', cascade: ['persist', 'remove'])]
+    private ?Ressource $ressource = null;
+
     public function __construct()
     {
         $this->nombreVu = 0;
@@ -87,7 +90,7 @@ class Article
 
     public function setCorps(?string $corps): static
     {
-        $this->corps = $corps;
+        $this->corps = strip_tags($corps);
 
         return $this;
     }
@@ -140,12 +143,28 @@ class Article
         return $this;
     }
 
+    public function getDate(): string
+    {
+        return $this->created_at->format('d/m/Y');
+    }
+
+
     /**
      * @return Collection<int, Categorie>
      */
     public function getCategories(): Collection
     {
         return $this->categories;
+    }
+
+    public function getCategoriesString(): string
+    {
+        $res = '';
+        foreach ($this->categories as $categorie) {
+            $res .= $categorie->getNom() . ' ';
+        }
+        $res = rtrim($res);
+        return $res;
     }
 
     public function addCategory(Categorie $category): static
@@ -214,6 +233,48 @@ class Article
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPseudoAuteur(): string
+    {
+        return $this->user->getPseudo();
+    }
+
+    public function setRessource(?Ressource $ressource): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($ressource === null && $this->ressource !== null) {
+            $this->ressource->setArticle(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($ressource !== null && $ressource->getArticle() !== $this) {
+            $ressource->setArticle($this);
+        }
+
+        $this->ressource = $ressource;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ressource>
+     */
+    public function getRessources(): Collection
+    {
+        return new ArrayCollection([$this->ressource]);
+    }
+
+    public function removeRessource(Ressource $ressource): static
+    {
+        if ($this->ressource->removeElement($ressource)) {
+            // set the owning side to null (unless already changed)
+            if ($ressource->getArticle() === $this) {
+                $ressource->setArticle(null);
+            }
+        }
 
         return $this;
     }
