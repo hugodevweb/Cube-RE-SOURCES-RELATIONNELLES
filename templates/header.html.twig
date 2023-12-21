@@ -83,14 +83,20 @@
             <img class="mb-4 theme-logo" src="{{ asset('img/logoFN.png') }}" alt="" width="200" height="115">
             </a>
         </div>
-        <div class="col-md-3 text-end">
+        <div class="col-md-3 d-flex align-items-center text-end">
             {% if app.user %}
-                <button type="button" class="btn btn-outline-primary me-2"><a href="{{ path('app_logout') }}" class="style-none">Déconnexion</a></button>
                 {% for row in app.user.roles %}
                     {% if row == 'ADMIN' %}
                         <button type="button" class="btn btn-outline-primary me-2"><a href="{{ path('admin') }}" class="style-none">Administration</a></button>
                     {% endif %}
                 {% endfor %}
+                <button type="button" class="btn btn-outline-primary me-2"><a href="{{ path('app_logout') }}" class="style-none">Déconnexion</a></button>
+                <a href="{{ path('app_user_show', {'id': app.user.id}) }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle text-primary" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                </a>
             {% else %}
                 <button type="button" class="btn btn-outline-primary me-2"><a href="{{ path('app_login') }}" class="style-none">Connexion</a></button>
                 <button type="button" class="btn btn-primary"><a href="{{ path('app_user_new') }}" class="style-none-white">S'inscrire</a></button>
