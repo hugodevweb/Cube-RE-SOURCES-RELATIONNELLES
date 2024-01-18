@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Commentaire;
 use App\Repository\ArticleRepository;
+use App\Repository\UserRepository;
 use App\Repository\CommentaireRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -18,10 +19,11 @@ class CommentaireCrudController extends AbstractCrudController
     private $articleRepository;
     private $commentaireRepository;
 
-    public function __construct(ArticleRepository $articleRepository, CommentaireRepository $commentaireRepository)
+    public function __construct(ArticleRepository $articleRepository, CommentaireRepository $commentaireRepository, UserRepository $utilisateurRepository)
     {
         $this->articleRepository = $articleRepository;
         $this->commentaireRepository = $commentaireRepository;
+        $this->utilisateurRepository = $utilisateurRepository;
     }
   
     public static function getEntityFqcn(): string
@@ -34,6 +36,8 @@ class CommentaireCrudController extends AbstractCrudController
         $res =  [
             IdField::new('id')->onlyOnIndex(),
             TextEditorField::new('contenu'),
+            ChoiceField::new('user')->setChoices($this->formatUserForChoices($this->utilisateurRepository->findAll()))->onlyOnForms(),
+            TextField::new('user')->onlyOnIndex(),
             ChoiceField::new('article')
                 ->setChoices($this->formatArticleForChoices($this->articleRepository->findAll()))
                 ->onlyOnForms(),
@@ -51,8 +55,6 @@ class CommentaireCrudController extends AbstractCrudController
             IdField::new('parent')->onlyOnIndex(),
             BooleanField::new('est_actif')->onlyOnIndex(),
         ];
-        dump($res[0]);
-
         return $res;
     }
 
@@ -70,6 +72,15 @@ class CommentaireCrudController extends AbstractCrudController
         $choices = [];
         foreach ($comments as $comment) {
             $choices[$comment->getId() . ' - ' . strip_tags(substr($comment->getContenu(),0,50)) . '...'] = $comment->getId();
+        }
+        return $choices;
+    }
+
+    public function formatUserForChoices(array $users)
+    {
+        $choices = [];
+        foreach ($users as $user) {
+            $choices[$user->getPseudo() . ' - ' . $user->getNom() . ' ' . $user->getPrenom()] = $user;
         }
         return $choices;
     }

@@ -29,6 +29,28 @@ class CommentaireRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findCommentsParents($article)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.article = :article')
+            ->andWhere('c.parent IS NULL')
+            ->setParameter('article', $article)
+            ->orderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findCommentsChilds($article)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.article = :article')
+            ->andWhere('c.parent IS NOT NULL')
+            ->setParameter('article', $article)
+            ->orderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
   
 //    /**
 //     * @return Commentaire[] Returns an array of Commentaire objects

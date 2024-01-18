@@ -180,7 +180,7 @@ label, #toggle{
     .nav.col-12.col-md-auto.mb-2.mb-md-0 {
         display: none;
         flex-direction: column;
-        height: 320px;
+        height: 260px;
     }
     label{
         width: 100%;
@@ -188,7 +188,7 @@ label, #toggle{
         justify-content: center;
         align-items: center;
         margin: 0 auto;
-        font-size: 40px;
+        font-size: 25px;
         cursor: pointer;
         padding-top:5%;
         padding-bottom:5%;

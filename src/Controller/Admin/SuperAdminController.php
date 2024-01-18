@@ -15,11 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-/**
-* @IsGranted("ADMIN")
-*/
 class SuperAdminController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
@@ -47,7 +43,6 @@ class SuperAdminController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Événement', 'fas fa-calendar-days', Evenement::class);
 
         yield MenuItem::section('Administration');
-        // yield MenuItem::linkToCrud('Utilisateur', 'fa-solid fa-user', Utilisateur::class);
         yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
         yield MenuItem::linkToCrud('Role', 'fa-solid fa-users', Role::class);
     }

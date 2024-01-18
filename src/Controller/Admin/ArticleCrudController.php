@@ -4,7 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 
-use App\Repository\UtilisateurRepository;
+use App\Repository\UserRepository;
+use App\Repository\TypeRepository;
 
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -17,11 +18,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 
 class ArticleCrudController extends AbstractCrudController
 {
-    private $utilisateurRepository;
+    private $userRepository;
+    private $typeRepository;
 
-    public function __construct(UtilisateurRepository $utilisateurRepository)
+    public function __construct(UserRepository $userRepository, TypeRepository $typeRepository)
     {
-        $this->utilisateurRepository = $utilisateurRepository;
+        $this->userRepository = $userRepository;
+        $this->typeRepository = $typeRepository;
     }
   
     public static function getEntityFqcn(): string
@@ -37,8 +40,9 @@ class ArticleCrudController extends AbstractCrudController
             Field::new('nombreVu')->onlyOnIndex(),
             BooleanField::new('validation')->onlyOnIndex(),
             AssociationField::new('categories')->onlyOnForms(),
-            ChoiceField::new('utilisateur')->setChoices($this->formatUtilisateurForChoices($this->utilisateurRepository->findall()))->onlyOnForms(),
-            AssociationField::new('utilisateur')
+            ChoiceField::new('type')->setChoices($this->formatUtilisateurForChoices($this->userRepository->findall()))->onlyOnForms(),
+            ChoiceField::new('user')->setChoices($this->formatUtilisateurForChoices($this->userRepository->findall()))->onlyOnForms(),
+            AssociationField::new('user')
             ->setFormTypeOptions([
                 'by_reference' => false,
             ])

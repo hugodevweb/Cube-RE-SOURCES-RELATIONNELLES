@@ -4,10 +4,20 @@
 
 {% block stylesheets %}
     <link href="{{ asset('css/corps.css') }}" rel="stylesheet">
+    <style>
+        .carrouselContainer{
+            border-radius: 20%;
+            background-color: rgba(255, 255, 255, 0.663);
+            padding: 25px;
+            color: black;
+            max-height: 387px;
+}
+    </style>
 {% endblock %}
 
 {% block body %}
-    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+<main>
+    <div id="myCarousel" class="carousel slide mb-6"  data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -15,32 +25,33 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-                <div class="container">
-                    <div class="carousel-caption text-start">
-                        <h1>Example headline.</h1>
-                        <p class="opacity-75">Some representative placeholder content for the first slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                <img src="https://www.cidj.com/sites/default/files/2019-09/vie-etudiante_2.jpg" style="filter: blur(5px);width: fit-content;height:fit-content;" class="d-block" alt="First slide">
+                <div class="container " >
+                    <div class="carousel-caption carrouselContainer">
+                    <h1>Article en catégorie</h1>
+                    <p class="opacity-75">Some representative placeholder content for the first slide of the carousel.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#">Vie quotidienne</a></p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Another example headline.</h1>
+            <div class="carousel-item">
+                <img src="https://www.conservation-nature.fr/wp-content/uploads/2023/06/legumes.jpg" style="filter: blur(3px);width: fit-content;height:fit-content;" class="d-block " alt="First slide">
+                <div class="container ">
+                    <div class="carousel-caption carrouselContainer">
+                    <h1>Article en catégorie</h1>
                     <p>Some representative placeholder content for the second slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                    <p><a class="btn btn-lg btn-primary" href="#">Santé et Bien-être</a></p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-            <div class="container">
-                <div class="carousel-caption text-end">
-                    <h1>One more for good measure.</h1>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1541976844346-f18aeac57b06?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="filter: blur(2px);width: fit-content;height:fit-content;" class="d-block " alt="First slide">
+                <div class="container ">
+                    <div class="carousel-caption carrouselContainer">
+                    <h1>Article en catégorie</h1>
                     <p>Some representative placeholder content for the third slide of this carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                    <p><a class="btn btn-lg btn-primary" href="#">Aides</a></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,9 +64,9 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <div class="album py-5 bg-body-tertiary">
+    <div class="album pt-5 bg-body-tertiary">
         <div class="container">
-            <h1 class="titre_actu">L'essentiel de l'actualité</h1>
+            <h1 class="titre_actu mt-4">L'essentiel de l'actualité</h1>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col">
                     <div class="card shadow-sm">
@@ -66,7 +77,7 @@
                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ouvrir</button>
+                                    <button type="button"  class="btn btn-sm btn-outline-secondary">Ouvrir</button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
                                 </div>
                                 <small class="text-body-secondary">Publié 27/11/2023</small>
@@ -111,42 +122,53 @@
             </div>
         </div>
     </div>
-    <div class="album py-5 bg-body-tertiary">
+    <div class="album pt-5 bg-body-tertiary">
         <div class="container">
-        <h1 class="titre_actu">Les ressources populaires</h1>
-        <div class="row mb-2">
-            <div class="col-md-6">
-                <div class="card shadow-sm">
-                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
-                            <h3 class="mb-0">Featured post</h3>
-                            <div class="mb-1 text-body-secondary">
-                                Nov 12
+            <h1 class="titre_actu mt-4">Ressources récentes</h1>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <small class="text-categorie">Vie quotidienne</small>
+                            <p class="card-text"><a href="/actualite/les-4-actus-de-la-semaine-du-27-novembre-au-3-decembre-2023">Les 4 actus de la semaine du 27 novembre au 3 décembre 2023</a></p>
+                            <p class="card-text">This is a wider card with supporting text below.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ouvrir</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
+                                </div>
+                                <small class="text-body-secondary">Publié 20/12/2023</small>
                             </div>
-                                <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">Continue reading</a>
-                        </div>
-                        <div class="col-auto d-none d-lg-block">
-                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card shadow-sm">
-                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <strong class="d-inline-block mb-2 text-success-emphasis">Design</strong>
-                            <h3 class="mb-0">Post title</h3>
-                            <div class="mb-1 text-body-secondary">
-                                Nov 11
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <small class="text-categorie">Vie quotidienne</small>
+                            <p class="card-text"><a href="/actualite/une-aide-durgence-pour-les-victimes-de-violences-conjugales">Une aide d&#039;urgence pour les victimes de violences conjugales</a></p>
+                            <p class="card-text">This is a wider card with supporting text below.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ouvrir</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
+                                </div>
+                                <small class="text-body-secondary">Publié 12/12/2023</small>
                             </div>
-                            <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">Continue reading</a>
                         </div>
-                    <div class="col-auto d-none d-lg-block">
-                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="justify-card">
+                            <div class="card body">
+                                <p class="card-text"><a href="/actualite/les-dates-des-vacances-scolaires-de-noel-2023">Les dates des vacances scolaires de Noël 2023</a></p>
+                                <small class="text-categorie">École primaire</small>
+                                <p class="card-text"><a href="/actualite/une-campagne-contre-les-violences-sexistes-et-sexuelles-dans-les-transports-en-commun">Une campagne contre les violences sexistes dans les transports</a></p>
+                                <small class="text-categorie">Vie quotidienne</small>
+                                <button class="btn btn-outline-secondary" type="button">Voir plus...</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

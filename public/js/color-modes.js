@@ -11,12 +11,7 @@
   const setStoredTheme = theme => localStorage.setItem('theme', theme)
 
   const getPreferredTheme = () => {
-    const storedTheme = getStoredTheme()
-    if (storedTheme) {
-      return storedTheme
-    }
-
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    return 'dark';
   }
 
   const setTheme = theme => {
@@ -63,17 +58,32 @@
       setTheme(getPreferredTheme())
     }
   })
+  const updateOutlinedBtn = theme => {
+    document.querySelectorAll('.dark-mode-btn').forEach(btn => {
+      if (theme === 'dark') {
+        btn.classList.remove('btn-outline-dark');
+        btn.classList.add('btn-outline-light');
+      } else {
+        btn.classList.remove('btn-outline-light');
+        btn.classList.add('btn-outline-dark');
+      }
+    });
+  };
+
+
+
+
   const updateLogo = theme => {
     const logoElement = document.querySelector('.theme-logo');
   
     // Chemin relatif par rapport au fichier HTML qui charge le script
     let imagePath;
-    let isParentPage = window.location.pathname === '/index.html' || window.location.pathname === '/';
-    if (isParentPage) {
-      imagePath = '../../../public/img/';
-    } else {
-      imagePath = './../../public/img/';
-    }
+    // let isParentPage = window.location.pathname === '/index.html' || window.location.pathname === '/';
+    // if (isParentPage) {
+    //   imagePath = '../../../public/img/';
+    // } else {
+      imagePath = '/img/';
+    //}
     if (theme === 'dark') {
       logoElement.src = imagePath + 'logoFN.png';
       logoElement.alt = 'Dark Logo';
@@ -95,6 +105,7 @@
           setTheme(theme)
           showActiveTheme(theme, true)
           updateLogo(theme) 
+          updateOutlinedBtn(theme)
         })
       })
   })
