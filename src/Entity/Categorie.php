@@ -50,6 +50,7 @@ class Categorie
     {
         return $this->articles;
     }
+    
     public function addArticle(Article $article): static
     {
         if (!$this->articles->contains($article)) {
