@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte - Création{% endblock %}
+
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+                <link rel="stylesheet" href="{{ asset('css/connexion.css') }}">
+
+        
+{% endblock %}
+
+{% block body %}<main class="form-signin w-100 m-auto">
+<h1 class="h3 mb-3 fw-normal">Remplissez le formulaire ci-dessous pour vous inscrire</h1>
+{{ include('user/forms/_form_new_user.html.twig') }}
+</main>
+{% endblock %}
