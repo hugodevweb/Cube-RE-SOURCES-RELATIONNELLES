@@ -172,9 +172,9 @@ a.style-none-white {
   color:white;
 }
 
-label, #toggle{
+ #toggle{
   display: none;
-}
+} 
 
 @media all and (max-width: 991px){    
     .nav.col-12.col-md-auto.mb-2.mb-md-0 {
@@ -201,6 +201,7 @@ label, #toggle{
       display: flex;
       flex-wrap: revert-layer;
       align-items: center;
+      justify-content: space-around;
   }
 }
 

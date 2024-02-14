@@ -1,0 +1,41 @@
+
+{{ form_start(form) }}
+
+
+{% set errors = form_errors(form.password.first)|raw|trim %}
+{% set styled_errors = errors|replace({'<ul>': '<ul style="list-style-type: none; padding: 0; margin: 0;">'}) %}
+{% if styled_errors is not empty %}
+    <div class="alert alert-danger" role="alert">
+        {{ styled_errors|raw }}
+    </div>
+{% endif %}
+
+
+<div class="form-floating">
+    {{ form_widget(form.nom, {'attr': {'class': 'form-control mb-0 rounded-bottom-0 rounded-top', 'placeholder': 'Nom'}}) }}
+    {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+</div>
+<div class="form-floating">
+    {{ form_widget(form.prenom, {'attr': {'class': 'form-control mb-0 rounded-0', 'placeholder': 'Prénom'}}) }}
+    {{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
+</div>
+<div class="form-floating">
+    {{ form_widget(form.pseudo, {'attr': {'class': 'form-control mb-0 rounded-0', 'placeholder': 'Pseudo'}}) }}
+    {{ form_label(form.pseudo, 'Pseudo', {'label_attr': {'class': 'form-label'}}) }}
+</div>
+<div class="form-floating">
+    {{ form_widget(form.email, {'attr': {'class': 'form-control mb-0 rounded-0', 'placeholder': 'Email'}}) }}
+    {{ form_label(form.email, 'Adresse Email', {'label_attr': {'class': 'form-label'}}) }}
+</div>
+<div class="form-floating">
+    {{ form_widget(form.password.first, {'attr': {'class': 'form-control mb-0 rounded-0', 'placeholder': 'Mot de passe'}}) }}
+    {{ form_label(form.password.first, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+</div>
+
+<div class="form-floating">
+    {{ form_widget(form.password.second, {'attr': {'class': 'form-control mb-0 rounded-bottom', 'placeholder': 'Confirmation du mot de passe'}}) }}
+    {{ form_label(form.password.second, 'Confirmation du mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+</div>
+
+<button type="submit" class="btn btn-primary px-5 mt-3">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}

@@ -32,7 +32,7 @@ class SecurityController extends AbstractController
                 $return['message'] = $message; //on ajoute à l'array de paramètres notre message
         }
 
-        return $this->render('security/login.html.twig', $return);
+        return $this->render('user/forms/login.html.twig', $return);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
