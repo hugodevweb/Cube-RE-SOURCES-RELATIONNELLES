@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Article;
 use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Entity\Role;
@@ -25,13 +26,6 @@ class AppFixtures extends Fixture
             $manager->persist($categorie);
         }
 
-        for ($i=0; $i<5; $i++) {
-            $type = new Type();
-            $type->setNom($faker->unique()->word());
-            $manager->persist($type);
-        }
-
-        
         $role_admin = new Role();
         $role_admin->setNom('ADMIN');
         $manager->persist($role_admin);
@@ -51,14 +45,26 @@ class AppFixtures extends Fixture
         $manager->persist($admin);
 
         for ($i=0; $i<4; $i++) {
-            $citoyen = new User();
-            $citoyen->setRoles(["CITOYEN"])
+            $user = new User();
+            $user->setRoles(["CITOYEN"])
             ->setEmail($faker->unique()->email())
             ->setPassword('123456')
             ->setPseudo($faker->unique()->name())
             ->setPrenom($faker->unique()->name())
             ->setNom($faker->unique()->name());
-            $manager->persist($citoyen);
+            $manager->persist($user);
+
+            $type = new Type();
+            $type->setNom($faker->unique()->word());
+            $manager->persist($type);
+
+            $article = new Article();
+            $article->setTitre($faker->word())
+                ->setCorps($faker->text())
+                ->setUser($user)
+                ->setType($type);
+            $manager->persist($article);
+
         }
 
         $event = new Evenement();
