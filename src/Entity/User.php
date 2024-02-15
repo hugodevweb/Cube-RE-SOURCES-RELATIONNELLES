@@ -116,7 +116,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPassword(string $password): static
     {
-        $newPassword = password_hash($password, PASSWORD_BCRYPT, $cost = [15]);
+        if (strlen($password) < 6) {
+            return throw new \InvalidArgumentException('Votre mot de passe doit contenir au moins 6 caractères.');
+        }
+        
+
+        $newPassword = password_hash($password, PASSWORD_BCRYPT, ['cost' => 15]);
         $this->password = $newPassword;
         return $this;
     }
