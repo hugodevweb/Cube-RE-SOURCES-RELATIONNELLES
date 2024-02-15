@@ -29,9 +29,6 @@ class Commentaire
     private ?int $parent = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Utilisateur $utilisateur = null;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
     #[ORM\Column]
@@ -92,18 +89,6 @@ class Commentaire
     public function setParent(?int $parent): static
     {
         $this->parent = $parent;
-
-        return $this;
-    }
-
-    public function getUtilisateur(): ?Utilisateur
-    {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(?Utilisateur $utilisateur): static
-    {
-        $this->utilisateur = $utilisateur;
 
         return $this;
     }
