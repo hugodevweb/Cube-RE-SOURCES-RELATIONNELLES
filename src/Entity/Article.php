@@ -26,10 +26,10 @@ class Article
     private ?string $corps = null;
 
     #[ORM\Column]
-    private ?bool $validation = null;
+    private ?bool $validation = false;
 
     #[ORM\Column]
-    private ?int $nombreVu = null;
+    private ?int $nombreVu = 0;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?Utilisateur $utilisateur = null;
