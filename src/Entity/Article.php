@@ -26,13 +26,13 @@ class Article
     private ?string $corps = null;
 
     #[ORM\Column]
-    private ?bool $validation = null;
+    private ?bool $validation = false;
 
     #[ORM\Column]
-    private ?int $nombreVu = null;
+    private ?int $nombreVu = 0;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
-    private ?Utilisateur $utilisateur = null;
+    private ?User $user = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -45,9 +45,6 @@ class Article
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentaire::class)]
     private Collection $commentaires;
-
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-    private ?User $user = null;
 
     #[ORM\OneToOne(mappedBy: 'article', cascade: ['persist', 'remove'])]
     private ?Ressource $ressource = null;
@@ -115,18 +112,6 @@ class Article
     public function setNombreVu(int $nombreVu): static
     {
         $this->nombreVu = $nombreVu;
-
-        return $this;
-    }
-
-    public function getUtilisateur(): ?Utilisateur
-    {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(?Utilisateur $utilisateur): static
-    {
-        $this->utilisateur = $utilisateur;
 
         return $this;
     }
