@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/migrations": "3.7.2",
         "doctrine/orm": "^2.16",
         "easycorp/easyadmin-bundle": "^4.8",
         "fakerphp/faker": "^1.23",
@@ -46,6 +47,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^7.3",
         "dbrekelmans/bdi": "^1.1",
         "doctrine/doctrine-fixtures-bundle": "^3.5",
         "phpunit/phpunit": "^9.5",

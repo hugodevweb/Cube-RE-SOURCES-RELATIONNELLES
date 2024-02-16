@@ -31,18 +31,14 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (strlen($this->getPassword()) < 6) {
-                $context->buildViolation('Le mot de passe doit contenir au moins 6 caractères.')
-                    ->atPath('password')
-                    ->addViolation();
-            }
-            else{
+            
                 $entityManager->persist($user);
                 $entityManager->flush();
-            }
+            
             
 
             return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
+            
         }
 
         return $this->renderForm('user/forms/new.html.twig', [
