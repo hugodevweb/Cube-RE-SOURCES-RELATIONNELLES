@@ -43,16 +43,6 @@ class UserCrudController extends AbstractCrudController
             EmailField::new('email'),
             TextField::new('password')->onlyWhenCreating(),
             ChoiceField::new('roles')->allowMultipleChoices()->setChoices($this->formatRolesForChoices($roles))->onlyOnForms(),
-            // AssociationField::new('roles')
-            // ->setFormTypeOptions([
-            //     'by_reference' => false,
-            // ])
-            // ->autocomplete()
-            // ->setCustomOptions([
-            //     'widget' => 'native',
-            // ])
-            // ->setRequired(true)
-            // ->onlyOnIndex(),
             AssociationField::new('articles')->onlyOnForms(),
         ];
     }
@@ -61,7 +51,7 @@ class UserCrudController extends AbstractCrudController
     {
         $formattedRoles = [];
         foreach ($roles as $role) {
-            $formattedRoles[$role->getNom()] = $role->getNom();
+            $formattedRoles[$role->getNom()] = 'ROLE_'.$role->getNom();
         }
         return $formattedRoles;
     }
