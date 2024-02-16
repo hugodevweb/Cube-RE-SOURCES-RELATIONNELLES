@@ -8,12 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserCrawlerTest extends WebTestCase
 {
+    
+
     private $entityManager;
     private $client;
 
     protected function setUp(): void
     {
         parent::setUp();
+        echo"UserCrawlerTest()\n";
+        echo"{\n";
 
         // Start the client and get the container
         $this->client = static::createClient();
@@ -24,11 +28,15 @@ class UserCrawlerTest extends WebTestCase
 
     public function testCreateUserCrawlerSuccess(): void
     {
+        echo"testCreateUserCrawlerSuccess()\n";
+
         try {
+            echo"{\n";
             echo "Test de création d'un utilisateur avec succès \n";
-            $crawler = $this->client->request('GET', '/compte/new');
+            $crawler = $this->client->request('GET', '/new/compte');
 
             $this->assertResponseIsSuccessful();
+
             $form = $crawler->selectButton('Sauvegarder')->form();
             echo "Selection du formulaire \n";
             $form['user[nom]'] = 'John';
@@ -37,7 +45,7 @@ class UserCrawlerTest extends WebTestCase
             echo "Selection du Prenom \n";
             $form['user[pseudo]'] = 'johndoedu77';
             echo "Selection du Pseudo \n";
-            $form['user[email]'] = 'exampleCCrawler@example.com';
+            $form['user[email]'] = 'exampleCrawler@example.com';
             echo "Selection du Email \n";
             $form['user[password][first]'] = 'your_password';
             echo "Selection du Password \n";
@@ -51,15 +59,22 @@ class UserCrawlerTest extends WebTestCase
             echo $this->entityManager->getConnection()->isTransactionActive();
             // Perform your assertions on the response if necessary
             // $this->assertSelectorTextContains('h1', 'Page de confirmation');
+            $savedUser = $this->entityManager->getRepository(User::class)->findOneBy(['email' => 'exampleCrawler@example.com']);
+            echo "Récupération de l'utilisateur de la base de données pour vérifier s'il a été correctement enregistré\n";
+
+            $this->assertEquals('John', $savedUser->getNom());
+            $this->assertEquals('Doe', $savedUser->getPrenom());
+
         } finally {
             // Rollback the transaction to leave the database in its initial state
+            echo"}\n";
         }
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
-
+        echo"}\n";
         // Rollback the transaction after each test
         if ($this->entityManager != null) {
             $this->entityManager->close();

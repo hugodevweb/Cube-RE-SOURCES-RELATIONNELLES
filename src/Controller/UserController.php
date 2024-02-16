@@ -27,9 +27,14 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            //créer une sécurité qui verifie que le mot de passe est plus de 6 caractères
+            if(strlen($user->getPassword()) < 6){
+                return throw new \InvalidArgumentException('Votre mot de passe doit contenir au moins 6 caractères.');
+            }else{
                 $entityManager->persist($user);
                 $entityManager->flush();
+            }
+            
             
             
 
