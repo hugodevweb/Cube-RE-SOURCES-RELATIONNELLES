@@ -1,4 +1,5 @@
-{% extends 'base.html.twig' %} {% block title %}Articles{% endblock %} 
+{% extends 'base.html.twig' %} 
+{% block title %}Articles{% endblock %} 
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
@@ -24,10 +25,11 @@
         <h1>Espace Articles</h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {% for article in articles %}
-            <div class="col">
+            <div class="col article-responsive">
                 <div class="card shadow-sm">
                     <img class="bd-placeholder-img card-img-top" width="100%" height="200" src="https://www.gouvernement.fr/upload/media/content/0001/07/a55d231483a76164d2dbc1cf62ca6d7e949c09d0.jpg" alt=""/>
                     <div class="card-body">
+                        <div class="grid-alignment">
                         <small class="text-categorie">{{ article.getCategoriesString() }}</small>
                         <p class="card-text"><a href="/actualite/les-4-actus-de-la-semaine-du-27-novembre-au-3-decembre-2023">{{ article.titre }}}</a></p>
                         <p class="card-text">
@@ -43,7 +45,7 @@
                                 <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
                             </div>
                             <small class="text-body-secondary">{{ article.getDate() }}</small>
-                        </div>
+                        </div></div>
                     </div>
                 </div>
             </div>

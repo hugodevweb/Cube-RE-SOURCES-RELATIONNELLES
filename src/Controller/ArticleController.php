@@ -30,7 +30,7 @@ class ArticleController extends AbstractController
     public function CreateArticle(Request $req, EntityManagerInterface $entityManager): Response
     {
         ini_set('upload_max_filesize', '20M');
-        ini_set('post_max_size', '20M');    
+        ini_set('post_max_size', '20M');
         $article = new Article();
         $form = $this->createForm(ArticleType::class);
         $form->handleRequest($req);
