@@ -70,6 +70,22 @@ class UserCrawlerTest extends WebTestCase
             echo"}\n";
         }
     }
+    public function testCreateUserCrawlerFailure()
+{
+
+    // Faire une requête GET sur l'URL '/new/compte'
+    $crawler = $this->client->request('GET', '/new/compte');
+
+    // Sélectionner le formulaire et remplir les champs avec des données de test
+    $form = $crawler->selectButton('Sauvegarder')->form();
+    $form['user[nom]'] = ''; // Laisser le nom vide pour simuler une erreur
+
+    // Soumettre le formulaire
+    $this->client->submit($form);
+
+    // Vérifier que la réponse contient une erreur
+    $this->assertTrue($this->client->getResponse()->isClientError());
+}
 
     protected function tearDown(): void
     {

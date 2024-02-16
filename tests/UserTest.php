@@ -77,7 +77,6 @@ class UserTest extends WebTestCase
             $this->entityManager->flush();
 
             $savedUser = $this->entityManager->getRepository(User::class)->findOneBy(['email' => 'example2@example.com']);
-            echo'Ca devrait pas passer ici';
             // Assurez-vous que l'utilisateur n'est pas enregistré avec un mot de passe d'un seul caractère
               $this->assertEquals("1","1");
 
