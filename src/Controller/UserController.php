@@ -28,22 +28,18 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             //créer une sécurité qui verifie que le mot de passe est plus de 6 caractères
-            if(strlen($user->getPassword()) < 6){
+            if (strlen($user->getPassword()) < 6) {
                 throw new \InvalidArgumentException('Votre mot de passe doit contenir au moins 6 caractères.');
-            }else{
+            } else {
                 $entityManager->persist($user);
                 $entityManager->flush();
             }
-            
-            
-            
-
-            return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
-            
+            return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
         }
 
         if ($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
+            // return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
+            return $this->render('bundles/TwigBundle/Exception/error403.html.twig');
         } else {
             return $this->renderForm('user/forms/new.html.twig', [
                 'user' => $user,
