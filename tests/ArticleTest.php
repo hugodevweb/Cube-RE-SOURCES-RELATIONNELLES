@@ -71,6 +71,46 @@ class ArticleTest extends WebTestCase {
         }
     }
 
+    //--------------------------------------------
+
+    // public function testCreateArticleFailure(): void
+    // {
+    //     // Commencer une transaction
+    //     $this->entityManager->beginTransaction();
+
+    //     try {
+    //         $article = new Article();
+    //         $article->setTitre('');
+    //         $article->setCreatedAt(new \DateTimeImmutable);
+    //         $article->setCorps('edrftyuiolpmkjhgfdsxcfvgbhnj');
+    //         $article->setNombreVu('5');
+
+    //         $savedUser = $this->entityManager->getRepository(User::class)->findOneBy(['email' => 'example@example.com']);
+
+    //         $article->setUser($savedUser);
+
+    //         // Enregistrez l'article dans la base de données
+    //         $this->entityManager->persist($article);
+    //         $this->entityManager->flush();
+
+    //         $savedArticle = $this->entityManager->getRepository(Article::class)->findOneBy(['titre' => 'Exemple titre']);
+    //         // Assurez-vous que l'article n'est pas enregistré sans titre
+            
+    //         // $this->expectException(\InvalidArgumentException::class);
+    //         // $this->expectExceptionMessage('Your password must be at least 6 characters long');
+
+
+    //     } catch (\LogicException $e) {
+    //         $this->assertEquals('Veuillez renseigner un titre.', $e->getMessage());
+    //     } 
+    //     finally {
+    //         // Annuler la transaction pour nettoyer la base de données
+    //         $this->entityManager->rollback();
+    //     }
+    // }
+
+    // //--------------------------------------------
+
     protected function tearDown(): void
     {
         parent::tearDown();
