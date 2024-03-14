@@ -26,9 +26,6 @@ class UserController extends AbstractController
         Request $request, 
         EntityManagerInterface $entityManager, 
         AuthorizationCheckerInterface $authorizationChecker,
-        UserPasswordEncoderInterface $passwordEncoder, 
-        GuardAuthenticatorHandler $guardHandler,
-        LoginFormAuthenticator $authenticator
     ): Response
     {
         $user = new User();
@@ -49,11 +46,8 @@ class UserController extends AbstractController
                 return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
             }
         }
-
-        // Redirigez l'utilisateur vers la page souhaitée après l'inscription
-        // return $this->redirectToRoute('app_home'); // Remplacez 'app_home' par le nom de la route de votre choix
-
-        return $this->render('user/new.html.twig', [
+      
+        return $this->render('user/Forms/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
