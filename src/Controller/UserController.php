@@ -27,19 +27,22 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //créer une sécurité qui verifie que le mot de passe est plus de 6 caractères
-            if (strlen($user->getPassword()) < 6) {
-                throw new \InvalidArgumentException('Votre mot de passe doit contenir au moins 6 caractères.');
+            //fait une query dans la base de données pour voir si l'email existe déjà
+            $userRepo = $entityManager->getRepository(User::class);
+            $userCheck = $userRepo->findOneBy(['email' => $user->getEmail()]);
+            if ($userCheck) {   
+                // Add an error to the form
+                $form->get('email')->addError(new FormError('Cet email est déjà utilisé.'));
             } else {
                 $entityManager->persist($user);
                 $entityManager->flush();
-            }
-            return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
+
+                return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
+    }
         }
 
         if ($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
-            // return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
-            return $this->render('bundles/TwigBundle/Exception/error403.html.twig');
+            return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
         } else {
             return $this->renderForm('user/forms/new.html.twig', [
                 'user' => $user,
