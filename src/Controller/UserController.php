@@ -36,20 +36,19 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Encodez le mot de passe de l'utilisateur
-            $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
+            //fait une query dans la base de données pour voir si l'email existe déjà
+            $userRepo = $entityManager->getRepository(User::class);
+            $userCheck = $userRepo->findOneBy(['email' => $user->getEmail()]);
+            if ($userCheck) {   
+                // Add an error to the form
+                $form->get('email')->addError(new FormError('Cet email est déjà utilisé.'));
+            } else {
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            // Persistez l'utilisateur dans la base de données
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // Authentifiez automatiquement l'utilisateur après l'inscription
-            $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // Nom du pare-feu dans security.yaml
-            );
+                return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
+            }
+        }
 
             // Redirigez l'utilisateur vers la page souhaitée après l'inscription
             return $this->redirectToRoute('app_home'); // Remplacez 'app_home' par le nom de la route de votre choix

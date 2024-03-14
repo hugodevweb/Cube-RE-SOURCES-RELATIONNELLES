@@ -122,7 +122,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPassword(string $password): static
     {
-        $newPassword = password_hash($password, PASSWORD_BCRYPT, $cost = [15]);
+        
+        
+
+        $newPassword = password_hash($password, PASSWORD_BCRYPT, ['cost' => 15]);
         $this->password = $newPassword;
         return $this;
     }
