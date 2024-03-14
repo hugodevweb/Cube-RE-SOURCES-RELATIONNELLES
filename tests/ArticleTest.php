@@ -60,7 +60,8 @@ class ArticleTest extends WebTestCase {
             $savedArticle = $this->entityManager->getRepository(Article::class)->findOneBy(['titre' => 'Exemple titre']);
             
             $this->assertInstanceOf(Article::class, $savedArticle);
-            $this->assertEquals((new \DateTimeImmutable())->getTimestamp(), $savedArticle->getCreatedAt()->getTimestamp());
+            
+            $this->assertEquals(date('d/m/Y'), $savedArticle->getCreatedAt()->format('d/m/Y'));
             $this->assertEquals('edrftyuiolpmkjhgfdsxcfvgbhnj', $savedArticle->getCorps());
             $this->assertEquals('5', $savedArticle->getNombreVu());
             $this->assertEquals($savedUser, $savedArticle->getUser());

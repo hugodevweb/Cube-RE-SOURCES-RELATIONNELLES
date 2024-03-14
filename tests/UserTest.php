@@ -13,7 +13,7 @@ class UserTest extends WebTestCase
     {
         parent::setUp();
         echo"UserTest()\n";
-        echo"{\n";
+        
 
 
         // Démarrer le client et récupérer le conteneur
@@ -27,7 +27,7 @@ class UserTest extends WebTestCase
     {
         // Commencer une transaction
         echo"testCreateUserSuccess()\n";
-        echo"{\n";
+        
 
 
         try {
@@ -53,7 +53,7 @@ class UserTest extends WebTestCase
 
         } finally {
             // Annuler la transaction pour nettoyer la base de données
-            echo"}\n";
+            
         }
     }
 
@@ -61,7 +61,7 @@ class UserTest extends WebTestCase
     {
         // Commencer une transaction
         echo"testCreateUserFailure()\n";
-        echo"{\n";
+        
 
         try {
             $user = new User();
@@ -92,14 +92,14 @@ class UserTest extends WebTestCase
         // } 
         finally {
             // Annuler la transaction pour nettoyer la base de données
-            echo"}\n";
+            
         }
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
-        echo"}\n";
+        
         // Annuler la transaction après chaque test
         if ($this->entityManager != null) {
             $this->entityManager->close();

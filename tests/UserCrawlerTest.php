@@ -17,7 +17,7 @@ class UserCrawlerTest extends WebTestCase
     {
         parent::setUp();
         echo"UserCrawlerTest()\n";
-        echo"{\n";
+        
 
         // Start the client and get the container
         $this->client = static::createClient();
@@ -31,7 +31,7 @@ class UserCrawlerTest extends WebTestCase
         echo"testCreateUserCrawlerSuccess()\n";
 
         try {
-            echo"{\n";
+            
             echo "Test de création d'un utilisateur avec succès \n";
             $crawler = $this->client->request('GET', '/new/compte');
 
@@ -66,8 +66,7 @@ class UserCrawlerTest extends WebTestCase
             $this->assertEquals('Doe', $savedUser->getPrenom());
 
         } finally {
-            // Rollback the transaction to leave the database in its initial state
-            echo"}\n";
+            // Rollback the transaction to leave the database in its initial state   
         }
     }
     public function testCreateUserCrawlerFailure()
@@ -90,7 +89,7 @@ class UserCrawlerTest extends WebTestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        echo"}\n";
+        
         // Rollback the transaction after each test
         if ($this->entityManager != null) {
             $this->entityManager->close();
