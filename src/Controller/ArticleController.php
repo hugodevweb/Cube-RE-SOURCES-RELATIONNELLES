@@ -2,21 +2,32 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
-use Monolog\DateTimeImmutable;
-use App\Form\ArticleType;
-
-use App\Repository\CommentaireRepository;
 use App\Entity\Article;
 use App\Entity\Ressource;
+use App\Entity\Commentaire;
+use App\Form\CommentaireFormType;
+use App\Form\ReponseFormType;
+use App\Form\ArticleType;
+use App\Repository\CommentaireRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Monolog\DateTimeImmutable;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 #[Route('/articles')]
 class ArticleController extends AbstractController
 {
+    private $tokenStorage;
+
+    public function __construct(TokenStorageInterface $tokenStorage)
+    {
+        $this->tokenStorage = $tokenStorage;
+    }
+
     #[Route('/', name: 'articles')]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -30,7 +41,7 @@ class ArticleController extends AbstractController
     public function CreateArticle(Request $req, EntityManagerInterface $entityManager): Response
     {
         ini_set('upload_max_filesize', '20M');
-        ini_set('post_max_size', '20M');    
+        ini_set('post_max_size', '20M');
         $article = new Article();
         $form = $this->createForm(ArticleType::class);
         $form->handleRequest($req);
@@ -81,17 +92,55 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show_article')]
-    public function show(EntityManagerInterface $entityManager, int $id, CommentaireRepository $commentaireRepository): Response
+    public function show(EntityManagerInterface $entityManager, int $id, CommentaireRepository $commentaireRepository, Request $request): Response
     {
         $article = $entityManager->getRepository(Article::class)->find($id);
-        $article->setNombreVu($article->getNombreVu() + 1);
-        $entityManager->persist($article);
-        $entityManager->flush();
-        // dd($commentaireRepository->findCommentsParents($article));
+
+        $comment = new Commentaire();
+        $reponse = new Commentaire();
+
+        $reponse_form = $this->createForm(ReponseFormType::class, $reponse);
+        $reponse_form->handleRequest($request);
+
+        $form = $this->createForm(CommentaireFormType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setUser($this->tokenStorage->getToken()->getUser());
+            $comment->setArticle($article);
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            $article->setNombreVu($article->getNombreVu() - 1);
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('show_article', ['id' => $id]);
+        } elseif ($reponse_form->isSubmitted() && $reponse_form->isValid()) {
+            $data = $request->request->all()['reponse_form'];
+            $reponse->setcontenu($data['contenu']);
+            $reponse->setParent($data['parent']);
+            $reponse->setUser($this->tokenStorage->getToken()->getUser());
+            $reponse->setArticle($article);
+            $entityManager->persist($reponse);
+            $entityManager->flush();
+
+            $article->setNombreVu($article->getNombreVu() - 1);
+            $entityManager->persist($article);
+            $entityManager->flush();
+            return $this->redirectToRoute('show_article', ['id' => $id]);
+        } else {
+            $article->setNombreVu($article->getNombreVu() + 1);
+            $entityManager->persist($article);
+            $entityManager->flush();
+        }
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'commentairesParent' => $commentaireRepository->findCommentsParents($article),
             'commentairesEnfant' => $commentaireRepository->findCommentsChilds($article),
+            'form' => $form->createView(),
+            'reponse_form_token' => $reponse_form->createView()->children['_token']->vars['value'],
         ]);
     }
 }

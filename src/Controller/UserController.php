@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Form\FormError;
+
 
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -20,7 +22,14 @@ use Symfony\Component\Security\Core\Authorization\Voter\RoleVoter;
 class UserController extends AbstractController
 {
     #[Route('/new/compte', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, AuthorizationCheckerInterface $authorizationChecker): Response
+    public function new(
+        Request $request, 
+        EntityManagerInterface $entityManager, 
+        AuthorizationCheckerInterface $authorizationChecker,
+        UserPasswordEncoderInterface $passwordEncoder, 
+        GuardAuthenticatorHandler $guardHandler,
+        LoginFormAuthenticator $authenticator
+    ): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -38,17 +47,16 @@ class UserController extends AbstractController
                 $entityManager->flush();
 
                 return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
-    }
+            }
         }
 
-        if ($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
-        } else {
-            return $this->renderForm('user/forms/new.html.twig', [
-                'user' => $user,
-                'form' => $form,
-            ]);
+            // Redirigez l'utilisateur vers la page souhaitée après l'inscription
+            return $this->redirectToRoute('app_home'); // Remplacez 'app_home' par le nom de la route de votre choix
         }
+
+        return $this->render('user/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/compte/{id}', name: 'app_user_show', methods: ['GET'])]
