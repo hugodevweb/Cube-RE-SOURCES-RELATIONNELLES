@@ -36,7 +36,7 @@ class CommentaireRepository extends ServiceEntityRepository
             ->andWhere('c.article = :article')
             ->andWhere('c.parent IS NULL')
             ->setParameter('article', $article)
-            ->orderBy('c.id', 'DESC')
+            ->orderBy('c.id', 'ASC')
             ->getQuery()
             ->getResult();
     }
@@ -47,7 +47,7 @@ class CommentaireRepository extends ServiceEntityRepository
             ->andWhere('c.article = :article')
             ->andWhere('c.parent IS NOT NULL')
             ->setParameter('article', $article)
-            ->orderBy('c.id', 'DESC')
+            ->orderBy('c.id', 'ASC')
             ->getQuery()
             ->getResult();
     }
