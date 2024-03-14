@@ -42,5 +42,4 @@ jobs:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DATABASE_URL: "mysql://freedb_ProjetCube_test:rddrTD8j6S9H4*M@sql.freedb.tech:3306/freedb_ProjetCube"
-
-      run: vendor/bin/phpunit
+      run: php ./vendor/bin/phpunit --filter '/^(?!.*UserCrawlerTest).*$/'

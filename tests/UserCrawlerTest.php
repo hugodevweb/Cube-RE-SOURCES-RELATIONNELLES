@@ -8,10 +8,15 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserCrawlerTest extends WebTestCase
 {
-    
+     
+     
 
     private $entityManager;
     private $client;
+
+    /**
+ * @group crawler
+ */
 
     protected function setUp(): void
     {
