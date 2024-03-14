@@ -50,9 +50,8 @@ class UserController extends AbstractController
             }
         }
 
-            // Redirigez l'utilisateur vers la page souhaitée après l'inscription
-            return $this->redirectToRoute('app_home'); // Remplacez 'app_home' par le nom de la route de votre choix
-        }
+        // Redirigez l'utilisateur vers la page souhaitée après l'inscription
+        // return $this->redirectToRoute('app_home'); // Remplacez 'app_home' par le nom de la route de votre choix
 
         return $this->render('user/new.html.twig', [
             'form' => $form->createView(),
