@@ -30,10 +30,32 @@ h1, h2, h3, h4, h5, h6 {
 /*
  * Blog posts
  */
-.blog-post {
-  margin-bottom: 4rem;
+.blog-post {min-width: 320px; /* Taille minimale pour les petits écrans */
+  margin: auto; /* Centrer l'article */
+  padding: 15px; /* Espacement interne */
+  background-color: #fff; /* Couleur de fond */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre */
 }
+
+@media (min-width: 576px) {
+  .blog-post {
+    min-width: 576px; /* Taille minimale pour les écrans de taille moyenne et supérieure */
+  }
+}
+
+@media (min-width: 768px) {
+  .blog-post {
+    min-width: 768px; /* Taille minimale pour les grands écrans */
+  }
+}
+
 .blog-post-meta {
   margin-bottom: 1.25rem;
   color: #727272;
+}
+
+/* grid pour l'alignement de l'affichage des articles */
+.grid-alignement {
+  display: grid;
 }

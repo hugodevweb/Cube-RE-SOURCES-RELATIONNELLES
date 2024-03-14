@@ -9,7 +9,7 @@ on:
   push:
     branches: [ "main","test","articles" ]
   pull_request:
-    branches: [ "main","test","articles" ]  
+    branches: [ "main","test","articles" ]
 
 permissions:
   contents: read

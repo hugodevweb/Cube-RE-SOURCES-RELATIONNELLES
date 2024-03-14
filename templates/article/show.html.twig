@@ -3,7 +3,7 @@
 {% block title %}Article - Consultation{% endblock %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="../../public/css/blog.css" />
+  {# <link rel="stylesheet" href="{{ asset('css/blog.css') }}" /> #}
 {% endblock %} 
 
 {% block body %}
@@ -56,61 +56,68 @@
       </a>
     </div>
     <hr />
-    {% if commentairesParent is not empty %}
-      <!-- Commentaires -->
+  {% if commentairesParent is not empty %}
+    <div class="mt-5">
       <h2>Commentaires</h2>
-
-      <!-- Commentaire 2 -->
-      {% for commentairesP in commentairesParent %}
-        <div class="comment border p-3 mb-2 d-flex">
-          <div>
-            <p><strong>{{ commentairesP.user.getPseudo() }}</strong> a dit :</p>
-            <p>{{ commentairesP.contenu }}</p>
-            <div class="d-flex justify-content-between align-items-center pb-2">
-              <p class="text-muted align-items-center mb-0">{{ commentairesP.getDate() }}</p>
-              <button type="button" class="btn btn-primary mt-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left"
-                  viewBox="0 0 16 16">
-                  <path
-                    d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z">
-                  </path>
-                </svg>
-              </button>
-            </div>
-
-            <!-- Réponse à Commentaire 2 -->
-            {% if commentairesEnfant is not empty %}
-              {% for commentairesE in commentairesEnfant %}
-                <div class="comment border mb-2 p-3 ml-3">
-                  <p><strong>{{ commentairesE.user.getPseudo() }}</strong> a répondu :</p>
-                  <p>{{ commentairesE.contenu }}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <p class="text-muted align-items-center mb-0">{{ commentairesE.getDate() }}</p>
-                  </div>
+      {% if commentairesParent is not empty %}
+        {% for commentairesP in commentairesParent %}
+          <div class="comment border p-3 mb-2 d-flex">
+            <div>
+              <p><strong>{{ commentairesP.user.getPseudo() }}</strong> a dit :</p>
+              <p>{{ commentairesP.contenu }}</p>
+              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div class="d-flex justify-content-between align-items-center pb-2">
+                  <p class="text-muted align-items-center mb-0">{{ commentairesP.getDate() }}</p>
+                  <button type="button" class="btn btn-primary mt-3" data-button="{{ commentairesP.getId() }}" data-token="{{ reponse_form_token }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left"
+                      viewBox="0 0 16 16">
+                      <path
+                        d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z">
+                      </path>
+                    </svg>
+                  </button>
                 </div>
-              {% endfor %}
-            {% endif %}
+              {% endif %}
+
+              <!-- Réponse à Commentaire -->
+              {% if commentairesEnfant is not empty %}
+                {% for commentairesE in commentairesEnfant %}
+                  {% if commentairesE.getParent() is same as (commentairesP.getId()) %}
+                    <div class="comment border mb-2 p-3 ml-3">
+                      <p><strong>{{ commentairesE.user.getPseudo() }}</strong> a répondu :</p>
+                      <p>{{ commentairesE.contenu }}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <p class="text-muted align-items-center mb-0">{{ commentairesE.getDate() }}</p>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
           </div>
+        {% endfor %}
+      {% endif %}
+  {% endif %}
 
-          <!-- Bouton de réponse -->
+      <!-- Ajouter un nouveau commentaire -->
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="comment border p-3 mb-2">
+          <div class="p-3 mb-2">
+            <h3>Ajouter un commentaire</h1>
+            <div class="form-group">
+              {{ form_start(form) }}
+                  {{ form_row(form.contenu) }}
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Ajouter un commentaire</button>
+                  </div>
+              {{ form_end(form) }}
+            </div>
+          </div>
         </div>
-      {% endfor %}
-    {% endif %}
-
-    <!-- Ajouter un nouveau commentaire -->
-    <div class="comment border p-3 mb-2">
-      <form>
-        <div class="form-group">
-          <h3 for="userComment">Votre Commentaire</h3>
-          <textarea class="form-control" id="userComment" rows="3"
-            placeholder="Écrivez votre commentaire ici..."></textarea>
-        </div>
-        <div class="d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary mt-3">
-            Ajouter un commentaire
-          </button>
-        </div>
-      </form>
+      {% endif %}
     </div>
-  </article>
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset('js/commentaire_reponse.js') }}"></script>
 {% endblock %}
