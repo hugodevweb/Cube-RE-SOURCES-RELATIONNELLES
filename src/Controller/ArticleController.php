@@ -106,7 +106,6 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($comment);
             $comment->setUser($this->tokenStorage->getToken()->getUser());
             $comment->setArticle($article);
             $entityManager->persist($comment);
@@ -118,10 +117,11 @@ class ArticleController extends AbstractController
 
             return $this->redirectToRoute('show_article', ['id' => $id]);
         } elseif ($reponse_form->isSubmitted() && $reponse_form->isValid()) {
-            dd($reponse_form->getData());
+            $data = $request->request->all()['reponse_form'];
+            $reponse->setcontenu($data['contenu']);
+            $reponse->setParent($data['parent']);
             $reponse->setUser($this->tokenStorage->getToken()->getUser());
             $reponse->setArticle($article);
-            dd($reponse);
             $entityManager->persist($reponse);
             $entityManager->flush();
 
@@ -134,8 +134,6 @@ class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
         }
-
-        // dd($reponse_form->createView() ,$reponse_form->createView()->children['_token']->vars['value']);
 
         return $this->render('article/show.html.twig', [
             'article' => $article,

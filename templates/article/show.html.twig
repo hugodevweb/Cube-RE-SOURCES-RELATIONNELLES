@@ -56,7 +56,7 @@
       </a>
     </div>
     <hr />
-    {% if commentairesParent is not empty %}
+  {% if commentairesParent is not empty %}
     <div class="mt-5">
       <h2>Commentaires</h2>
       {% if commentairesParent is not empty %}
@@ -77,7 +77,7 @@
                     </svg>
                   </button>
                 </div>
-                {% endif %}
+              {% endif %}
 
               <!-- Réponse à Commentaire -->
               {% if commentairesEnfant is not empty %}
@@ -97,6 +97,7 @@
           </div>
         {% endfor %}
       {% endif %}
+  {% endif %}
 
       <!-- Ajouter un nouveau commentaire -->
       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -115,7 +116,6 @@
         </div>
       {% endif %}
     </div>
-  {% endif %}
 {% endblock %}
 
 {% block javascripts %}
