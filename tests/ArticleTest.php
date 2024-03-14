@@ -34,6 +34,8 @@ class ArticleTest extends WebTestCase {
             $this->entityManager->flush();
     }
 
+    //--------------------------------------------
+
     public function testCreateArticleSuccess(): void
     {
         // Commencer une transaction
@@ -70,6 +72,8 @@ class ArticleTest extends WebTestCase {
             $this->entityManager->rollback();
         }
     }
+
+    //--------------------------------------------
 
     public function testCreateArticleFailure(): void{
 
