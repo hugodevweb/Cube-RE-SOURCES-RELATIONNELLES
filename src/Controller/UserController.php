@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Form\FormError;
+
 
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -27,10 +29,18 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
+            //fait une query dans la base de données pour voir si l'email existe déjà
+            $userRepo = $entityManager->getRepository(User::class);
+            $userCheck = $userRepo->findOneBy(['email' => $user->getEmail()]);
+            if ($userCheck) {   
+                // Add an error to the form
+                $form->get('email')->addError(new FormError('Cet email est déjà utilisé.'));
+            } else {
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
+    }
         }
 
         if ($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
