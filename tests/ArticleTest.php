@@ -13,6 +13,7 @@ class ArticleTest extends WebTestCase {
 
     protected function setUp(): void
     {
+        
         parent::setUp();
 
         // Démarrer le client et récupérer le conteneur
