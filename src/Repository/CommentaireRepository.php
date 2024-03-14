@@ -51,6 +51,11 @@ class CommentaireRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function addCommentaire($commentaire)
+    {
+        dd($this->security->getUser());
+    }
   
 //    /**
 //     * @return Commentaire[] Returns an array of Commentaire objects

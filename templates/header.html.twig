@@ -100,10 +100,10 @@
             <div class="col-md-3 d-flex align-items-center text-end">
                 {% if app.user %}
                 {% for row in app.user.roles %}
-                {% if row == 'ROLE_ADMIN' %}
-                <button type="button" class="btn btn-outline-primary me-2"><a href="{{ path('admin') }}"
-                        class="style-none">Administration</a></button>
-                {% endif %}
+                    {% if row == 'ROLE_ROLE_ADMIN' %}
+                    <button type="button" class="btn btn-outline-primary me-2"><a href="{{ path('admin') }}"
+                            class="style-none">Administration</a></button>
+                    {% endif %}
                 {% endfor %}
                 <button type="button" class="btn btn-outline-primary me-2"><a href="{{ path('app_logout') }}"
                         class="style-none">Déconnexion</a></button>
