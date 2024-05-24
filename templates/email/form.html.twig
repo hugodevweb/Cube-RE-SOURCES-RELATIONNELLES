@@ -1,0 +1,22 @@
+{# templates/email/form.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Envoyer un Email</title>
+</head>
+<body>
+    <h1>Envoyer un Email</h1>
+    <form action="{{ path('sendEmailRequest') }}" method="post">
+        <label for="to">À :</label>
+        <input type="email" id="to" name="to" required>
+        <br>
+        <label for="subject">Sujet :</label>
+        <input type="text" id="subject" name="subject" required>
+        <br>
+        <label for="content">Contenu :</label>
+        <textarea id="content" name="content" required></textarea>
+        <br>
+        <button type="submit">Envoyer Email</button>
+    </form>
+</body>
+</html>
