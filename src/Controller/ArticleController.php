@@ -49,7 +49,7 @@ class ArticleController extends AbstractController
             $liste_ressources = $form->get('ressources')->getData();
             $article->setUser($this->getUser());
             foreach ($form->get('categories')->getData() as $category) {
-                $article->addCategory($category);
+                $article->addCategory($category) || $article->addCategory("aucune Catégorie");
             }
             $article->setTitre($form->get('titre')->getData());
             $article->setCorps($form->get('corps')->getData());
