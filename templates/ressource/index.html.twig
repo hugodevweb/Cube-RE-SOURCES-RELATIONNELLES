@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %} {% block title %}Ressources{% endblock %} 
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
+{% endblock %}
+
+{% block body %}
+<main>
+    <div class="album py-0 bg-body-tertiary">
+        <div class="container my-5">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-chevron p-3">
+                    <li class="breadcrumb-item">
+                        <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Accueil</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Ressources
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Espace Ressources</h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for ressource in ressources %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text"><a href="#">{{ ressource.titre }}</a></p>
+                        <p class="card-text">
+                        {{ ressource.corps | slice(0, 90) }}
+                        {% if ressource.corps|length > 100 %}
+                        ...
+                        {% endif %}
+                        </p>
+                        <p class="card-text">Vu {{ ressource.nombreVu }} fois</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{{ path('show_ressource', {'id': ressource.id}) }}" class="btn btn-sm btn-outline-secondary">Ouvrir</a>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
+                            </div>
+                            <small class="text-body-secondary">{{ ressource.getDate() }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}

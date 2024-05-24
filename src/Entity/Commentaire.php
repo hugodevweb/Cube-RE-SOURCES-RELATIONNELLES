@@ -34,6 +34,9 @@ class Commentaire
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commentaires')]
+    private ?Ressource $ressources = null;
+
     public function __construct()
     {
         $this->est_actif = true;
@@ -120,5 +123,17 @@ class Commentaire
     public function getDate(): string
     {
         return $this->created_at->format('m/d/Y H:i');
+    }
+
+    public function getRessources(): ?Ressource
+    {
+        return $this->ressources;
+    }
+
+    public function setRessources(?Ressource $ressources): static
+    {
+        $this->ressources = $ressources;
+
+        return $this;
     }
 }
