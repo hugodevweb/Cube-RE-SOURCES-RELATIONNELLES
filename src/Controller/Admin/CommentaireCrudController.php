@@ -33,6 +33,9 @@ class CommentaireCrudController extends AbstractCrudController
   
     public function configureFields(string $pageName): iterable
     {
+        $commentaires_parents = $this->formatParentForChoices($this->commentaireRepository->findall());
+        // dd($commentaires_parents);
+
         $res =  [
             IdField::new('id')->onlyOnIndex(),
             TextEditorField::new('contenu'),
@@ -51,10 +54,13 @@ class CommentaireCrudController extends AbstractCrudController
                 ])
                 ->setRequired(true)
                 ->onlyOnIndex(),
-            ChoiceField::new('parent')->setChoices($this->formatParentForChoices($this->commentaireRepository->findall()))->onlyOnForms(),
             IdField::new('parent')->onlyOnIndex(),
-            BooleanField::new('est_actif')->onlyOnIndex(),
         ];
+        if (!empty($commentaires_parents)) {
+            array_push($res, 
+                ChoiceField::new('parent')->setChoices($this->formatParentForChoices($this->commentaireRepository->findall()))->onlyOnForms());
+        }
+        array_push($res, BooleanField::new('est_actif'));
         return $res;
     }
 

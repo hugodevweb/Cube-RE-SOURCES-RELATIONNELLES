@@ -28,7 +28,7 @@ class Commentaire
     #[ORM\Column(nullable: true)]
     private ?int $parent = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'commentaires')]
     private ?User $user = null;
 
     #[ORM\Column]
@@ -36,7 +36,7 @@ class Commentaire
 
     public function __construct()
     {
-        $this->est_actif = false;
+        $this->est_actif = true;
         $this->created_at = new DateTimeImmutable(false, new DateTimeZone('Europe/Paris'));
     }
   

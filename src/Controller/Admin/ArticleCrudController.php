@@ -40,7 +40,7 @@ class ArticleCrudController extends AbstractCrudController
             Field::new('nombreVu')->onlyOnIndex(),
             BooleanField::new('validation')->onlyOnIndex(),
             AssociationField::new('categories')->onlyOnForms(),
-            ChoiceField::new('type')->setChoices($this->formatUtilisateurForChoices($this->userRepository->findall()))->onlyOnForms(),
+            ChoiceField::new('type')->setChoices($this->formatUtilisateurForChoices($this->typeRepository->findall()))->onlyOnForms(),
             ChoiceField::new('user')->setChoices($this->formatUtilisateurForChoices($this->userRepository->findall()))->onlyOnForms(),
             AssociationField::new('user')
             ->setFormTypeOptions([

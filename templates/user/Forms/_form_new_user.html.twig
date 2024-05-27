@@ -1,12 +1,14 @@
 
 {{ form_start(form) }}
 
-
-{% set errors = form_errors(form.password.first)|raw|trim %}
-{% set styled_errors = errors|replace({'<ul>': '<ul style="list-style-type: none; padding: 0; margin: 0;">'}) %}
-{% if styled_errors is not empty %}
+{% set password_errors = form_errors(form.password.first)|raw|trim %}
+{% set email_errors = form_errors(form.email)|raw|trim %}
+{% set styled_password_errors = password_errors|replace({'<ul>': '<ul style="list-style-type: none; padding: 0; margin: 0;">'}) %}
+{% set styled_email_errors = email_errors|replace({'<ul>': '<ul style="list-style-type: none; padding: 0; margin: 0;">'}) %}
+{% if styled_password_errors is not empty or styled_email_errors is not empty %}
     <div class="alert alert-danger" role="alert">
-        {{ styled_errors|raw }}
+        {{ styled_password_errors|raw }}
+        {{ styled_email_errors|raw }}
     </div>
 {% endif %}
 
