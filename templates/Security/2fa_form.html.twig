@@ -1,35 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vérification E-mail{% endblock %}
-
-{% block stylesheets %}
-    <link href="{{ asset('css/corps.css') }}" rel="stylesheet">
-   {% endblock %}
-
 {% block body %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Vérification à deux facteurs</h4>
+<style>
+    #user_actions {
+        display: none !important;
+    }
+    label{
+        font-size: 18px;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Authentification à deux facteurs</h4>
+                </div>
+                <div class="card-body">
+
+                    {% if authenticationError %}
+                        <div class="alert alert-danger">{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</div>
+                    {% endif %}
+
+                    <div class="dropdown mt-2 mb-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ "choose_provider"|trans({}, 'SchebTwoFactorBundle') }}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            {% for provider in availableTwoFactorProviders %}
+                                <a class="dropdown-item" href="{{ path("2fa_login", {"preferProvider": provider}) }}">{{ provider }}</a>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="card-body">
-                        {% if error is defined and error %}
-                            <div class="alert alert-danger">{{ error }}</div>
+                    
+
+                    <p class="label"><label for="_auth_code">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }} {{ twoFactorProvider }}:</label></p>
+
+                    <form class="form" action="{{ checkPathUrl ? checkPathUrl : path(checkPathRoute) }}" method="post">
+                        <div class="form-group">
+                            <input id="_auth_code" type="text" name="{{ authCodeParameterName }}" class="form-control" autocomplete="one-time-code" autofocus>
+                        </div>
+
+                        {% if displayTrustedOption %}
+                            <div class="form-group form-check d-flex align-items-center ">
+                                <input id="_trusted" type="checkbox" name="{{ trustedParameterName }}" class="form-check-input ">
+                                <label for="_trusted" class="form-check-label" style="margin-left: 3%;">{{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}</label>
+                            </div>
                         {% endif %}
 
-                        <p>Veuillez saisir le code de vérification envoyé à votre adresse e-mail.</p>
+                        {% if isCsrfProtectionEnabled %}
+                            <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
+                        {% endif %}
 
-                        
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Vérifier</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                       <button type="submit" class="btn btn-primary">{{ "login"|trans({}, 'SchebTwoFactorBundle') }}</button>
+                        <a href="{{ logoutPath }}" class="btn btn-secondary ml-2">{{ "cancel"|trans({}, 'SchebTwoFactorBundle') }}</a>
+                    </form>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

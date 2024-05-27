@@ -112,10 +112,8 @@ class ResetPasswordController extends AbstractController
             $this->resetPasswordHelper->removeResetRequest($token);
 
             // Encode(hash) the plain password, and set it.
-            $encodedPassword = $passwordHasher->hashPassword(
-                $user,
-                $form->get('plainPassword')->getData()
-            );
+            $encodedPassword = $form->get('plainPassword')->getData();
+        
 
             $user->setPassword($encodedPassword);
             $this->entityManager->flush();
@@ -123,7 +121,7 @@ class ResetPasswordController extends AbstractController
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render('reset_password/reset.html.twig', [
@@ -161,7 +159,7 @@ class ResetPasswordController extends AbstractController
         $email = (new TemplatedEmail())
             ->from(new Address('contact@oneclick-dev.fr', '(RE)Sources'))
             ->to($user->getEmail())
-            ->subject('Your password reset request')
+            ->subject('Votre demande de réinitialisation du mot de passe')
             ->htmlTemplate('reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken,

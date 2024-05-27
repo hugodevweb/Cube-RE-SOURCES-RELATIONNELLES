@@ -9,7 +9,7 @@ scheb_two_factor:
         sender_email: contact@oneclick-dev.fr
         sender_name: Minister de la Santé  # Optional
         mailer: App\Service\MyAuthCodeMailer
-        #template: Security/2fa_form.html.twig
+        template: Security/2fa_form.html.twig
     # config/packages/scheb_2fa.yaml
     trusted_device:
         enabled: true                 # If the trusted device feature should be enabled
@@ -19,3 +19,5 @@ scheb_two_factor:
         cookie_secure: false           # Set the 'Secure' (HTTPS Only) flag on the trusted device cookie
         cookie_same_site: "lax"        # The same-site option of the cookie, can be "lax" or "strict"
         cookie_path: "/"               # Path to use when setting the cookie
+    google:
+        enabled: false

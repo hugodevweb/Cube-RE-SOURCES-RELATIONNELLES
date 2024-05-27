@@ -1,9 +1,153 @@
-<h1>Hi!</h1>
-
-<p>To reset your password, please visit the following link</p>
-
-<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
-
-<p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
-
-<p>Cheers!</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <!-- Compiled with Bootstrap Email version: 1.5.1 --><meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+      body,table,td{font-family:Helvetica,Arial,sans-serif !important}.ExternalClass{width:100%}.ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:150%}a{text-decoration:none}*{color:inherit}a[x-apple-data-detectors],u+#body a,#MessageViewBody a{color:inherit;text-decoration:none;font-size:inherit;font-family:inherit;font-weight:inherit;line-height:inherit}img{-ms-interpolation-mode:bicubic}table:not([class^=s-]){font-family:Helvetica,Arial,sans-serif;mso-table-lspace:0pt;mso-table-rspace:0pt;border-spacing:0px;border-collapse:collapse}table:not([class^=s-]) td{border-spacing:0px;border-collapse:collapse}@media screen and (max-width: 600px){.w-full,.w-full>tbody>tr>td{width:100% !important}*[class*=s-lg-]>tbody>tr>td{font-size:0 !important;line-height:0 !important;height:0 !important}.s-4>tbody>tr>td{font-size:16px !important;line-height:16px !important;height:16px !important}.s-5>tbody>tr>td{font-size:20px !important;line-height:20px !important;height:20px !important}}
+    </style>
+  </head>
+  <body class="bg-light" style="outline: 0; width: 100%; min-width: 100%; height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Helvetica, Arial, sans-serif; line-height: 24px; font-weight: normal; font-size: 16px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; color: #000000; margin: 0; padding: 0; border-width: 0;" bgcolor="#f7fafc">
+    <div class="preview" style="display: none; max-height: 0px; overflow: hidden;">
+      Votre demande de R&#233;initialisation de mot de passe&#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; &#847; &#8204; &#160; 
+    </div>
+    <table class="bg-light body" valign="top" role="presentation" border="0" cellpadding="0" cellspacing="0" style="outline: 0; width: 100%; min-width: 100%; height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Helvetica, Arial, sans-serif; line-height: 24px; font-weight: normal; font-size: 16px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; color: #000000; margin: 0; padding: 0; border-width: 0;" bgcolor="#f7fafc">
+      <tbody>
+        <tr>
+          <td valign="top" style="line-height: 24px; font-size: 16px; margin: 0;" align="left" bgcolor="#f7fafc">
+            <table class="s-5 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
+              <tbody>
+                <tr>
+                  <td style="line-height: 20px; font-size: 20px; width: 100%; height: 20px; margin: 0;" align="left" width="100%" height="20">
+                    &#160;
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="container" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+              <tbody>
+                <tr>
+                  <td align="center" style="line-height: 24px; font-size: 16px; margin: 0; padding: 0 16px;">
+                    <!--[if (gte mso 9)|(IE)]>
+                      <table align="center" role="presentation">
+                        <tbody>
+                          <tr>
+                            <td width="600">
+                    <![endif]-->
+                    <table align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 600px; margin: 0 auto;">
+                      <tbody>
+                        <tr>
+                          <td style="line-height: 24px; font-size: 16px; margin: 0;" align="left">
+                            <table class="card shadow-sm" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important; width: 100%; overflow: hidden; border: 1px solid #e2e8f0;" bgcolor="#ffffff">
+                              <tbody>
+                                <tr>
+                                  <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left" bgcolor="#ffffff">
+                                    <table class="card-body" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                                      <tbody>
+                                        <tr>
+                                          <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 20px;" align="left">
+                                            <div class="text-center" style="" align="center">
+                                              <img class="img-fluid rounded" src="https://lh3.googleusercontent.com/d/1JRdgDHua6ZfQvOzgayIPO5f-JJHMLNuQ" alt="Logo (Re)Sources" style="max-width: 200px; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; width: 100%; border-radius: 4px; border-style: none; border-width: 0;" width="100%">
+                                            </div>
+                                            <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="line-height: 16px; font-size: 16px; width: 100%; height: 16px; margin: 0;" align="left" width="100%" height="16">
+                                                    &#160;
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">Bonjour, vous avez demand&#233; &#224; r&#233;initialiser votre mot de passe pour votre compte (Re)Sources. Cliquez sur le bouton ci-dessous pour proc&#233;der &#224; la r&#233;initialisation :</p>
+                                            <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="line-height: 16px; font-size: 16px; width: 100%; height: 16px; margin: 0;" align="left" width="100%" height="16">
+                                                    &#160;
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <div class="text-center" style="" align="center">
+                                              <table class="btn btn-lg" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important;">
+                                                <tbody>
+                                                  <tr>
+                                                    <td style="line-height: 24px; font-size: 16px; border-radius: 6px; margin: 0;" align="center">
+                                                      <a href="{{ url('app_reset_password', {token: resetToken.token}) }}" style="background-color: #000091; color: #FFFFFF; font-size: 20px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 9px; line-height: 25px; display: block; font-weight: normal; white-space: nowrap; padding: 8px 16px; border: 1px solid transparent;">R&#233;initialiser mon mot de passe</a>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                            <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="line-height: 16px; font-size: 16px; width: 100%; height: 16px; margin: 0;" align="left" width="100%" height="16">
+                                                    &#160;
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}. Si vous n'avez pas demand&#233; cette r&#233;initialisation, ignorez simplement cet email.</p>
+                                            <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="line-height: 16px; font-size: 16px; width: 100%; height: 16px; margin: 0;" align="left" width="100%" height="16">
+                                                    &#160;
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <p style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">Merci de votre compr&#233;hension et &#224; bient&#244;t sur (Re)Sources !</p>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <table class="s-4 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
+                              <tbody>
+                                <tr>
+                                  <td style="line-height: 16px; font-size: 16px; width: 100%; height: 16px; margin: 0;" align="left" width="100%" height="16">
+                                    &#160;
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <div class="text-center" style="" align="center">
+                              <p class="text-muted" style="line-height: 24px; font-size: 16px; color: #718096; width: 100%; margin: 0;" align="left">Si vous avez des questions, n'h&#233;sitez pas &#224; <a href="mailto:support@example.com" class="text-primary" style="color: #0d6efd;">nous contacter</a>.</p>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!--[if (gte mso 9)|(IE)]>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+                    <![endif]-->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="s-5 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
+              <tbody>
+                <tr>
+                  <td style="line-height: 20px; font-size: 20px; width: 100%; height: 20px; margin: 0;" align="left" width="100%" height="20">
+                    &#160;
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
