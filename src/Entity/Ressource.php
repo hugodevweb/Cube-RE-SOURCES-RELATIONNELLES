@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RessourceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Monolog\DateTimeImmutable;
 
@@ -25,6 +27,19 @@ class Ressource
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
+
+    #[ORM\ManyToOne(inversedBy: 'ressources')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Type $type = null;
+
+    #[ORM\ManyToOne(inversedBy: 'ressources')]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'ressources')]
+    private ?Favorie $favorie = null;
+
+    #[ORM\ManyToOne(inversedBy: 'ressources')]
+    private ?Exploitation $exploitation = null;
 
     public function getId(): ?int
     {
@@ -75,6 +90,54 @@ class Ressource
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getFavorie(): ?Favorie
+    {
+        return $this->favorie;
+    }
+
+    public function setFavorie(?Favorie $favorie): static
+    {
+        $this->favorie = $favorie;
+
+        return $this;
+    }
+
+    public function getExploitation(): ?Exploitation
+    {
+        return $this->exploitation;
+    }
+
+    public function setExploitation(?Exploitation $exploitation): static
+    {
+        $this->exploitation = $exploitation;
 
         return $this;
     }

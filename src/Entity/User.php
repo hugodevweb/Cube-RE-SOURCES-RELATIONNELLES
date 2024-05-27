@@ -11,9 +11,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 
-
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, PasswordAuthenticatedUserInterface,TwoFactorInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -51,10 +50,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface,TwoFacto
     #[Assert\NotBlank(message: 'Veuillez entrer un prénom.')]
     private ?string $prenom = null;
 
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
     private Collection $articles;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Ressource::class)]
+    private Collection $ressources;
+  
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $authCode = null;
 
@@ -62,6 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface,TwoFacto
     {
         $this->roles = ["CITOYEN"];
         $this->articles = new ArrayCollection();
+        $this->ressources = new ArrayCollection();
     }
 
     public function __toString()
@@ -96,6 +98,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface,TwoFacto
         return (string) $this->email;
     }
 
+
     /**
      * @see UserInterface
      */
@@ -127,9 +130,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface,TwoFacto
 
     public function setPassword(string $password): static
     {
-        
-        
-
         $newPassword = password_hash($password, PASSWORD_BCRYPT, ['cost' => 15]);
         $this->password = $newPassword;
         return $this;
@@ -180,8 +180,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface,TwoFacto
         return $this;
     }
 
-   
-
     /**
      * @return Collection<int, Article>
      */
@@ -211,6 +209,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface,TwoFacto
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Ressource>
+     */
+    public function getRessources(): Collection
+    {
+        return $this->ressources;
+    }
+
+    public function addRessource(Ressource $ressource): static
+    {
+        if (!$this->ressources->contains($ressource)) {
+            $this->ressources->add($ressource);
+            $ressource->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRessource(Ressource $ressource): static
+    {
+        if ($this->ressources->removeElement($ressource)) {
+            // set the owning side to null (unless already changed)
+            if ($ressource->getUser() === $this) {
+                $ressource->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
     //-------------------------2FA-------------------------
 
     // ...

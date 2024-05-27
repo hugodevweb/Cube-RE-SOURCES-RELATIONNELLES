@@ -21,9 +21,13 @@ class Type
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Article::class)]
     private Collection $articles;
 
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Ressource::class)]
+    private Collection $ressources;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        // $this->ressources = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +71,36 @@ class Type
             // set the owning side to null (unless already changed)
             if ($article->getType() === $this) {
                 $article->setType(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ressource>
+     */
+    public function getRessources(): Collection
+    {
+        return $this->ressources;
+    }
+
+    public function addRessource(Ressource $ressource): static
+    {
+        if (!$this->ressources->contains($ressource)) {
+            $this->ressources->add($ressource);
+            $ressource->setType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRessource(Ressource $ressource): static
+    {
+        if ($this->ressources->removeElement($ressource)) {
+            // set the owning side to null (unless already changed)
+            if ($ressource->getType() === $this) {
+                $ressource->setType(null);
             }
         }
 
