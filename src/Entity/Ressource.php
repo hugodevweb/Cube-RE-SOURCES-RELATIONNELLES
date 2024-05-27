@@ -32,16 +32,14 @@ class Ressource
     #[ORM\JoinColumn(nullable: false)]
     private ?Type $type = null;
 
-    #[ORM\OneToMany(mappedBy: 'ressources', targetEntity: Commentaire::class)]
-    private Collection $commentaires;
-
     #[ORM\ManyToOne(inversedBy: 'ressources')]
     private ?User $user = null;
 
-    public function __construct()
-    {
-        $this->commentaires = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'ressources')]
+    private ?Favorie $favorie = null;
+
+    #[ORM\ManyToOne(inversedBy: 'ressources')]
+    private ?Exploitation $exploitation = null;
 
     public function getId(): ?int
     {
@@ -108,36 +106,6 @@ class Ressource
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commentaire>
-     */
-    public function getCommentaires(): Collection
-    {
-        return $this->commentaires;
-    }
-
-    public function addCommentaire(Commentaire $commentaire): static
-    {
-        if (!$this->commentaires->contains($commentaire)) {
-            $this->commentaires->add($commentaire);
-            $commentaire->setRessources($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommentaire(Commentaire $commentaire): static
-    {
-        if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
-            if ($commentaire->getRessources() === $this) {
-                $commentaire->setRessources(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -146,6 +114,30 @@ class Ressource
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getFavorie(): ?Favorie
+    {
+        return $this->favorie;
+    }
+
+    public function setFavorie(?Favorie $favorie): static
+    {
+        $this->favorie = $favorie;
+
+        return $this;
+    }
+
+    public function getExploitation(): ?Exploitation
+    {
+        return $this->exploitation;
+    }
+
+    public function setExploitation(?Exploitation $exploitation): static
+    {
+        $this->exploitation = $exploitation;
 
         return $this;
     }
