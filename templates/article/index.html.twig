@@ -1,59 +1,57 @@
 {% extends 'base.html.twig' %} 
 {% block title %}Articles{% endblock %} 
-{% extends 'base.html.twig' %} 
-{% block title %}Articles{% endblock %} 
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
 {% endblock %}
 
 {% block body %}
-<div class="container">
-<main>
-    <div class="album py-0 bg-body-tertiary">
-        <div class="container my-5">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-chevron p-3">
-                    <li class="breadcrumb-item">
-                        <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Accueil</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        Articles
-                    </li>
-                </ol>
-            </nav>
+    <main>
+        <div class="container">
+            <div class="album py-0 bg-body-tertiary">
+                <div class="container my-5">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb breadcrumb-chevron p-3">
+                            <li class="breadcrumb-item">
+                                <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Accueil</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Articles
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-    <div class="container">
-    <h1>Espace Articles</h1>
-    <div class="row">
-        {% for article in articles %}
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 mx-auto" style="width: 18rem;">
-                    <img src="https://www.gouvernement.fr/upload/media/content/0001/07/a55d231483a76164d2dbc1cf62ca6d7e949c09d0.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="/actualite/les-4-actus-de-la-semaine-du-27-novembre-au-3-decembre-2023">{{ article.titre }}</a></h5>
-                        <small class="text-categorie">{{ article.getCategoriesString() }}</small>
-                        <p class="card-text">{{ article.corps | slice(0, 90) }}
-                            {% if article.corps|length > 100 %}
-                                ...
-                            {% endif %}
-                        </p>
-                        <p class="card-text">Vu {{ article.nombreVu }} fois</p>
-                        <small class="text-body-secondary">{{ article.getDate() }}</small>
-                        <div class="d-flex justify-content-between align-items-center responsive">
-                            <div class="btn-group">
-                                <a href="{{ path('show_article', {'id': article.id}) }}" class="btn btn-sm btn-outline-secondary">Ouvrir</a>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
+        <div class="container">
+            <h1>Espace Articles</h1>
+            <div class="row">
+                {% for article in articles %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 mx-auto">
+                            <img src="https://www.gouvernement.fr/upload/media/content/0001/07/a55d231483a76164d2dbc1cf62ca6d7e949c09d0.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="/actualite/les-4-actus-de-la-semaine-du-27-novembre-au-3-decembre-2023">{{ article.titre }}</a></h5>
+                                <small class="text-categorie">{{ article.getCategoriesString() }}</small>
+                                <p class="card-text">{{ article.corps | slice(0, 90) }}
+                                    {% if article.corps|length > 100 %}
+                                        ...
+                                    {% endif %}
+                                </p>
+                                <p class="card-text">Vu {{ article.nombreVu }} fois</p>
+                                <small class="text-body-secondary">{{ article.getDate() }}</small>
+                                <div class="d-flex justify-content-between align-items-center responsive">
+                                    <div class="btn-group">
+                                        <a href="{{ path('show_article', {'id': article.id}) }}" class="btn btn-sm btn-outline-secondary">Ouvrir</a>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
-</div>
-</main>
+        </div>
+    </main>
 {% endblock %}
 
