@@ -13,7 +13,7 @@ use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface,TwoFactorInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,7 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(message: 'Veuillez entrer une adresse email valide.')]
     private ?string $email = null;
 
-    #[ORM\Column]
+        #[ORM\Column]
     private array $roles = [];
 
     /**
@@ -54,6 +54,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
     private Collection $articles;
+
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $authCode = null;
 
     public function __construct()
     {
@@ -209,7 +212,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
     //-------------------------2FA-------------------------
-    private ?string $authCode;
 
     // ...
 
@@ -235,5 +237,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmailAuthCode(string $authCode): void
     {
         $this->authCode = $authCode;
+    }
+
+    public function getAuthCode(): ?string
+    {
+        return $this->authCode;
+    }
+
+    public function setAuthCode(?string $authCode): static
+    {
+        $this->authCode = $authCode;
+
+        return $this;
     }
 }

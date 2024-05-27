@@ -16,16 +16,7 @@ class EmailController extends AbstractController
         $this->mailerService = $mailerService;
     }
 
-    /**
-     * @Route("/send-email", name="send_email")
-     */
-    public function sendEmail(): Response
-    {
-        $this->mailerService->sendEmail('destinataire@example.com', 'Sujet de l\'email', 'Contenu de l\'email');
-
-        return new Response('Email envoyé avec succès.');
-    }
-
+    
     /**
      * @Route("/email-form", name="email_form")
      */

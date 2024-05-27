@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vérification E-mail{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/corps.css') }}" rel="stylesheet">
+   {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Vérification à deux facteurs</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if error is defined and error %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endif %}
+
+                        <p>Veuillez saisir le code de vérification envoyé à votre adresse e-mail.</p>
+
+                        
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Vérifier</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
