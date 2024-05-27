@@ -9,9 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface,TwoFactorInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,7 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(message: 'Veuillez entrer une adresse email valide.')]
     private ?string $email = null;
 
-    #[ORM\Column]
+        #[ORM\Column]
     private array $roles = [];
 
     /**
@@ -52,6 +54,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
     private Collection $articles;
+
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $authCode = null;
 
     public function __construct()
     {
@@ -203,6 +208,45 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $article->setUser(null);
             }
         }
+
+        return $this;
+    }
+    //-------------------------2FA-------------------------
+
+    // ...
+
+    public function isEmailAuthEnabled(): bool
+    {
+        return true; // This can be a persisted field to switch email code authentication on/off
+    }
+
+    public function getEmailAuthRecipient(): string
+    {
+        return $this->email;
+    }
+
+    public function getEmailAuthCode(): string
+    {
+        if (null === $this->authCode) {
+            throw new \LogicException('The email authentication code was not set');
+        }
+
+        return $this->authCode;
+    }
+
+    public function setEmailAuthCode(string $authCode): void
+    {
+        $this->authCode = $authCode;
+    }
+
+    public function getAuthCode(): ?string
+    {
+        return $this->authCode;
+    }
+
+    public function setAuthCode(?string $authCode): static
+    {
+        $this->authCode = $authCode;
 
         return $this;
     }

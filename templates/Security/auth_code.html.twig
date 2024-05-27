@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Code de vérification pour (Re)Sources</title>
+    <style>
+        body {
+            color: rgb(var(--bs-tertiary-color-rgb));
+            font-family: 'MarianneNormal', Arial, sans-serif;
+            margin: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+            background-color: #212529;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 200px;
+            border-radius : 20px;
+        }
+
+        .code {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000091;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="logo" src="https://lh3.googleusercontent.com/d/1JRdgDHua6ZfQvOzgayIPO5f-JJHMLNuQ" alt="Logo (Re)Sources">
+        <h1>Bonjour {{ user.prenom }},</h1>
+        <p>Votre code de vérification pour vous connecter à (Re)Sources est :</p>
+        <div class="code">{{ authCode }}</div>
+        <p>Ce code expirera dans 10 minutes. Si vous n'avez pas essayé de vous connecter récemment, ignorez simplement ce message.</p>
+        <p>Merci de votre compréhension et à bientôt sur (Re)Sources !</p>
+    </div>
+</body>
+</html>
