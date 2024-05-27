@@ -24,7 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[Assert\Email(message: 'Veuillez entrer une adresse email valide.')]
     private ?string $email = null;
 
-    #[ORM\Column]
+        #[ORM\Column]
     private array $roles = [];
 
     /**
@@ -55,7 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Ressource::class)]
     private Collection $ressources;
-
+  
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $authCode = null;
 
@@ -239,7 +239,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
         return $this;
     }
-    
+
     //-------------------------2FA-------------------------
 
     // ...
