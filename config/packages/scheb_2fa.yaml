@@ -22,3 +22,4 @@ scheb_two_factor:
     google:
         enabled: true
         template: Security/2fa_form.html.twig
+        form_renderer: App\Form\GoogleAuthenticatorFormRendererWithQR

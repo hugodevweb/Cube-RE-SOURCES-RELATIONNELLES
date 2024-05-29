@@ -26,6 +26,7 @@ class UserController extends AbstractController
         Request $request, 
         EntityManagerInterface $entityManager, 
         AuthorizationCheckerInterface $authorizationChecker,
+        GoogleAuthenticatorInterface $googleAuthenticator
     ): Response
     {
         $user = new User();
@@ -40,7 +41,7 @@ class UserController extends AbstractController
                 // Add an error to the form
                 $form->get('email')->addError(new FormError('Cet email est déjà utilisé.'));
             } else {
-                $secret = $this->googleAuthenticator->generateSecret();
+                $secret = $googleAuthenticator->generateSecret();
                 $user->setGoogleAuthenticatorSecret($secret);
                 $entityManager->persist($user);
                 $entityManager->flush();

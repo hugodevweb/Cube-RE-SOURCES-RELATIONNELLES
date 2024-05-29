@@ -1,14 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<style>
-    #user_actions {
-        display: none !important;
-    }
-    label {
-        font-size: 18px;
-    }
-</style>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -25,53 +17,59 @@
                     {% endif %}
 
                     {% if availableTwoFactorProviders|length > 1 %}
+                    
                         <div class="form-group">
                             <label class="h4" for="provider-select">
                                 {{ "choose_provider"|trans({}, 'SchebTwoFactorBundle') }}
                             </label>
-                            <div class="btn-group d-flex" role="group">
+                            
+                            <div class="btn-group d-flex flex-wrap" role="group">
                                 {% for provider in availableTwoFactorProviders %}
-                                    <a href="{{ path('2fa_login', {'preferProvider': provider}) }}" class="btn flex-fill {% if provider == twoFactorProvider %}btn-primary order-{{ loop.index }}{% else %}btn-outline-primary order-{{ loop.index }}{% endif %}">
+                                    <a href="{{ path('2fa_login', {'preferProvider': provider}) }}" class="btn btn-outline-light {% if provider == twoFactorProvider %}btn-primary disabled{% endif %} mr-2 mb-2">
                                         {{ provider }}
                                     </a>
                                 {% endfor %}
                             </div>
+                            
                             {% if twoFactorProvider == 'google' %}
-                                <div class="form-group">
-                                    <label for="google_authenticator_qr_code">Google Authenticator QR Code:</label>
-                                    <img id="google_authenticator_qr_code" src="{{ path('2fa_google_qr_code') }}" alt="Google Authenticator QR Code">
+                                <div class="form-group py-3 d-flex justify-content-around align-items-center flex-column">
+                                    <label class="mb-2" for="google_authenticator_qr_code">Code QR de Google Authenticator:</label>
+                                    {% set qrCodeUrl = 'https://quickchart.io/qr?text=' ~ qrCodeContent %}
+                                    <img id="google_authenticator_qr_code" src="{{ qrCodeUrl }}" alt="Google Authenticator QR Code" class="img-fluid">
                                 </div>
                             {% endif %}
-                        </div>
+
+                        
+                    </div>
                     {% endif %}
                     <div class="pt-4">
-                    <form class="form" action="{{ checkPathUrl ? checkPathUrl : path(checkPathRoute) }}" method="post">
-                        <div class="form-group">
-                            <label for="_auth_code">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }} {{ twoFactorProvider }}:</label>
-                            <input id="_auth_code" type="text" name="{{ authCodeParameterName }}" class="form-control" autocomplete="one-time-code" autofocus>
-                        </div>
-
-                        {% if displayTrustedOption %}
-                            <div class="form-group form-check d-flex align-items-center pt-2">
-                            <div class="mr-3">
-                                <input id="_trusted" type="checkbox" name="{{ trustedParameterName }}" class="form-check-input">
+                        <form class="form" action="{{ checkPathUrl ? checkPathUrl : path(checkPathRoute) }}" method="post">
+                            <div class="form-group">
+                                <label class="mb-2" for="_auth_code">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }} {{ twoFactorProvider }}:</label>
+                                <input id="_auth_code" type="text" name="{{ authCodeParameterName }}" class="form-control" autocomplete="one-time-code" autofocus>
                             </div>
-                                <label for="_trusted" class="form-check-label">
-                                    {{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}
-                                </label>
+
+                            {% if displayTrustedOption %}
+                                <div class="form-group form-check d-flex align-items-center pt-2">
+                                    <div class="mr-3">
+                                        <input id="_trusted" type="checkbox" name="{{ trustedParameterName }}" class="form-check-input">
+                                    </div>
+                                    <label for="_trusted" class="form-check-label">
+                                        {{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}
+                                    </label>
+                                </div>
+                            {% endif %}
+
+                            {% if isCsrfProtectionEnabled %}
+                                <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
+                            {% endif %}
+
+                            <div class="d-flex mt-4 justify-content-start">
+                                <button type="submit" class="btn btn-primary flex-fill mr-2">{{ "login"|trans({}, 'SchebTwoFactorBundle') }}</button>
+                                <a href="{{ logoutPath }}" class="btn btn-secondary">{{ "cancel"|trans({}, 'SchebTwoFactorBundle') }}</a>
                             </div>
-                        {% endif %}
-
-                        {% if isCsrfProtectionEnabled %}
-                            <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
-                        {% endif %}
-
-                        <div class="d-flex mt-4 justify-content-start">
-                            <button type="submit" class="btn btn-primary flex-fill" style="margin-right:20px">{{ "login"|trans({}, 'SchebTwoFactorBundle') }}</button>
-                            <a href="{{ logoutPath }}" class="btn btn-secondary">{{ "cancel"|trans({}, 'SchebTwoFactorBundle') }}</a>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
