@@ -5,47 +5,60 @@
     #user_actions {
         display: none !important;
     }
-    label{
+    label {
         font-size: 18px;
     }
 </style>
 
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-8 col-lg-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Authentification à deux facteurs</h4>
                 </div>
                 <div class="card-body">
-
                     {% if authenticationError %}
-                        <div class="alert alert-danger">{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</div>
+                        <div class="alert alert-danger">
+                            {{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}
+                        </div>
                     {% endif %}
 
-                    <div class="dropdown mt-2 mb-3">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ "choose_provider"|trans({}, 'SchebTwoFactorBundle') }}
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            {% for provider in availableTwoFactorProviders %}
-                                <a class="dropdown-item" href="{{ path("2fa_login", {"preferProvider": provider}) }}">{{ provider }}</a>
-                            {% endfor %}
+                    {% if availableTwoFactorProviders|length > 1 %}
+                        <div class="form-group">
+                            <label class="h4" for="provider-select">
+                                {{ "choose_provider"|trans({}, 'SchebTwoFactorBundle') }}
+                            </label>
+                            <div class="btn-group d-flex" role="group">
+                                {% for provider in availableTwoFactorProviders %}
+                                    <a href="{{ path('2fa_login', {'preferProvider': provider}) }}" class="btn flex-fill {% if provider == twoFactorProvider %}btn-primary order-{{ loop.index }}{% else %}btn-outline-primary order-{{ loop.index }}{% endif %}">
+                                        {{ provider }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            {% if twoFactorProvider == 'google' %}
+                                <div class="form-group">
+                                    <label for="google_authenticator_qr_code">Google Authenticator QR Code:</label>
+                                    <img id="google_authenticator_qr_code" src="{{ path('2fa_google_qr_code') }}" alt="Google Authenticator QR Code">
+                                </div>
+                            {% endif %}
                         </div>
-                    </div>
-                    
-
-                    <p class="label"><label for="_auth_code">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }} {{ twoFactorProvider }}:</label></p>
-
+                    {% endif %}
+                    <div class="pt-4">
                     <form class="form" action="{{ checkPathUrl ? checkPathUrl : path(checkPathRoute) }}" method="post">
                         <div class="form-group">
+                            <label for="_auth_code">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }} {{ twoFactorProvider }}:</label>
                             <input id="_auth_code" type="text" name="{{ authCodeParameterName }}" class="form-control" autocomplete="one-time-code" autofocus>
                         </div>
 
                         {% if displayTrustedOption %}
-                            <div class="form-group form-check d-flex align-items-center ">
-                                <input id="_trusted" type="checkbox" name="{{ trustedParameterName }}" class="form-check-input ">
-                                <label for="_trusted" class="form-check-label" style="margin-left: 3%;">{{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}</label>
+                            <div class="form-group form-check d-flex align-items-center pt-2">
+                            <div class="mr-3">
+                                <input id="_trusted" type="checkbox" name="{{ trustedParameterName }}" class="form-check-input">
+                            </div>
+                                <label for="_trusted" class="form-check-label">
+                                    {{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}
+                                </label>
                             </div>
                         {% endif %}
 
@@ -53,9 +66,13 @@
                             <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
                         {% endif %}
 
-                       <button type="submit" class="btn btn-primary">{{ "login"|trans({}, 'SchebTwoFactorBundle') }}</button>
-                        <a href="{{ logoutPath }}" class="btn btn-secondary ml-2">{{ "cancel"|trans({}, 'SchebTwoFactorBundle') }}</a>
+                        <div class="d-flex mt-4 justify-content-start">
+                            <button type="submit" class="btn btn-primary flex-fill" style="margin-right:20px">{{ "login"|trans({}, 'SchebTwoFactorBundle') }}</button>
+                            <a href="{{ logoutPath }}" class="btn btn-secondary">{{ "cancel"|trans({}, 'SchebTwoFactorBundle') }}</a>
+                        </div>
                     </form>
+                </div>
+                </div>
             </div>
         </div>
     </div>

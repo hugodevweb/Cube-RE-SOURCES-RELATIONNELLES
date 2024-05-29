@@ -20,4 +20,5 @@ scheb_two_factor:
         cookie_same_site: "lax"        # The same-site option of the cookie, can be "lax" or "strict"
         cookie_path: "/"               # Path to use when setting the cookie
     google:
-        enabled: false
+        enabled: true
+        template: Security/2fa_form.html.twig
