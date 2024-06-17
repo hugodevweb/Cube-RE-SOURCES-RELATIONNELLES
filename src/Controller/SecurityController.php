@@ -8,6 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SecurityController extends AbstractController
 {
@@ -40,4 +45,118 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+    public function removeGoogleAuth(
+        Request $request,
+        GoogleAuthenticatorInterface $googleAuthenticator,
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface $entityManager // Inject EntityManagerInterface
+    )
+    {
+        // Fetch the user
+        $user = $this->getUser();
+        if (!$user) {
+            // Handle the case where the user is not logged in
+            // Redirect to login or handle appropriately
+        }
+    
+        // Retrieve password from the submitted form
+        $password = $request->request->get('password');
+    
+        // Verify the password
+        if (!$passwordHasher->isPasswordValid($user, $password)) {
+            $this->addFlash('error', 'Mot de passe invalide');
+            return new RedirectResponse($this->generateUrl('app_user_show', ['id' => $user->getId()]));
+        }
+    
+        // Generate a new secret
+        $secret = $googleAuthenticator->generateSecret();
+    
+        // Set the secret on the user entity
+        $user->setGoogleAuthenticatorSecret(null);
+    
+        // You might want to persist changes to the database
+        $entityManager->persist($user); // Using EntityManagerInterface
+        $entityManager->flush();
+    
+        $this->addFlash('success', 'Authentification à deux facteurs Google désactivée'); // Add the flash message
+
+        return new RedirectResponse($this->generateUrl('app_user_show', ['id' => $user->getId()]));
+    }
+
+
+
+
+    //Create addGoogleAuth method
+    public function addGoogleAuth(
+        Request $request,
+        GoogleAuthenticatorInterface $googleAuthenticator,
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface $entityManager // Inject EntityManagerInterface
+    )
+    {
+        // Fetch the user
+        $user = $this->getUser();
+        if (!$user) {
+            // Handle the case where the user is not logged in
+            // Redirect to login or handle appropriately
+        }
+    
+        // Retrieve password from the submitted form
+        $password = $request->request->get('password');
+    
+        // Verify the password
+        if (!$passwordHasher->isPasswordValid($user, $password)) {
+            $this->addFlash('error', 'Mot de passe invalide');
+            return new RedirectResponse($this->generateUrl('app_user_show', ['id' => $user->getId()]));
+        }
+    
+        // Generate a new secret
+        $secret = $googleAuthenticator->generateSecret();
+    
+        // Set the secret on the user entity
+        $user->setGoogleAuthenticatorSecret($secret);
+    
+        // You might want to persist changes to the database
+        $entityManager->persist($user); // Using EntityManagerInterface
+        $entityManager->flush();
+    
+        // Redirect the user to the app_user_show route
+        $this->addFlash('sucessActivate', 'Authentification à deux facteurs Google activée');
+        $this->addFlash('qrContent', $secret);
+        return new RedirectResponse($this->generateUrl('app_user_show', ['id' => $user->getId()]));
+    }
+    
+
+
+    public function getGoogleQrCode(
+        Request $request,
+        GoogleAuthenticatorInterface $googleAuthenticator,
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface $entityManager // Inject EntityManagerInterface
+    )
+    {
+        // Fetch the user
+        $user = $this->getUser();
+        if (!$user) {
+            // Handle the case where the user is not logged in
+            // Redirect to login or handle appropriately
+        }
+    
+        $password = $request->request->get('password');
+    
+        // Verify the password
+        if (!$passwordHasher->isPasswordValid($user, $password)) {
+            $this->addFlash('error', 'Mot de passe invalide');
+            return new RedirectResponse($this->generateUrl('app_user_show', ['id' => $user->getId()]));
+        }
+
+        $qrContent = $googleAuthenticator->getQRContent($user);
+
+        // Store the QR content in the flash bag
+        $this->addFlash('qrContent', $qrContent);
+    
+        return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
+    }
+
 }

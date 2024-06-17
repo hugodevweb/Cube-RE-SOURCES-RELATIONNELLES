@@ -27,7 +27,6 @@ class GoogleAuthenticatorFormRendererWithQR implements TwoFactorFormRendererInte
          // Get the QR code content for the user from the TokenStorage
          $user = $this->tokenStorage->getToken()->getUser();
          $qrCodeContent = $this->schebGoogleAuthenticator->getQRContent($user);
-         $qrCodeUrl = 'https://quickchart.io/qr?text='.$qrCodeContent;
  
          // Render the form using the specified template
          $content = $this->twig->render('Security/2fa_form.html.twig', array_merge($templateVars, ['qrCodeContent' => $qrCodeContent]));

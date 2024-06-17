@@ -245,6 +245,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this;
     }
 
+    
+    
+
     //-------------------------2FA-------------------------
 
     // ...
@@ -304,4 +307,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     {
         $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
     }
+
 }

@@ -31,13 +31,7 @@
                                 {% endfor %}
                             </div>
                             
-                            {% if twoFactorProvider == 'google' %}
-                                <div class="form-group py-3 d-flex justify-content-around align-items-center flex-column">
-                                    <label class="mb-2" for="google_authenticator_qr_code">Code QR de Google Authenticator:</label>
-                                    {% set qrCodeUrl = 'https://quickchart.io/qr?text=' ~ qrCodeContent %}
-                                    <img id="google_authenticator_qr_code" src="{{ qrCodeUrl }}" alt="Google Authenticator QR Code" class="img-fluid">
-                                </div>
-                            {% endif %}
+                           
 
                         
                     </div>

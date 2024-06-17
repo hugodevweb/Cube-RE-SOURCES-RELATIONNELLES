@@ -1,3 +1,15 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+    
+remove_google_auth:
+    path: /remove-google-auth
+    controller: App\Controller\SecurityController::removeGoogleAuth
+
+add-google-auth:
+    path: /add-google-auth
+    controller: App\Controller\SecurityController::addGoogleAuth
+
+get_google_qr:
+    path: /get-google-qr
+    controller: App\Controller\SecurityController::getGoogleQrCode
