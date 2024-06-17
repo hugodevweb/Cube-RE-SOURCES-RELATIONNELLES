@@ -1,30 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vérification E-mail{% endblock %}
-
-{% block stylesheets %}
-    <link href="{{ asset('css/corps.css') }}" rel="stylesheet">
-   {% endblock %}
-
 {% block body %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Vérification à deux facteurs</h4>
-                    </div>
-                    <div class="card-body">
-                        {% if error is defined and error %}
-                            <div class="alert alert-danger">{{ error }}</div>
-                        {% endif %}
 
-                        <p>Veuillez saisir le code de vérification envoyé à votre adresse e-mail.</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Authentification à deux facteurs</h4>
+                </div>
+                <div class="card-body">
+                    {% if authenticationError %}
+                        <div class="alert alert-danger">
+                            {{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}
+                        </div>
+                    {% endif %}
+
+                    {% if availableTwoFactorProviders|length > 1 %}
+                    
+                        <div class="form-group">
+                            <label class="h4" for="provider-select">
+                                {{ "choose_provider"|trans({}, 'SchebTwoFactorBundle') }}
+                            </label>
+                            
+                            <div class="btn-group d-flex flex-wrap" role="group">
+                                {% for provider in availableTwoFactorProviders %}
+                                    <a href="{{ path('2fa_login', {'preferProvider': provider}) }}" class="btn btn-outline-light {% if provider == twoFactorProvider %}btn-primary disabled{% endif %} mr-2 mb-2">
+                                        {{ provider }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            
+                           
 
                         
-
+                    </div>
+                    {% endif %}
+                    <div class="pt-4">
+                        <form class="form" action="{{ checkPathUrl ? checkPathUrl : path(checkPathRoute) }}" method="post">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Vérifier</button>
+                                <label class="mb-2" for="_auth_code">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }} {{ twoFactorProvider }}:</label>
+                                <input id="_auth_code" type="text" name="{{ authCodeParameterName }}" class="form-control" autocomplete="one-time-code" autofocus>
+                            </div>
+
+                            {% if displayTrustedOption %}
+                                <div class="form-group form-check d-flex align-items-center pt-2">
+                                    <div class="mr-3">
+                                        <input id="_trusted" type="checkbox" name="{{ trustedParameterName }}" class="form-check-input">
+                                    </div>
+                                    <label for="_trusted" class="form-check-label">
+                                        {{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}
+                                    </label>
+                                </div>
+                            {% endif %}
+
+                            {% if isCsrfProtectionEnabled %}
+                                <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
+                            {% endif %}
+
+                            <div class="d-flex mt-4 justify-content-start">
+                                <button type="submit" style="margin-right: 20px;" class="btn btn-primary flex-fill mr-2">{{ "login"|trans({}, 'SchebTwoFactorBundle') }}</button>
+                                <a href="{{ logoutPath }}" class="btn btn-secondary">{{ "cancel"|trans({}, 'SchebTwoFactorBundle') }}</a>
                             </div>
                         </form>
                     </div>
@@ -32,4 +68,5 @@
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

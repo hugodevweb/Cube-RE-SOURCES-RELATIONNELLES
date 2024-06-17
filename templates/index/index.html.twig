@@ -6,7 +6,7 @@
     <link href="{{ asset('css/corps.css') }}" rel="stylesheet">
     <style>
         .carrouselContainer{
-            border-radius: 20%;
+            border-radius: 25px;
             background-color: rgba(255, 255, 255, 0.663);
             padding: 25px;
             color: black;
@@ -39,7 +39,7 @@
                             <div class="row">
                                 <h1 class="mb-2">{{ key }}</h1>
                                 <p>{{ categorie.titre }}</p>
-                                <p class="col-9 mx-auto">{{ categorie.corps }}</p>
+                                
                                 <p><a class="btn btn-lg btn-primary" href="{{ path('show_article', {'id': categorie.id}) }}">Regarder</a></p>
                             </div>
                         </div>
