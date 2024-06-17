@@ -22,8 +22,7 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $corps = null;
+    
 
     #[ORM\Column]
     private ?bool $validation = false;
@@ -40,8 +39,7 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private Collection $categories;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-    private ?Type $type = null;
+   
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentaire::class)]
     private Collection $commentaires;
@@ -168,17 +166,7 @@ class Article
         return $this;
     }
 
-    public function getType(): ?Type
-    {
-        return $this->type;
-    }
-
-    public function setType(?Type $type): static
-    {
-        $this->type = $type;
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Commentaire>
