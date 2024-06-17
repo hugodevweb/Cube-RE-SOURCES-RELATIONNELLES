@@ -18,16 +18,13 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Authorization\Voter\RoleVoter;
-use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 class UserController extends AbstractController
 {
     #[Route('/new/compte', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request, 
         EntityManagerInterface $entityManager, 
-        AuthorizationCheckerInterface $authorizationChecker,
-        GoogleAuthenticatorInterface $googleAuthenticator
-    ): Response
+        AuthorizationCheckerInterface $authorizationChecker  ): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -41,8 +38,7 @@ class UserController extends AbstractController
                 // Add an error to the form
                 $form->get('email')->addError(new FormError('Cet email est déjà utilisé.'));
             } else {
-                $secret = $googleAuthenticator->generateSecret();
-                $user->setGoogleAuthenticatorSecret($secret);
+                
                 $entityManager->persist($user);
                 $entityManager->flush();
 
