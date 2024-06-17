@@ -22,7 +22,8 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
-    
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $corps = null;
 
     #[ORM\Column]
     private ?bool $validation = false;
@@ -39,7 +40,7 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private Collection $categories;
 
-   
+    
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentaire::class)]
     private Collection $commentaires;
@@ -166,7 +167,7 @@ class Article
         return $this;
     }
 
-    
+
 
     /**
      * @return Collection<int, Commentaire>

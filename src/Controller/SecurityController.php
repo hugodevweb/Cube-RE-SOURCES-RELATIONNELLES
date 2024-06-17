@@ -113,6 +113,7 @@ class SecurityController extends AbstractController
     
         // Generate a new secret
         $secret = $googleAuthenticator->generateSecret();
+
     
         // Set the secret on the user entity
         $user->setGoogleAuthenticatorSecret($secret);
@@ -120,10 +121,12 @@ class SecurityController extends AbstractController
         // You might want to persist changes to the database
         $entityManager->persist($user); // Using EntityManagerInterface
         $entityManager->flush();
+        $qrContent = $googleAuthenticator->getQRContent($user);
+
     
         // Redirect the user to the app_user_show route
         $this->addFlash('sucessActivate', 'Authentification à deux facteurs Google activée');
-        $this->addFlash('qrContent', $secret);
+        $this->addFlash('qrContent', $qrContent);
         return new RedirectResponse($this->generateUrl('app_user_show', ['id' => $user->getId()]));
     }
     
