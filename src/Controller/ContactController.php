@@ -9,15 +9,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
+        $user = $security->getUser();
         $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact);
+        
+        if ($user) {
+            $contact->setName($user->getUsername());
+            $contact->setEmail($user->getEmail());
+        }
+
+        $form = $this->createForm(ContactType::class, $contact, [
+            'is_authenticated' => $user !== null,
+        ]);
 
         $form->handleRequest($request);
 
@@ -31,6 +41,7 @@ class ContactController extends AbstractController
         }
         return $this->render('contact/index.html.twig', [
             'form' => $form->createView(),
+            'is_authenticated' => $user !== null,
         ]);
     }
 }
