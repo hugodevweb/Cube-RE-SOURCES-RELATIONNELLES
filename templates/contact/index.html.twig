@@ -1,35 +1,47 @@
 {% extends 'base.html.twig' %}
 {% block title %}Page de contact{% endblock %}
 {% block body %}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Contact</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Formulaire de Contact</h1>
-        <form action="/contact" method="POST">
-            <div class="row mb-3">
-                <label for="name">Nom :</label>
-                <input type="text" id="name" name="name" required>
+    <div class="container mt-4">
+        <h1 class="my-4">Page de Contact</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
             </div>
-            <div class="row mb-3">
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" required>
+        {% endfor %}
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+            {% if not is_authenticated %}
+                <div class="form-group row mb-3">
+                    {{ form_label(form.name, null, {'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    {{ form_label(form.email, null, {'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="form-group row mb-3">
+                {{ form_label(form.subject, null, {'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+                </div>
             </div>
-            <div class="row mb-3">
-                <label for="subject">Sujet du message :</label>
-                <input type="text" id="subject" name="subject" required>
+            <div class="form-group row mb-3">
+                {{ form_label(form.message, null, {'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+                </div>
             </div>
-            <div class="row mb-3">
-                <label for="message">Message :</label>
-                <textarea id="message" name="message" required></textarea>
+            <div class="form-group row">
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn btn-primary w-50">Send</button>
+                </div>
             </div>
-            <button type="submit">Envoyer</button>
-        </form>
+        {{ form_end(form) }}
     </div>
-</body>
-</html>
 {% endblock %}
