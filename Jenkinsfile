@@ -3,10 +3,10 @@ pipeline {
 
     environment {
         // Chemin vers PHP et Composer, ajustez selon votre configuration
-        PHP_PATH = '/usr/local/bin/php'
-        COMPOSER_PATH = '/usr/local/bin/composer'
+        PHP_PATH = 'C:\\Program Files\\php\\php.exe'
+        COMPOSER_PATH = 'C:\\composer\\composer.bat'
         // Chemin vers Symfony, ajustez selon votre configuration
-        SYMFONY_PATH = '/usr/local/bin/symfony'
+        SYMFONY_PATH = 'C:\\Program Files\\symfony\\symfony.exe'
     }
 
     stages {
