@@ -37,6 +37,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    // Création d'un article
     #[Route('/creer', name: 'create_article')]
     public function CreateArticle(Request $req, EntityManagerInterface $entityManager): Response
     {
