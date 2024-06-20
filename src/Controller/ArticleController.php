@@ -92,7 +92,7 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-    // Visualisation d'un article  
+    // Visualisation d'un article
     #[Route('/{id}', name: 'show_article')]
     public function show(EntityManagerInterface $entityManager, int $id, CommentaireRepository $commentaireRepository, Request $request): Response
     {
