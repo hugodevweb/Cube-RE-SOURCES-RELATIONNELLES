@@ -1,0 +1,40 @@
+
+version: '3.8'
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8888:80"
+    networks:
+      app-network:
+        ipv4_address: 172.30.0.2
+
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "rootcube"
+      MYSQL_DATABASE: "cube"
+    ports:
+      - "3306:3306"
+    networks:
+      app-network:
+        ipv4_address: 172.30.0.3
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "8080:80"
+    networks:
+      app-network:
+        ipv4_address: 172.30.0.4
