@@ -28,4 +28,7 @@ services:
             $twig: '@twig'
             $tokenStorage: '@security.token_storage'
             $schebGoogleAuthenticator: '@scheb_two_factor.security.google_authenticator'
+
+    App\Command\ShowDatabaseInfoCommand:
+        tags: ['console.command']
  
