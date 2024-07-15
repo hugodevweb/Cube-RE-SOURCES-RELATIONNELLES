@@ -122,8 +122,8 @@ body {
     font-style: italic;
 }
 
-.card.shadow-sm {
-    margin: 0 8% 0 5%;
+.card.shadow-sm{
+    margin: 0 8% 0% 5%;
 }
 
 .py-5 {
@@ -141,7 +141,7 @@ body {
 }
 
 .justify-card {
-    padding:0 15px 15px 15px;
+    padding:20px 15px 15px 15px;
 }
 
 .card {
@@ -167,13 +167,17 @@ a {
 @media screen and (max-width:767px) {
     .row.row-cols-1.row-cols-sm-2.row-cols-md-3.g-3 {
         padding: 4% 0 0 0;
-        margin-left:2%;
+        margin-left:0;
     }
     .row-cols-1>* {
-        margin-bottom: 4%;
+        margin-bottom: 3%;
     }
     .titre_actu {
         text-align:center;
+        margin-left:0;
+    }
+    .card.shadow-sm{
+      margin: 0 3% 5% 1%!important;
     }
 }
 
