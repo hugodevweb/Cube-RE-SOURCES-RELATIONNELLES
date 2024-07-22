@@ -31,11 +31,16 @@ class SetupDatabaseCommand extends Command
         $dockerComposeContent = sprintf('
 version: \'3.8\'
 networks:
+  monitoring:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.208.0/24
   app-network:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.30.0.0/16
+        - subnet: 192.168.192.0/24
 
 services:
   php:
@@ -48,7 +53,7 @@ services:
       - "8888:80"
     networks:
       app-network:
-        ipv4_address: 172.30.0.2
+        ipv4_address: 192.168.192.43
 
   db:
     image: mariadb:latest
@@ -59,7 +64,9 @@ services:
       - "3306:3306"
     networks:
       app-network:
-        ipv4_address: 172.30.0.3
+        ipv4_address: 192.168.192.250
+      monitoring:
+        ipv4_address: 192.168.208.100
 
   phpmyadmin:
     image: phpmyadmin:latest
@@ -67,7 +74,7 @@ services:
       - "8080:80"
     networks:
       app-network:
-        ipv4_address: 172.30.0.4
+        ipv4_address: 192.168.192.4
 ', $dbPassword, $dbBase);
 
         file_put_contents('compose.yml', $dockerComposeContent);

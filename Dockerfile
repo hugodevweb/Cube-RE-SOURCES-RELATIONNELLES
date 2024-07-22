@@ -39,5 +39,6 @@ COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
 # Exposer le port 80 (Apache)
 EXPOSE 80
 
-# Commande par défaut pour démarrer Apache et exécuter Symfony
+// execute php bin/console app:migrate-database
+CMD ["php", "bin/console", "app:migrate-database"]
 CMD ["apache2-foreground"]

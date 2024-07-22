@@ -33,7 +33,7 @@ class DatabaseCommand extends Command
 
         $io->section('Setup Database...');
 
-        $process4 = new Process(['php', 'bin/console', 'app:modify-database-url', 'mysql://root:rootcube@172.30.0.3:3306/cube']);
+        $process4 = new Process(['php', 'bin/console', 'app:modify-database-url', 'mysql://root:rootcube@192.168.192.250:3306/cube']);
         $process4->run();
 
         $process = new Process(['php', 'bin/console', 'app:setup-database']);
@@ -63,10 +63,12 @@ class DatabaseCommand extends Command
         $process3->run();
 
         if (!$process3->isSuccessful()) {
+            echo 'Migration database failed';
             throw new ProcessFailedException($process3);
         }
+        echo 'Migration database success';
 
-        $process4 = new Process(['php', 'bin/console', 'app:modify-database-url', 'mysql://root:rootcube@172.30.0.3:3306/cube']);
+        $process4 = new Process(['php', 'bin/console', 'app:modify-database-url', 'mysql://root:rootcube@192.168.192.250:3306/cube']);
         $process4->run();
         
         $io->success('Migration database success');
