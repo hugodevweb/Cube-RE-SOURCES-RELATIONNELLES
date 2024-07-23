@@ -37,6 +37,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    // Création d'un article
     #[Route('/creer', name: 'create_article')]
     public function CreateArticle(Request $req, EntityManagerInterface $entityManager): Response
     {
@@ -49,7 +50,7 @@ class ArticleController extends AbstractController
             $liste_ressources = $form->get('ressources')->getData();
             $article->setUser($this->getUser());
             foreach ($form->get('categories')->getData() as $category) {
-                $article->addCategory($category);
+                $article->addCategory($category) || $article->addCategory("aucune Catégorie");
             }
             $article->setTitre($form->get('titre')->getData());
             $article->setCorps($form->get('corps')->getData());
@@ -91,6 +92,7 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
+    // Visualisation d'un article
     #[Route('/{id}', name: 'show_article')]
     public function show(EntityManagerInterface $entityManager, int $id, CommentaireRepository $commentaireRepository, Request $request): Response
     {
