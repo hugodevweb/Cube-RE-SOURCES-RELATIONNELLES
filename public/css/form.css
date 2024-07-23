@@ -63,6 +63,8 @@ form input, form select, form textarea {
     width: 100%; /* Largeur maximale pour occuper toute la largeur du conteneur */
     margin-bottom: 5%;
     box-sizing: border-box; /* Inclure les bordures et le rembourrage dans la largeur totale */
+    border: 1.5px solid RGBA(var(--bs-secondary-rgb), var(--bs-link-opacity, 1)) !important;
+    border-radius: var(--bs-border-radius);
 }
 
 form button {
