@@ -1,0 +1,117 @@
+version: '3.8'
+
+networks:
+  monitoring:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.208.0/24
+  app-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.192.0/24
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8888:80"
+    networks:
+      app-network:
+        ipv4_address: 192.168.192.2
+
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "rootcube"
+      MYSQL_DATABASE: "cube"
+    ports:
+      - "3306:3306"
+    networks:
+      app-network:
+        ipv4_address: 192.168.192.250
+      monitoring:
+        ipv4_address: 192.168.208.100
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "8080:80"
+    networks:
+      app-network:
+        ipv4_address: 192.168.192.4
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - '9090:9090'
+    networks:
+      monitoring:
+        aliases:
+          - prometheus
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    ports:
+      - '9100:9100'
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - '3001:3000'
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
+    volumes:
+      - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+    networks:
+      monitoring:
+        aliases:
+          - grafana
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - '8081:8081'
+    networks:
+      - monitoring
+
+
+
+  mysqld-exporter:
+    image: prom/mysqld-exporter:latest
+    command:
+      - --config.my-cnf=/cfg/.my.cnf
+      - --mysqld.address=192.168.192.3:3306
+    volumes:
+      - ./.my.cnf:/cfg/.my.cnf
+    environment:
+      DATA_SOURCE_NAME: root:test@(db:3306)
+    ports:
+      - "9104:9104"
+    networks:
+      - monitoring
+    depends_on:
+      - db
+
+volumes:
+  prometheus_data:
