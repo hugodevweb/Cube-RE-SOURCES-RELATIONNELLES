@@ -39,6 +39,6 @@ COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
 # Exposer le port 80 (Apache)
 EXPOSE 80
 
-// execute php bin/console app:migrate-database
+# execute php bin/console app:migrate-database
 CMD ["php", "bin/console", "app:migrate-database"]
 CMD ["apache2-foreground"]
