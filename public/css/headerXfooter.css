@@ -206,8 +206,8 @@ color:#0d6efd;
 }
 
 .row {
+padding-top: 0;
 margin-bottom:2%;
-margin-top:2%;
 }
 
 @media (min-width: 768px) {
