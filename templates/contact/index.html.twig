@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block title %}Page de contact{% endblock %}
 {% block body %}
-    <div class="container">
-        <h1 class="my-4">Page de Contact</h1>
-
-        {% for message in app.flashes('success') %}
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="card-no-border" style="margin-top: 10px;">
+            <h2 class="mb-4 text-center">Contact</h2>
+            {% for message in app.flashes('success') %}
             <div class="alert alert-success">
                 {{ message }}
             </div>
-        {% endfor %}
+            {% endfor %}
 
         {{ form_start(form) }}
             {% if not is_authenticated %}
@@ -29,9 +29,12 @@
                 {{ form_widget(form.message, {'attr': {'class': 'form-control mb-0 rounded-bottom', 'placeholder': 'Message'}}) }}
                 {{ form_label(form.message, 'Message', {'label_attr': {'class': 'form-label'}}) }}
             </div>
-            <button type="submit" class="btn btn-primary px-5 mt-3">{{ button_label|default('Sauvegarder') }}</button>
+            <div class="text-center mt-3">
+                <button type="submit"  class="btn btn-primary px-5 mt-3">{{ button_label|default('Envoyer') }}</button>
             </div>
             
+            </div>
         {{ form_end(form) }}
     </div>
+</div>
 {% endblock %}
