@@ -16,7 +16,7 @@ class ContactType extends AbstractType
     {
         if (!$options['is_authenticated']) {
             $builder
-                ->add('name', TextType::class, [
+                ->add('nom', TextType::class, [
                     'attr' => ['class' => 'form-control']
                 ])
                 ->add('email', EmailType::class, [
@@ -25,7 +25,7 @@ class ContactType extends AbstractType
         }
 
         $builder
-            ->add('subject', TextType::class, [
+            ->add('sujet', TextType::class, [
                 'attr' => ['class' => 'form-control']
             ])
             ->add('message', TextareaType::class, [
