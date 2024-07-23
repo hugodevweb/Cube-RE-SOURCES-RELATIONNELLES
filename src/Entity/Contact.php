@@ -15,13 +15,13 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $name = null;
+    private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 75)]
     private ?string $email = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $subject = null;
+    private ?string $sujet = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $message = null;
@@ -31,14 +31,14 @@ class Contact
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNom(): ?string
     {
-        return $this->name;
+        return $this->nom;
     }
 
-    public function setName(string $name): static
+    public function setNom(string $nom): static
     {
-        $this->name = $name;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -55,14 +55,14 @@ class Contact
         return $this;
     }
 
-    public function getSubject(): ?string
+    public function getSujet(): ?string
     {
-        return $this->subject;
+        return $this->sujet;
     }
 
-    public function setSubject(string $subject): static
+    public function setSujet(string $sujet): static
     {
-        $this->subject = $subject;
+        $this->sujet = $sujet;
 
         return $this;
     }

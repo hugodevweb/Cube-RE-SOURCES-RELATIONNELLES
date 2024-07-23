@@ -21,7 +21,7 @@ class ContactController extends AbstractController
         $contact = new Contact();
         
         if ($user) {
-            $contact->setName($user->getUsername());
+            $contact->setNom($user->getUsername());
             $contact->setEmail($user->getEmail());
         }
 
@@ -35,7 +35,7 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Your message has been sent successfully!');
+            $this->addFlash('success', 'Votre message a bien été envoyé !');
 
             return $this->redirectToRoute('app_contact');
         }
