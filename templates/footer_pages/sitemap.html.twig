@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %} 
+{% block title %}Plan du site{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="album py-0 bg-body-tertiary">
+            <div class="container my-5">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-chevron p-3">
+                        <li class="breadcrumb-item">
+                            <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Accueil</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Plan du site
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="grey-fond">
+            <div class="container">
+                <h1>Plan du site</h1>
+                <br/>
+                <div class="row row-cols-1 g-3">
+                    <ul>
+                        <li><h4><a href="/articles">Articles</a></h4></li>
+                        <li><h4><a href="/ressources">Ressources</a></h4></li>
+                        <li><h4><a href="/a-propos">À propos</a></h4></li>
+                        <li><h4><a href="https://sante.gouv.fr/">Sante.Gouv.fr</a></h4></li>
+                        <li><h4><a href="">Nous contacter</a></h4></li>
+                        <li><h4><a href="/plan-du-site">Plan du site</a></h4></li>
+                        <li><h4><a href="https://sante.gouv.fr/ministere/article/declaration-d-accessibilite-du-site-sante-gouv-fr">Accessibilité</a></h4></li>
+                        <li><h4><a href="/mentions-legales">Mentions légales</a></h4></li>
+                        <li><h4><a href="/donnees-personnelles">Données personnelles</a></h4></li>
+                        <li><h4><a href="/cookies">Cookies</a></h4></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

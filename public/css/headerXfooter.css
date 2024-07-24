@@ -41,6 +41,8 @@ body {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  border-top-left-radius: 0.55rem;
+  border-top-right-radius: 0.55rem;
 }
 
 @media (min-width: 768px) {
@@ -154,6 +156,11 @@ body {
   font-weight: bold;
 }
 
+a {
+  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+  text-decoration: none;
+}
+
 a.style-none {
   text-decoration: none;
   font-family: 'MarianneBold';
@@ -210,6 +217,18 @@ padding-top: 0;
 margin-bottom:2%;
 }
 
+.flex-column {
+  padding-left: 15px;
+}
+
+a:hover {
+  color:#0d6efd;
+}
+
+.pdg-tp-footer.container {
+  padding-top: 2%;
+}
+
 @media (min-width: 768px) {
 .col-md-2 {
     flex: 0 0 auto;
@@ -219,9 +238,12 @@ margin-bottom:2%;
 }
 
 @media (max-width: 768px) {
-.row {
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
+  .row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .flex-column {
+    padding-left: 0;
+  }
 }

@@ -1,24 +1,22 @@
 
 <footer>
-    <div class="container">
+    <div class="pdg-tp-footer container">
         <div class="py-3">
             <div class="row">
                 <div class="col-6 col-md-2 mb-4">
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2">À propos</li>
-                        <li class="nav-item mb-2">Importation des contacts</li>
-                        <li class="nav-item mb-2">FAQs</li>
-                        <li class="nav-item mb-2">Signaler un problème</li>
-                        <li class="nav-item mb-2">Aide</li>
+                        <li class="nav-item mb-2"><a href="{{ path('a-propos') }}">À propos</a></li>
+                        <li class="nav-item mb-2"><a href="https://sante.gouv.fr/" target="_blank">Sante.Gouv.fr</a></li>
+                        <li class="nav-item mb-2"><a href="">Nous contacter</a></li> {# Lien vers form Contact #}
+                        <li class="nav-item mb-2"><a href="{{ path('sitemap') }}">Plan du site</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-md-2 mb-3">
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2">Accessibilité</li>
-                        <li class="nav-item mb-2">Mentions légales</li>
-                        <li class="nav-item mb-2">Données personnelles</li>
-                        <li class="nav-item mb-2">Politique de confidentialité</li>
-                        <li class="nav-item mb-2">Gestion des cookies</li>
+                        <li class="nav-item mb-2"><a href="https://sante.gouv.fr/ministere/article/declaration-d-accessibilite-du-site-sante-gouv-fr">Accessibilité</a></li>
+                        <li class="nav-item mb-2"><a href="{{ path('mentions') }}">Mentions légales</a></li>
+                        <li class="nav-item mb-2"><a href="{{ path('donnees-perso') }}">Données personnelles</a></li>
+                        <li class="nav-item mb-2"><a href="{{ path('cookies') }}">Gestion des cookies</a></li>
                     </ul>
                 </div>
             </div>

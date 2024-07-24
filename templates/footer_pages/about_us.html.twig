@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %} 
+{% block title %}(RE)Sources Relationnelles{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="album py-0 bg-body-tertiary">
+            <div class="container my-5">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-chevron p-3">
+                        <li class="breadcrumb-item">
+                            <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Accueil</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            À propos 
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="grey-fond">
+            <div class="container">
+                <h1>À propos de (RE)Sources Relationnelles</h1>
+                <br/>
+                <div class="row row-cols-1 g-3">
+                    <h5>Pour plus d'informations sur les projets du Ministère de la Santé, rendez-vous sur le site <a href="https://sante.gouv.fr/">Santé Gouv.</a></h4>
+                    <p>
+                        La mission principale du Ministère de la Santé consiste à encourager la promotion de la santé, à prévenir l'incidence des maladies et à assurer l'accès universel à des soins de qualité pour l'ensemble des citoyens. Dans le cadre de cet objectif fondamental, le ministère a souhaité instaurer une plateforme numérique dédiée aux citoyens, visant à simplifier l'accès à un éventail de ressources, d'outils et de possibilités d'interaction.
+                        Cette initiative a pour vocation de répondre à la demande croissante de renforcement et d'élargissement des liens sociaux entre les citoyens, en mettant à leur disposition des informations pertinentes et des moyens de communication adaptés.
+                        <br/>
+                        L’objectif principal de (RE)Sources Relationnelles est de proposer une plateforme autour de la qualité des liens relationnels que nous pouvons tisser pour une meilleure qualité de vie. 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
