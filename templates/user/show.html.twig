@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
-
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/profil.css') }}" />
 {% endblock %}
@@ -11,8 +9,7 @@
 {% endblock %}
 
 {% block body %}
-<div>
-    <hr />
+    <hr/>
     <div class="px-3 py-2 text-bg-dark border-bottom">
         <div class="container">
             <div class="row justify-content-center text-center  "> <!-- Ajout de la classe text-center -->
@@ -20,69 +17,68 @@
                     <ul class="nav d-flex flex-column text-small">
                         <li class="nav-item">
                             <a onclick="navigateToSection('dashboard')" class="nav-link text-white">
-                                <div class="d-flex align-items-center justify-content-evenly">
-                                    <div class="d-flex align-items-center">
-                                        <svg class="bi d-block mb-1" width="24" style="margin-right:15px" height="24">
-                                            <use xlink:href="#speedometer2" />
-                                        </svg>
-                                        <span>Tableau de bord</span>
-                                    </div>
+                            <div class="d-flex align-items-center justify-content-evenly">
+                                <div class="d-flex align-items-center">
+                                <svg class="bi d-block mb-1" width="24"  style="margin-right:15px" height="24"><use xlink:href="#speedometer2"/></svg>
+                                <span>Tableau de bord</span>
                                 </div>
+                            </div>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a onclick="navigateToSection('favorites')" class="nav-link text-white">
-                                <div class="d-flex align-items-center justify-content-evenly">
-                                    <div class="d-flex align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:15px" width="24"
-                                            height="24" fill="currentColor"
-                                            class="bi bi-bookmark-heart-fill text-danger d-block mb-1 mr-2"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
-                                        </svg>
-                                        <span>Ressources en favorites</span>
-                                    </div>
+                            <div class="d-flex align-items-center justify-content-evenly">
+                                <div class="d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg"  style="margin-right:15px" width="24" height="24" fill="currentColor" class="bi bi-bookmark-heart-fill text-danger d-block mb-1 mr-2" viewBox="0 0 16 16">
+                                    <path d="M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
+                                </svg>
+                                <span>Ressources en favorites</span>
                                 </div>
+                            </div>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a onclick="navigateToSection('toConsult')" class="nav-link text-white">
-                                <div class="d-flex align-items-center justify-content-evenly">
-                                    <div class="d-flex align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" style="margin-right:15px"
-                                            height="24" fill="currentColor"
-                                            class="bi bi-bookmark-star-fill d-block mb-1 mr-2" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5M8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098z" />
-                                        </svg>
-                                        <span>Ressources à consulter</span>
-                                    </div>
+                            <div class="d-flex align-items-center justify-content-evenly">
+                                <div class="d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" style="margin-right:15px"  height="24" fill="currentColor" class="bi bi-bookmark-star-fill d-block mb-1 mr-2" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5M8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098z"/>
+                                </svg>
+                                <span>Ressources à consulter</span>
                                 </div>
+                            </div>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a onclick="navigateToSection('myArticles')" class="nav-link text-white">
-                                <div class="d-flex align-items-center justify-content-evenly">
-                                    <div class="d-flex align-items-center">
-                                        <svg class="bi d-block mb-1" style="margin-right:15px" width="24" height="24">
-                                            <use xlink:href="#grid" />
-                                        </svg>
-                                        <span>Mes articles</span>
-                                    </div>
+                            <div class="d-flex align-items-center justify-content-evenly">
+                                <div class="d-flex align-items-center">
+                                <svg class="bi d-block mb-1"  style="margin-right:15px" width="24" height="24"><use xlink:href="#grid"/></svg>
+                                <span>Mes articles</span>
                                 </div>
+                            </div>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a onclick="navigateToSection('account')" class="nav-link text-white">
-                                <div class="d-flex align-items-center justify-content-evenly">
-                                    <div class="d-flex align-items-center">
-                                        <svg class="bi d-block mb-1" style="margin-right:15px" width="24" height="24">
-                                            <use xlink:href="#people-circle" />
-                                        </svg>
-                                        <span>Mon profil</span>
-                                    </div>
+                            <div class="d-flex align-items-center justify-content-evenly">
+                                <div class="d-flex align-items-center">
+                                <svg class="bi d-block mb-1" style="margin-right:15px" width="24" height="24"><use xlink:href="#people-circle"/></svg>
+                                <span>Mon profil</span>
                                 </div>
+                            </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a onclick="navigateToSection('security')" class="nav-link text-white">
+                            <div class="d-flex align-items-center justify-content-evenly">
+                                <div class="d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-shield-lock-fill me-2" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.8 11.8 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7 7 0 0 0 1.048-.625 11.8 11.8 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.54 1.54 0 0 0-1.044-1.263 63 63 0 0 0-2.887-.87C9.843.266 8.69 0 8 0m0 5a1.5 1.5 0 0 1 .5 2.915l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99A1.5 1.5 0 0 1 8 5"/>
+                                </svg>                                
+                                <span>Sécurité</span>
+                                </div>
+                            </div>
                             </a>
                         </li>
                     </ul>
@@ -90,549 +86,322 @@
             </div>
         </div>
     </div>
-    <!-- ---------- MAIN ---------- -->
-    <main>
-        <div class="row mb-2">
-            {# Check if there are any error messages #}
-            {% if app.session.getFlashBag().has('error') %}
-            <div class="alert alert-danger" role="alert">
-                {{ app.session.getFlashBag().get('error')|first }}
-            </div>
-            {% endif %}
-            {% if app.session.getFlashBag().has('success') %}
-            <div class="alert alert-success" role="alert">
-                {{ app.session.getFlashBag().get('success')|first }}
-            </div>
-            {% endif %}
-            {% if app.session.getFlashBag().has('sucessActivate') %}
-            <div class="alert alert-success" role="alert">
-                {{ app.session.getFlashBag().get('sucessActivate')|first }}
-            </div>
-            {% endif %}
-
-            <div id="dashboard" class="col-md-6">
-                <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <h3 class="mb-0">Tableau de bord</h3>
-                        <div class="mt-3">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>Ressources favorites</td>
-                                        <td><span id="favCount">15</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ressources à exploiter</td>
-                                        <td><span id="exploreCount">10</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ressources publiées</td>
-                                        <td><span id="publishedCount">25</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ressources en attente</td>
-                                        <td><span id="pendingCount">5</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total des téléchargements</td>
-                                        <td><span id="downloadCount">100</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ressources archivées</td>
-                                        <td><span id="archiveCount">8</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="favorites" class="col-md-6">
-                <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col-auto d-none d-lg-block mr-3">
-                        <!-- Aperçu de la ressource à gauche (visible uniquement sur les écrans larges) -->
-                    </div>
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <div class="d-flex justify-content-start align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="35" style="margin-right:15px" height="35"
-                                fill="currentColor" class="bi bi-bookmark-heart-fill text-danger" viewBox="0 0 16 16">
-                                <path
-                                    d="M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
-                            </svg>
-                            <h3 class="mb-0">Ressources favorites</h3>
-                        </div>
-                        <div class="mt-3">
-                            <!-- Liste des ressources favorites -->
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/mp4.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 1 avec un
-                                                titre très long qui sera coupé</p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/mp3.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 2 </p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/jpg.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 3 </p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/mp3.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 4 </p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="toConsult" class="col-md-6">
-                <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col-auto d-none d-lg-block mr-3">
-                        <!-- Aperçu de la ressource à gauche (visible uniquement sur les écrans larges) -->
-                    </div>
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <div class="d-flex justify-content-start align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="35" style="margin-right:15px" height="35"
-                                fill="currentColor" class="bi bi-bookmark-star-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5M8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098z" />
-                            </svg>
-                            <h3 class="mb-0">Ressources a consulter</h3>
-                        </div>
-                        <div class="mt-3">
-                            <!-- Liste des ressources favorites -->
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/mp4.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 1 avec un
-                                                titre très long qui sera coupé</p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/jpg.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 2 </p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/mp4.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 3 </p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/mp3.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 4 </p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="myArticles" class="col-md-6">
-                <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <div class="d-flex justify-content-start align-items-center">
-                            <svg class="bi d-block mb-1" style="margin-right:15px" width="24" height="24">
-                                <use xlink:href="#grid" />
-                            </svg>
-                            <h3 class="mb-0">Mes articles</h3>
-                        </div>
-                        <div class="mt-3">
-                            <!-- Liste des ressources favorites -->
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/mp3.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 1 avec un
-                                                titre très long qui sera coupé</p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/mp3.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 2 </p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/mp4.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 3 </p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                        <div>
-                                            <!-- Ajustez la taille de l'image selon vos besoins -->
-                                            <img src="{{ asset('img/jpg.png') }}" class="img-fluid img-thumbnail "
-                                                style="max-width: 35px;margin-right:10px" alt="Aperçu Ressource 1">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
-                                            <p class="mb-0 text-truncate" style="max-width: 224px;">Ressource 4 </p>
-                                        </div>
-                                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                            <!-- Remplace le texte par une flèche -->
-                                            <svg class="bi" width="16" height="16" fill="currentColor"
-                                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-</div>
-<div id="account" class="col-md-6">
-    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <div class="d-flex justify-content-start align-items-center">
-                        <svg class="bi d-block mb-1" style="margin-right:15px" width="24" height="24">
-                            <use xlink:href="#people-circle" />
-                        </svg>
-                        <h3 class="mb-0">Mon Profil</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-3">
-                <div class="mb-2 d-flex align-items-center justify-content-between">
-                    <div>
-                        <strong>Nom:</strong> {{ user.nom }} {{ user.prenom }}
-                    </div>
-                </div>
-                <div class="mb-2 d-flex align-items-center justify-content-between">
-                    <div>
-                        <strong>Email:</strong> {{ user.email }}
-                    </div>
-                </div>
-                <div class="mb-2 d-flex align-items-center justify-content-between editable">
-                    <div>
-                        <strong>Date de création</strong> 02/06/2024, 15:30
-                    </div>
-                </div>
-                <div class="mb-2 d-flex align-items-center editable">
-                    <button type="button" class="btn btn-primary"><a href="{{ path('app_user_edit', {'id': user.id}) }}"
-                            class="style-none-white">Modifier</a></button>
-                    {{ include('user/forms/_delete_form.html.twig') }}
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    <div id="account" class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="d-flex align-items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-shield-lock-fill me-2" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.8 11.8 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7 7 0 0 0 1.048-.625 11.8 11.8 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.54 1.54 0 0 0-1.044-1.263 63 63 0 0 0-2.887-.87C9.843.266 8.69 0 8 0m0 5a1.5 1.5 0 0 1 .5 2.915l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99A1.5 1.5 0 0 1 8 5"/>
-                        </svg>
-                        <h3 class="mb-0">Sécurité</h3>
-                    </div>
-                </div>
-    
-                <div class="mb-2">
-                    <strong>Dernier changement de mot de passe :</strong> 03/06/2024, 15:30
-                </div>
-                
-                <div class="mb-2">
-                    <button type="button" class="btn btn-primary">
-                        <a href="{{ path('app_forgot_password_request') }}" class="text-white text-decoration-none">Réinitialiser le mot de passe</a>
-                    </button>
-                </div>
-                
-    
-                <div class="mb-2">
-                    <strong>Authentifications à deux facteurs :</strong>
-                </div>
-    
-                {% if user.isGoogleAuthenticatorEnabled() %}
-                    <div class="mb-2">
-                        <button id="toggleRemoveFormButton" class="btn btn-danger mb-2">Désactiver Google Authenticator</button>
-                        
-                        <div id="removeGoogleAuthForm" class="d-none mt-2">
-                            <form action="{{ path('remove_google_auth') }}" method="post" class="p-3 border rounded shadow-sm">
-                                <input type="hidden" name="user_id" value="{{ user.id }}">
-                                <div class="form-floating mb-2">
-                                    <p for="password">Merci de confirmer votre mot de passe</p>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
-                                </div>
-                                <button type="submit" class="btn btn-danger">Désactiver</button>
-                            </form>
-                        </div>
-                    </div>
-    
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            var toggleRemoveFormButton = document.getElementById("toggleRemoveFormButton");
-                            var removeGoogleAuthForm = document.getElementById("removeGoogleAuthForm");
-                            toggleRemoveFormButton.addEventListener("click", function() {
-                                removeGoogleAuthForm.classList.toggle("d-none");
-                            });
-                        });
-                    </script>
-    
-                    {% if app.session.flashBag.has('qrContent') %}
-                        {% set qrContents = app.session.flashBag.get('qrContent') %}
-                        {% set qrContent = qrContents[0] %}
-                        <div class="form-group py-3 d-flex justify-content-around align-items-center flex-column">
-                            <label class="mb-2" for="google_authenticator_qr_code">Code QR de Google Authenticator:</label>
-                            {% set qrCodeUrl = 'https://quickchart.io/qr?text=' ~ qrContent %}
-                            <img id="google_authenticator_qr_code" src="{{ qrCodeUrl }}" alt="Google Authenticator QR Code" class="img-fluid">
-                        </div>
-                    {% else %}
-                        <div class="mb-2">
-                            <button id="toggleGoogleAuthFormButton" class="btn btn-primary mb-2">Afficher le QR Code</button>
-                            
-                            <div id="googleAuthForm" class="d-none mt-2">
-                                <form id="googleAuthPasswordForm" method="post" action="{{ path('get_google_qr') }}" class="p-3 border rounded shadow-sm">
-                                    <div class="form-floating mb-2">
-                                        <p for="password">Merci de confirmer votre mot de passe</p>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Valider</button>
-                                </form>
+<!-- ---------- MAIN ---------- --> 
+    <main class="d-flex justify-content-center">
+        <div class="row col-10">
+            <div class="row col-12 m-0">
+                <div id="dashboard" class="col-md-6 col-12">
+                    <div class="row g-0 border rounded overflow-hidden custom-height flex-md-row mb-4 shadow-sm-relative">
+                        <div class="col p-4 pb-0 d-flex flex-column position-static">
+                            <h3 class="mb-0">Tableau de bord</h3>
+                            <div class="mt-3">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Articles favoris</td>
+                                            <td><span id="favCount">{{ user.favories|length }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Articles à exploiter</td>
+                                            <td><span id="exploreCount">{{ user.enAttentes|length }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Articles publiées</td>
+                                            <td><span id="publishedCount">{{ user.articles|length }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ressources publiées</td>
+                                            <td><span id="publishedCount">{{ user.ressources()|length }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total des téléchargements</td>
+                                            <td><span id="downloadCount">{{ user.getNbTelechargement() }}</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-    
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function() {
-                                var toggleGoogleAuthFormButton = document.getElementById("toggleGoogleAuthFormButton");
-                                var googleAuthForm = document.getElementById("googleAuthForm");
-                                toggleGoogleAuthFormButton.addEventListener("click", function() {
-                                    googleAuthForm.classList.toggle("d-none");
-                                });
-                            });
-                        </script>
-                    {% endif %}
-                {% else %}
-                    <div class="container">
-                        <button id="toggleGoogleAuthForm" class="btn btn-primary mb-2">Activer Google Authenticator</button>
-                        
-                        <div id="googleAuthForm" class="d-none mt-2">
-                            <form method="post" action="{{ path('add-google-auth') }}" class="p-3 border rounded shadow-sm">
-                                <div class="form-floating mb-2">
-                                    <p for="password">Merci de confirmer votre mot de passe</p>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Activer Google Authenticator</button>
-                            </form>
+                    </div>
+                </div>
+                
+                <div id="favorites" class="col-md-6 col-12">
+                    <div class="row g-0 border rounded overflow-hidden custom-height flex-md-row mb-4 shadow-sm position-relative">
+                        <div class="col-auto d-none d-lg-block mr-3">
+                            <!-- Aperçu de la ressource à gauche (visible uniquement sur les écrans larges) -->
+                        </div>
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35"  style="margin-right:15px" height="35" fill="currentColor" class="bi bi-bookmark-heart-fill text-danger" viewBox="0 0 16 16">
+                                <path d="M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
+                                </svg>
+                                <h3 class="mb-0">Articles favoris</h3>
+                            </div>
+                            <!-- Liste des ressources favorites -->
+                            {% if user.favories|length != 0 %}
+                            <div class="mt-3 d-flex justify-content-center h-100">
+                                <ul class="list-group w-100">
+                                    {% for favorie in user.favories %}
+                                        <li class="list-group-item">
+                                            <div class="d-flex justify-content-evenly align-items-center">
+                                                <div class="flex-grow-1">
+                                                    <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
+                                                    <p class="mb-0 text-truncate" style="max-width: 224px;">{{ favorie.article.getTitre() }}</p>
+                                                </div>
+                                                <a href="{{ path('show_article', {'id':favorie.article.id}) }}" class="icon-link gap-1 icon-link-hover stretched-link">
+                                                    <!-- Remplace le texte par une flèche -->
+                                                    <svg class="bi" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                            <div class="mt-3 d-flex justify-content-center align-items-center h-100">
+                                <p class="h3 mb-0">Aucun article en favorie</p>
+                            {% endif %}
+                            </div>
                         </div>
                     </div>
-                    
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            var toggleGoogleAuthFormButton = document.getElementById("toggleGoogleAuthForm");
-                            var googleAuthForm = document.getElementById("googleAuthForm");
-                            toggleGoogleAuthFormButton.addEventListener("click", function() {
-                                googleAuthForm.classList.toggle("d-none");
-                            });
-                        });
-                    </script>
-                {% endif %}
+                </div>
+            </div>
+            <div class="row col-12 m-0">
+                <div id="toConsult" class="col-md-6 col-12">
+                    <div class="row g-0 border rounded overflow-hidden custom-height flex-md-row mb-4 shadow-sm position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35"  style="margin-right:15px" height="35" fill="currentColor" class="bi bi-bookmark-star-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5M8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098z"/>
+                                </svg>
+                                <h3 class="mb-0">Ressources a consulter</h3>
+                            </div>
+                            {% if user.enAttentes|length != 0 %}
+                            <div class="mt-3 d-flex justify-content-center h-100">
+                                <ul class="list-group w-100">
+                                    {% for en_attente in user.enAttentes %}
+                                        <li class="list-group-item">
+                                            <div class="d-flex justify-content-evenly align-items-center">
+                                                <div class="flex-grow-1">
+                                                    <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
+                                                    <p class="mb-0 text-truncate" style="max-width: 224px;">{{ en_attente.article.getTitre() }}</p>
+                                                </div>
+                                                <a href="{{ path('show_article', {'id':en_attente.article.id}) }}" class="icon-link gap-1 icon-link-hover stretched-link">
+                                                    <!-- Remplace le texte par une flèche -->
+                                                    <svg class="bi" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                            <div class="mt-3 d-flex justify-content-center align-items-center h-100">
+                                <p class="h3 mb-0">Aucun article à consulter</p>
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {# Mes articles #}
+                <div id="myArticles" class="col-md-6 col-12">
+                    <div class="row g-0 border rounded overflow-hidden custom-height flex-md-row mb-4 shadow-sm position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <div class="d-flex justify-content-start align-items-center">      
+                                <svg class="bi d-block mb-1" style="margin-right:15px" width="24" height="24"><use xlink:href="#grid"/></svg>
+                                <h3 class="mb-0">Mes articles</h3>
+                            </div>
+                            <!-- Liste des articles favorites -->
+                            {% if user.articles|length != 0 %}
+                            <div class="mt-3 d-flex justify-content-center h-100">
+                                <ul class="list-group w-100">
+                                    {% for article in user.articles %}
+                                        <li class="list-group-item">
+                                            <div class="d-flex justify-content-evenly align-items-center">
+                                                <div class="flex-grow-1">
+                                                    <!-- Utilisez la classe text-truncate pour ajuster la taille de la police -->
+                                                    <p class="mb-0 text-truncate" style="max-width: 224px;">{{ article.getTitre() }}</p>
+                                                </div>
+                                                <a href="{{ path('show_article', {'id':article.id}) }}" class="icon-link gap-1 icon-link-hover stretched-link">
+                                                    <!-- Remplace le texte par une flèche -->
+                                                    <svg class="bi" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                            <div class="mt-3 d-flex justify-content-center align-items-center h-100">
+                                <p class="h3 mb-0">Aucun article</p>
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>                
+                </div>
+            </div> 
+            <div class="row col-12 m-0">
+                <div id="account" class="col-md-6 col-12">
+                    <div class="row g-0 border rounded overflow-hidden custom-height flex-md-row mb-4 shadow-sm position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="d-flex justify-content-start align-items-center">   
+                                        <svg class="bi d-block mb-1" style="margin-right:15px" width="24" height="24">
+                                            <use xlink:href="#people-circle" />
+                                        </svg>
+                                        <h3 class="mb-0">Mon Profil</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <div class="mb-2 d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <strong>Nom:</strong> {{ user.nom }} {{ user.prenom }}
+                                    </div>
+                                </div>
+                                <div class="mb-2 d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <strong>Email:</strong> {{ user.email }}
+                                    </div>
+                                </div>
+                                <div class="mb-2 d-flex align-items-center justify-content-between editable">
+                                    <div>
+                                        <strong>Date de création:</strong> 20 janvier 2023, 15:30
+                                    </div>
+                                </div>
+                                <div class="mb-2 d-flex justify-content-around editable mt-4">
+                                    <button type="button" class="btn btn-primary"><a href="{{ path('app_user_edit', {'id': user.id}) }}" class="style-none-white">Modifier</a></button>
+                                    {{ include('user/forms/_delete_form.html.twig') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="security" class="col-md-6 col-12">
+                    <div class="row g-0 border rounded overflow-hidden custom-height flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="d-flex align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-shield-lock-fill me-2" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.8 11.8 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7 7 0 0 0 1.048-.625 11.8 11.8 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.54 1.54 0 0 0-1.044-1.263 63 63 0 0 0-2.887-.87C9.843.266 8.69 0 8 0m0 5a1.5 1.5 0 0 1 .5 2.915l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99A1.5 1.5 0 0 1 8 5"/>
+                                    </svg>
+                                    <h3 class="mb-0">Sécurité</h3>
+                                </div>
+                            </div>
+                
+                            <div class="mb-2">
+                                <strong>Dernier changement de mot de passe :</strong> 03/06/2024, 15:30
+                            </div>
+                            
+                            <div class="mb-2">
+                                <div class="container">
+                                    <button type="button" class="btn btn-primary">
+                                        <a href="{{ path('app_forgot_password_request') }}" class="text-white text-decoration-none">Réinitialiser le mot de passe</a>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                
+                            <div class="mb-2">
+                                <strong>Authentifications à deux facteurs :</strong>
+                            </div>
+                
+                            {% if user.isGoogleAuthenticatorEnabled() %}
+                                {% if app.session.flashBag.has('qrContent') %}
+                                    {% set qrContents = app.session.flashBag.get('qrContent') %}
+                                    {% set qrContent = qrContents[0] %}
+                                    <div class="mb-2">
+                                        <button id="toggleRemoveFormButton" class="btn btn-danger mb-2">Désactiver Google Authenticator</button>
+                                    </div>
+                                    <div class="form-group py-3 d-flex justify-content-around align-items-center flex-column">
+                                        <label class="mb-2" for="google_authenticator_qr_code">Code QR de Google Authenticator:</label>
+                                        {% set qrCodeUrl = 'https://quickchart.io/qr?text=' ~ qrContent %}
+                                        <img id="google_authenticator_qr_code" src="{{ qrCodeUrl }}" alt="Google Authenticator QR Code" class="img-fluid">
+                                    </div>
+                                {% else %}
+                                    <div class="mt-2 d-flex justify-content-between flex-column-md flex-row">
+                                        <div class="mb-2">
+                                            <button id="toggleGoogleAuthFormButton" class="btn btn-primary mb-2">Afficher le QR Code</button>
+                                        </div>
+                                        <div class="mb-2">
+                                            <button id="toggleRemoveFormButton" class="btn btn-danger mb-2">Désactiver Google Authenticator</button>
+                                        </div>
+                                    </div>
+                                    <div id="googleAuthForm" class="d-none mt-2">
+                                        <form id="googleAuthPasswordForm" method="post" action="{{ path('get_google_qr') }}" class="p-3 border rounded shadow-sm">
+                                            <div class="form-floating mb-2">
+                                                <p for="password">Merci de confirmer votre mot de passe</p>
+                                                <input type="password" class="form-control m-0 py-0" id="password" name="password" placeholder="Mot de passe" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Afficher</button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                                <div id="removeGoogleAuthForm" class="d-none mt-2">
+                                    <form action="{{ path('remove_google_auth') }}" method="post" class="p-3 border rounded shadow-sm">
+                                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                                        <div class="form-floating mb-2">
+                                            <p for="password">Merci de confirmer votre mot de passe</p>
+                                            <input type="password" class="form-control m-0 py-0" id="password" name="password" placeholder="Mot de passe" required>
+                                        </div>
+                                        <button type="submit" class="d-flex btn btn-danger">Désactiver</button>
+                                    </form>
+                                </div>
+                            {% else %}
+                                <div class="container">
+                                    <button id="toggleGoogleAuthForm" class="btn btn-primary mb-2">Activer Google Authenticator</button>
+                                    
+                                    <div id="googleAuthForm" class="d-none mt-2">
+                                        <form method="post" action="{{ path('add-google-auth') }}" class="p-3 border rounded shadow-sm">
+                                            <div class="form-floating mb-2">
+                                                <p for="password">Merci de confirmer votre mot de passe</p>
+                                                <input type="password" class="form-control m-0 py-0" id="password" name="password" placeholder="Mot de passe" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Activer Google Authenticator</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    
+    </main>
 
-</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var toggleGoogleAuthFormButton = document.getElementById("toggleGoogleAuthFormButton");
+            var googleAuthForm = document.getElementById("googleAuthForm");
 
-</div>
-</div>
-</div>
-</main>
+            var toggleRemoveFormButton = document.getElementById("toggleRemoveFormButton");
+            var removeGoogleAuthForm = document.getElementById("removeGoogleAuthForm");
+
+            toggleGoogleAuthFormButton.addEventListener("click", function() {
+                googleAuthForm.classList.toggle("d-none");
+                if (!removeGoogleAuthForm.classList.contains("d-none")) {
+                    console.log('test')
+                    removeGoogleAuthForm.classList.toggle("d-none");
+                }
+            });
+
+            toggleRemoveFormButton.addEventListener("click", function() {
+                removeGoogleAuthForm.classList.toggle("d-none");
+                if (!googleAuthForm.classList.contains("d-none")) {
+                    console.log('test')
+                    googleAuthForm.classList.toggle("d-none");
+                }
+            });
+
+            var toggleGoogleAuthFormButton = document.getElementById("toggleGoogleAuthForm");
+            var googleAuthForm = document.getElementById("googleAuthForm");
+            toggleGoogleAuthFormButton.addEventListener("click", function() {
+                googleAuthForm.classList.toggle("d-none");
+            });
+        });
+    </script>
 {% endblock %}

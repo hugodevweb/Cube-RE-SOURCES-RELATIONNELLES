@@ -31,9 +31,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //fait une query dans la base de données pour voir si l'email existe déjà
-            $userRepo = $entityManager->getRepository(User::class);
-            $userCheck = $userRepo->findOneBy(['email' => $user->getEmail()]);
+            $userCheck = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
             if ($userCheck) {   
                 // Add an error to the form
                 $form->get('email')->addError(new FormError('Cet email est déjà utilisé.'));
