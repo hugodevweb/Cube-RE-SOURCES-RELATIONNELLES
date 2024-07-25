@@ -213,17 +213,8 @@ a.style-none-white {
 
 /*------------ FOOTER ------------*/
 
-footer {
-  margin-top:2%;
-}
-
 li.nav-item.mb-2:hover {
-color:#0d6efd;
-}
-
-.row {
-padding-top: 0;
-margin-bottom:2%;
+/* color:#0d6efd; */
 }
 
 .flex-column {
@@ -231,7 +222,7 @@ margin-bottom:2%;
 }
 
 a:hover {
-  color:#0d6efd;
+  /* color:#0d6efd; */
 }
 
 .pdg-tp-footer.container {
