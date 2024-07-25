@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %} 
+{% block title %}Données personnelles{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="album py-0 bg-body-tertiary">
+            <div class="container my-5">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-chevron p-3">
+                        <li class="breadcrumb-item">
+                            <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Accueil</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Données personnelles
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="container">
+            <h6><i>Le ministère du Travail, de la Santé et des Solidarités s’engage à ce que les traitements de données personnelles effectués sur ce site, ainsi que sur les systèmes d’information sous sa responsabilité, soient conformes au règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés.</i></h6>
+            <br/>
+        </div>
+        <div class="grey-fond">
+            <div class="container">
+                <h1>Données personnelles</h1>
+                <br/>
+                <div class="row row-cols-1 g-3">
+                    <h5>Site (RE)Sources Relationnelles</h5>
+                        <h6>Politique de protection des données</h6>
+                        <p>
+                            Le ministère du Travail, de la Santé et des Solidarités s’engage à ce que les traitements de données personnelles 
+                            effectués à partir de ce site, soient conformes au « <b>Règlement général sur la protection des données » (RGPD)</b> et à la loi 
+                            n° 78-17 du 6 janvier 1978 modifiée, relative à l’informatique, aux fichiers et aux libertés.
+                            <br/><br/>
+                            Le ministère du Travail, de la Santé et des Solidarités est très attentif à la protection des données à caractère personnel.
+                            <br/><br/>
+                            Les données statistiques recueillies sont utilisées pour nous permettre d’enrichir le parcours des internautes, fournir une meilleure information et ainsi participer à l’amélioration de notre mission de service public.
+                            <br/><br/>
+                            <b>Exercer vos droits</b>
+                            <br/><br/>
+                            Pour toute information ou exercice de vos droits Informatique et Libertés sur les traitements de données 
+                            personnelles gérés par (RE)Sources Relationnelles.fr, vous pouvez nous contacter <a href="" style="color:#1212ff"><b>par courriel</b>.</a>
+                            <br/><br/>
+                            Informations complémentaires :
+                            <br/>
+                            <ul>
+                                <li><p>Afin de pouvoir traiter votre demande, merci de bien préciser l’objet de votre demande</p></li>
+                                <li><p>En cas d’exercice de vos droits, vous devez justifier de votre identité.</p></li>
+                            </ul>
+                        </p>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

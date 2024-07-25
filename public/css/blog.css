@@ -1,8 +1,30 @@
+@font-face {
+  font-family: MarianneBold;
+  src: url("../fonts/Marianne-Bold.702e12a6.woff2");
+}
+
+@font-face {
+  font-family: MarianneNormal;
+  src: url("../fonts/Marianne-Regular.4349f045.woff2");
+}
+
+@font-face {
+  font-family: MarianneMedium;
+  src: url("../fonts/Marianne-Medium.3d17f2f9.woff2");
+}
+
 /* stylelint-disable stylistic/selector-list-comma-newline-after */
 
 .blog-header-logo {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+  font-family: 'MarianneBold';
   font-size: 2.25rem;
+}
+
+.grey-fond {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity)) !important;
+  text-align: justify;
+  padding: 5%;
 }
 
 .blog-header-logo:hover {
@@ -10,7 +32,7 @@
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+  font-family: 'MarianneBold';
 }
 
 .flex-auto {
@@ -58,4 +80,14 @@ h1, h2, h3, h4, h5, h6 {
 /* grid pour l'alignement de l'affichage des articles */
 .grid-alignement {
   display: grid;
+}
+
+@media (max-width: 768px) {
+  h1{
+    text-align:left;
+  }
+  
+  h2, h3, h4, h5, h6, p {
+    text-align:justify;
+  }
 }

@@ -188,10 +188,12 @@ a {
     margin-top:4%;
 }
  
+.mtp-ressources {
+  padding-top: 1rem !important;
+}
 
-
-
-
-
+.pdg-btm {
+  padding-bottom:2%;
+}
 
 
