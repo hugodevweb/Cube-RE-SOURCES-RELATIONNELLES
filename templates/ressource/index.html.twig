@@ -23,12 +23,14 @@
     <div class="container">
         <h1>Espace Ressources</h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {% for ressource in ressources %}
+            {% for article, ressource in ressources %}
             <div class="col">
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <p class="card-text"><a href="#">{{ ressource.titre }}</a></p>
-                        <p class="card-text">Vu {{ article.nombreVu }} fois</p>
+                        {% if nombreVu is defined %}
+                            <p class="card-text">Vu {{ article.nombreVu }} fois</p>
+                        {% endif %}
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a href="{{ path('show_article', {'id': article.id}) }}" class="btn btn-sm btn-outline-secondary">Ouvrir</a>

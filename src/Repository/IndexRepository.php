@@ -24,7 +24,12 @@ class IndexRepository extends ServiceEntityRepository
             if ($articles) {
                 foreach (array_reverse($categorie->getArticles()->toArray()) as $article) {
                     if (!$one_article && !in_array($article->getId(), $addedArticles)) {
-                        $article_par_categorie[$categorie->getNom()] = $article;
+                        $article_par_categorie[$categorie->getNom()] = [
+                            'article' => $article,
+                            'imageUrl' => $categorie->getImageUrl(),  // Assurez-vous que cette méthode est disponible
+                            'titre' => $article->getTitre(),           // Inclure le titre de l'article
+                            'id' => $article->getId()                   // Inclure l'ID de l'article pour le lien
+                        ];
                         $addedArticles[] = $article->getId();
                         $one_article = true;
                     }
@@ -32,5 +37,27 @@ class IndexRepository extends ServiceEntityRepository
             }
         }
         return $article_par_categorie;
+    }
+
+    public function getLastArticles(EntityManagerInterface $entityManager)
+    {
+        return $entityManager->createQuery('
+            SELECT a
+            FROM App\Entity\Article a
+            ORDER BY a.created_at DESC
+        ')
+        ->setMaxResults(3)
+        ->getResult();
+    }
+
+    public function getLastRessources(EntityManagerInterface $entityManager)
+    {
+        return $entityManager->createQuery('
+            SELECT r
+            FROM App\Entity\Ressource r
+            ORDER BY r.created_at DESC
+        ')
+        ->setMaxResults(3)
+        ->getResult();
     }
 }

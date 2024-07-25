@@ -92,7 +92,7 @@
             <label style="width:40px" class="d-md-none" for="toggle">☰</label>
         </div>
         <header
-            class="flex-grow-1 d-flex flex-wrap align-items-center justify-content-center justify-content-md-between border-bottom pb-2" style="absolute;">
+            class="flex-grow-1 d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pb-2" style="absolute;">
             <div class="col-md-3  mb-md-0">
                 <a href="/" class="d-flex align-items-center my-lg-0 me-lg-auto text-white text-decoration-none">
                     <img class=" theme-logo" src="{{ asset('img/logoFN.png') }}" alt="" width="200" height="115">
@@ -127,11 +127,10 @@
     </header>
 
     <input type="checkbox" id="toggle">
-    <ul class="nav col-12 col-md-auto mb-2 mb-md-0 border-bottom">
+    <ul class="nav col-12 col-md-auto mb-2 mb-md-0">
         <li><a href="{{ path('app_index')}}" class="nav-link px-2">Accueil</a></li>
         <li><a href="{{ path('articles')}}" class="nav-link px-2">Articles</a></li>
-        <li><a href="#" class="nav-link px-2">Ressources</a></li>
-        <li><a href="{{ path('app_contact')}}" class='nav-link px-2'>Contact</a></li>
+        <li><a href="{{ path('ressources') }}" class="nav-link px-2">Ressources</a></li>
     </ul>
 </div>
         <script src="{{ asset('js/color-modes.js') }}"></script>

@@ -12,9 +12,15 @@ class IndexController extends AbstractController
 {
     #[Route('/', name: 'app_index')]
     public function index(EntityManagerInterface $entityManager, IndexRepository $indexRepository): Response
-    {
+    {    
+        $carousel = $indexRepository->carousel($entityManager);
+        $lastArticles = $indexRepository->getLastArticles($entityManager);
+        $lastRessources = $indexRepository->getLastRessources($entityManager);
+
         return $this->render('index/index.html.twig', [
-            'carousel' => $indexRepository->carousel($entityManager),
+            'carousel' => $carousel,
+            'lastArticles' => $lastArticles,
+            'lastRessources' => $lastRessources,
         ]);
     }
 

@@ -17,155 +17,98 @@
 
 {% block body %}
 <main>
-    <div id="myCarousel" class="carousel slide mb-6"  data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            {% for index in range(0, carousel|length - 1) %}
-                {% set aria_current = (index == 0) ? 'true' : 'false' %}
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ index }}" {% if aria_current == 'true' %} class="active" aria-current="true" {% else %} aria-label="Slide {{ index + 1 }}" {% endif %}></button>
-            {% endfor %}
-        </div>
-        <div class="carousel-inner">
-            {% set active = false %}
-            {% for key, categorie in carousel %}
-                {% if not active %}
-                    <div class="carousel-item active">
-                    {% set active = true %}
-                {% else %}
-                    <div class="carousel-item">
-                {% endif %}
-                    <img src="https://www.cidj.com/sites/default/files/2019-09/vie-etudiante_2.jpg" style="filter: blur(5px);width: fit-content;height:fit-content;" class="d-block" alt="First slide">
-                    <div class="container " >
-                        <div class="carousel-caption carrouselContainer">
-                            <div class="row">
-                                <h1 class="mb-2">{{ key }}</h1>
-                                <p>{{ categorie.titre }}</p>
-                                
-                                <p><a class="btn btn-lg btn-primary" href="{{ path('show_article', {'id': categorie.id}) }}">Regarder</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-    <div class="album pt-5 bg-body-tertiary">
-        <div class="pdg-btm container">
-            <h1 class="titre_actu mt-4">L'essentiel de l'actualité</h1>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img class="bd-placeholder-img card-img-top" width="100%" height="200" src="https://www.gouvernement.fr/upload/media/content/0001/07/347c0eaa42d262e38fca38f6ca7c648297d5be36.jpg" alt=""/>
-                        <div class="card-body">
-                            <small class="text-categorie">Vie quotidienne</small>
-                            <p class="card-text"><a href="/actualite/les-4-actus-de-la-semaine-du-27-novembre-au-3-decembre-2023">Les 4 actus de la semaine du 27 novembre au 3 décembre 2023</a></p>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button"  class="btn btn-sm btn-outline-secondary">Ouvrir</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
+    {% if carousel is not empty %}
+        <div id="myCarousel" class="carousel slide mb-6"  data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {% for index in range(0, carousel|length - 1) %}
+                    {% set aria_current = (index == 0) ? 'true' : 'false' %}
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ index }}" {% if aria_current == 'true' %} class="active" aria-current="true" {% else %} aria-label="Slide {{ index + 1 }}" {% endif %}></button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% set active = false %}
+                {% for key, categorie in carousel %}
+                    {% if not active %}
+                        <div class="carousel-item active">
+                        {% set active = true %}
+                    {% else %}
+                        <div class="carousel-item">
+                    {% endif %}
+                        <img src="{{ categorie.imageUrl }}" style="filter: blur(2px);width: fit-content;height:fit-content;" class="d-block w-100" alt="First slide">
+                        <div class="container" >
+                            <div class="carousel-caption carrouselContainer">
+                                <div class="row">
+                                    <h1 class="mb-2">{{ key }}</h1>
+                                    <p style="vertical-align: middle;">Dernier article : {{ categorie.titre }}</p>
+                                    
+                                    <p><a class="btn btn-lg btn-primary" href="{{ path('show_article', {'id': categorie.id}) }}">Regarder</a></p>
                                 </div>
-                                <small class="text-body-secondary">Publié 27/11/2023</small>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img class="bd-placeholder-img card-img-top" width="100%" height="200" src="https://www.gouvernement.fr/upload/media/content/0001/07/a27795e62c41b72ab9de55f9fcc4306ef24526e5.jpg" alt=""/>
-                        <div class="card-body">
-                            <small class="text-categorie">Vie quotidienne</small>
-                            <p class="card-text"><a href="/actualite/une-aide-durgence-pour-les-victimes-de-violences-conjugales">Une aide d&#039;urgence pour les victimes de violences conjugales</a></p>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ouvrir</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    {% endif %}
+        <div class="album pt-5 bg-body-tertiary">
+            <div class="pdg-btm container">
+                <h1 class="titre_actu mt-4">L'essentiel de l'actualité</h1>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {% for article in lastArticles %}
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <small class="text-categorie">{{ article.getCategoriesString() }}</small>
+                                    <p class="card-text"><a href="{{ path('show_article', {'id' : article.id}) }}">{{ article.titre }}</a></p>
+                                    <p class="card-text">{{ article.corps|slice(0, 100) ~ '...' }}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path('show_article', {'id' : article.id}) }}">Ouvrir</a></button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
+                                        </div>
+                                        <small class="text-body-secondary">Publié {{ article.getCreatedAt()|date("d/m/Y") }}</small>
+                                    </div>
                                 </div>
-                                <small class="text-body-secondary">Publié 12/12/2023</small>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <div class="justify-card">
-                            <div class="card body">
-                                <p class="card-text"><a href="/actualite/les-bons-reflexes-a-avoir-face-au-risque-terroriste">Les bons réflexes face à la menace terroriste</a></p>
-                                <small class="text-categorie">Sécurité intérieure</small>
-                                <p class="card-text"><a href="/actualite/tpe-pme-une-plateforme-pour-concilier-ecologie-et-economies">TPE-PME : une plateforme pour concilier écologie et économies</a></p>
-                                <small class="text-categorie">Croissance</small>
-                                <p class="card-text"><a href="/actualite/les-dates-des-vacances-scolaires-de-noel-2023">Les dates des vacances scolaires de Noël 2023</a></p>
-                                <small class="text-categorie">École primaire</small>
-                                <p class="card-text"><a href="/actualite/une-campagne-contre-les-violences-sexistes-et-sexuelles-dans-les-transports-en-commun">Une campagne contre les violences sexistes dans les transports</a></p>
-                                <small class="text-categorie">Vie quotidienne</small>
-                                <button class="btn btn-outline-secondary" type="button">Voir plus...</button>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-    </div>
-    <hr/>
-    <div class="mtp-ressources album pt-5 bg-body-tertiary">
-        <div class="pdg-btm container">
-            <h1 class="titre_actu mt-4">Ressources récentes</h1>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <small class="text-categorie">Vie quotidienne</small>
-                            <p class="card-text"><a href="/actualite/les-4-actus-de-la-semaine-du-27-novembre-au-3-decembre-2023">Les 4 actus de la semaine du 27 novembre au 3 décembre 2023</a></p>
-                            <p class="card-text">This is a wider card with supporting text below.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ouvrir</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
+
+        <hr/>
+
+        <div class="mtp-ressources album pt-5 bg-body-tertiary">
+            <div class="pdg-btm container">
+                <h1 class="titre_actu mt-4">Ressources récentes</h1>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {% for ressource in lastRessources %}
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <small class="text-categorie">{{ ressource.article.getCategoriesString() }}</small>
+                                    <p class="card-text"><a href="{{ path('show_article', {'id' : ressource.article.id}) }}">{{ ressource.titre }}</a></p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path('show_article', {'id' : ressource.article.id}) }}">Ouvrir</a></button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
+                                        </div>
+                                        <small class="text-body-secondary">Publié {{ ressource.getCreatedAt()|date("d/m/Y") }}</small>
+                                    </div>
                                 </div>
-                                <small class="text-body-secondary">Publié 20/12/2023</small>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <small class="text-categorie">Vie quotidienne</small>
-                            <p class="card-text"><a href="/actualite/une-aide-durgence-pour-les-victimes-de-violences-conjugales">Une aide d&#039;urgence pour les victimes de violences conjugales</a></p>
-                            <p class="card-text">This is a wider card with supporting text below.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ouvrir</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
-                                </div>
-                                <small class="text-body-secondary">Publié 12/12/2023</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <div class="justify-card">
-                            <div class="card body">
-                                <p class="card-text"><a href="/actualite/les-dates-des-vacances-scolaires-de-noel-2023">Les dates des vacances scolaires de Noël 2023</a></p>
-                                <small class="text-categorie">École primaire</small>
-                                <p class="card-text"><a href="/actualite/une-campagne-contre-les-violences-sexistes-et-sexuelles-dans-les-transports-en-commun">Une campagne contre les violences sexistes dans les transports</a></p>
-                                <small class="text-categorie">Vie quotidienne</small>
-                                <button class="btn btn-outline-secondary" type="button">Voir plus...</button>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-    </div>
 </main>
 {% endblock %}

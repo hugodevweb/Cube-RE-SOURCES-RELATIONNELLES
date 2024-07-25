@@ -18,6 +18,9 @@ class Categorie
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
+    #[ORM\Column(length: 500)]
+    private ?string $imageUrl = null;
+
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categories')]
     private Collection $articles;
 
@@ -41,6 +44,11 @@ class Categorie
         $this->nom = $nom;
 
         return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->imageUrl;
     }
 
     /**
