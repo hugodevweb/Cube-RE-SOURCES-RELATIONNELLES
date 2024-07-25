@@ -64,11 +64,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column(length: 350, nullable: true)]
     private ?string $googleAuthenticatorSecret;
 
+    /**
+     * @var Collection<int, Favorie>
+     */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Favorie::class)]
+    private Collection $favories;
+
+    /**
+     * @var Collection<int, EnAttente>
+     */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: EnAttente::class)]
+    private Collection $enAttentes;
+
+    #[ORM\Column]
+    private ?int $nb_telechargement = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+
     public function __construct()
     {
         $this->roles = ["CITOYEN"];
         $this->articles = new ArrayCollection();
         $this->ressources = new ArrayCollection();
+        $this->favories = new ArrayCollection();
+        $this->enAttentes = new ArrayCollection();
     }
 
     public function __toString()
@@ -110,13 +130,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // dd($roles);
-        // guarantee every user at least has ROLE_USER
-        // $roles[] = 'ROLE_ADMIN';
-
-        // dd(array_unique($roles));
         return array_unique($roles);
-        // return array_unique($roles);
+    }
+
+    public function getRolesToString(): string
+    {
+        $roles = $this->roles;
+        return array_unique($roles);
     }
 
     public function setRoles(array $roles): static
@@ -306,6 +326,86 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
     {
         $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
+    }
+
+    /**
+     * @return Collection<int, Favorie>
+     */
+    public function getFavories(): Collection
+    {
+        return $this->favories;
+    }
+
+    public function addFavory(Favorie $favory): self
+    {
+        if (!$this->favories->contains($favory)) {
+            $this->favories->add($favory);
+            $favory->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavory(Favorie $favory): self
+    {
+        if ($this->favories->removeElement($favory)) {
+            if ($favory->getUser() === $this) {
+                $favory->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EnAttente>
+     */
+    public function getEnAttentes(): Collection
+    {
+        return $this->enAttentes;
+    }
+
+    public function addEnAttente(EnAttente $enAttente): static
+    {
+        if (!$this->enAttentes->contains($enAttente)) {
+            $this->enAttentes->add($enAttente);
+            $enAttente->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnAttente(EnAttente $enAttente): static
+    {
+        if ($this->enAttentes->removeElement($enAttente)) {
+            $enAttente->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getNbTelechargement(): ?int
+    {
+        return $this->nb_telechargement;
+    }
+
+    public function setNbTelechargement(int $nb_telechargement): static
+    {
+        $this->nb_telechargement = $nb_telechargement;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?string
+    {
+        return $this->created_at->format('d/m/Y');
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    {
+        $this->created_at = $created_at;
+
+        return $this;
     }
 
 }
