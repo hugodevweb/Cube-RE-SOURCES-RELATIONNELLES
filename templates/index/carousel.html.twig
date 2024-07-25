@@ -1,0 +1,40 @@
+{% if carousel is not empty %}
+    <div id="myCarousel" class="carousel slide mb-6"  data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            {% for index in range(0, carousel|length - 1) %}
+                {% set aria_current = (index == 0) ? 'true' : 'false' %}
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ index }}" {% if aria_current == 'true' %} class="active" aria-current="true" {% else %} aria-label="Slide {{ index + 1 }}" {% endif %}></button>
+            {% endfor %}
+        </div>
+        <div class="carousel-inner">
+            {% set active = false %}
+            {% for key, categorie in carousel %}
+                {% if not active %}
+                    <div class="carousel-item active">
+                    {% set active = true %}
+                {% else %}
+                    <div class="carousel-item">
+                {% endif %}
+                    <img src="{{ categorie.imageUrl }}" style="filter: blur(2px);width: fit-content;height:fit-content;" class="d-block w-100" alt="First slide">
+                    <div class="container" >
+                        <div class="carousel-caption carrouselContainer">
+                            <div class="d-flex flex-column align-items-center">
+                                <h1 class="mb-2">{{ key }}</h1>
+                                <p style="vertical-align: middle;">Dernier article : {{ categorie.titre }}</p>
+                                <p><a class="btn btn-lg btn-primary" href="{{ path('show_article', {'id': categorie.id}) }}">Regarder</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+{% endif %}

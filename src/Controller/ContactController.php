@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Security;
 
 class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
+    #[Route('/contact', name: 'contact', methods: ['GET', 'POST'])]
     public function index(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         $user = $security->getUser();
