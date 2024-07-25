@@ -92,9 +92,7 @@
     </div>
     <!-- ---------- MAIN ---------- -->
     <main>
-        <div class="row mb-2">
-            {# Check if there are any error messages #}
-            {% if app.session.getFlashBag().has('error') %}
+    {% if app.session.getFlashBag().has('error') %}
             <div class="alert alert-danger" role="alert">
                 {{ app.session.getFlashBag().get('error')|first }}
             </div>
@@ -109,6 +107,9 @@
                 {{ app.session.getFlashBag().get('sucessActivate')|first }}
             </div>
             {% endif %}
+        <div class="row mb-2">
+            {# Check if there are any error messages #}
+            
 
             <div id="dashboard" class="col-md-6">
                 <div
