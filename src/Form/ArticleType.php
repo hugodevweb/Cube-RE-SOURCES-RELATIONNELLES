@@ -22,22 +22,25 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', TextType::class)
-            ->add('corps', TextareaType::class, ['required' => false])
+            ->add('titre', TextType::class, ['label' => 'Titre'])
+            ->add('corps', TextareaType::class, ['required' => false, 'label' => 'Contenu de l\'article'])
             ->add('categories', EntityType::class, [
                 'class' => Categorie::class,
                 'multiple' => true,
                 'choice_label' => 'nom',
+                'label' => 'Sélectionnez une catégorie',
             ])
             ->add('type', EntityType::class, [
                 'class' => Type::class,
                 'choice_label' => 'nom',
+                'label' => 'Type du fichier joint',
             ])
             ->add('ressources', FileType::class, [
                 'multiple' => true,
                 'required' => false,
+                'label' => 'Ressource(s) jointe(s)',
             ])
-            ->add('valider', SubmitType::class, ['label' => 'Creer l\'article'])
+            ->add('valider', SubmitType::class, ['label' => 'Créer l\'article'])
         ;
 
         ini_restore('upload_max_filesize');

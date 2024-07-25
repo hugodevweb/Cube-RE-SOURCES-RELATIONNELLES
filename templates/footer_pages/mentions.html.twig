@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %} 
+{% block title %}Mentions légales{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="album py-0 bg-body-tertiary">
+            <div class="container my-5">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-chevron p-3">
+                        <li class="breadcrumb-item">
+                            <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Accueil</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Mentions légales 
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="grey-fond">
+            <div class="container">
+                <h1>Nos mentions légales</h1>
+                <br/>
+                <div class="row row-cols-1 g-3">
+                    <h5>Information éditeur</h5>
+                    <p>
+                        Les principaux services du ministère participent à la gestion et à l’amélioration du site sante.gouv.fr.
+                        <br/>
+                        Le suivi éditorial, graphique et technique est assuré par le cabinet du ministre et par la délégation à l’information et à la communication (DICOM).
+                        <br/>
+                        14 avenue Duquesne - 75350 Paris 07 SP 
+                    </p>
+                    <br/>
+
+                    <h5>Informations prestataires</h5>
+                    <ul>
+                        <li><p>L’hébergement est assuré par la société <a href="https://www.cegedim.fr/Pages/default.aspx" style="color:#1212ff"><b>Cegedim</b>.</a></p></li>
+                        <li><p>Le développement est assuré par la société <a href="https://www.soprasteria.com/fr" style="color:#1212ff"><b>Sopra Steria</b>.</a></p></li>
+                        <li><p>La rédaction des fiches pratiques (travail - famille - personnes âgées, seniors - handicap) est assurée par le cabinet <a href="https://www.cbcavocats.com/" style="color:#1212ff"><b>CBC Avocats</b></a></p></li>
+                    </ul>
+                    <br/>
+
+                    <h5>Droits de reproduction</h5>
+                    <p>
+                        Les contenus du site <a href="/"><b>(Re)Sources Relationnelles.fr</b></a>, à l’exception des marques et logos et des contenus grevés de droits de propriété intellectuelle de tiers ou contenant des données à caractère personnel, 
+                        sont des informations publiques librement et gratuitement réutilisables dans les conditions fixées par la loi n°78-753 du 17 juillet 1978, formalisées dans les conditions générales de réutilisation des 
+                        informations publiques ou dans le respect des conditions générales de réutilisation des informations publiques.
+                        <br/>
+                        Si vous souhaitez réutiliser des contenus présents sur ce site, merci de bien vouloir <a href="" style="color:#1212ff"><b>nous contacter</b></a>.
+                    </p>
+                    <br/>
+
+                    <h5>Graphismes, photos et vidéos</h5>
+                    <p><a href="" style="color:#1212ff"><b>Nous contacter</b></a>.</p>
+                    <br/>
+
+                    <h5>Données personnelles</h5>
+                    <p>
+                        Lorsque des données présentes sur ce site ont un caractère nominatif, les utilisateurs doivent en faire un usage conforme aux réglementations en vigueur et aux recommandations de la Commission nationale de l’informatique et des libertés (Cnil).
+                        <br/>
+                        Conformément à la loi Informatique et Liberté 78-17 du 6 janvier 1978 modifiée, vous disposez d’un droit d’opposition (art. 38), d’accès (art. 39), de rectification ou de suppression (art. 40) des données qui vous concernent. Vous pouvez exercer ce droit en vous adressant au ministère de la Santé et de la Prévention.
+                        <br/>
+                        Ce droit s’exerce, en justifiant de son identité :
+                    </p>
+                        <ul>
+                            <li><p>par voie postale : Ministère du Travail, de la Santé et des Solidarités - 14, avenue Duquesne 75350 PARIS 07 SP</p></li>
+                            <li><p>par courrier <a href="" style="color:#1212ff"><b>électronique</b>.</a></p></li>
+                        </ul>
+                    <br/>
+
+                    <h5>Liens hypertextes</h5>
+                    <h6>Fichiers : PDF, Word, Excel…</h6>
+                    <p><b>Pour les fichiers</b> (PDF, Word, Excel…) faire pointer le lien vers la page de notre site où figure ce document et non vers le fichier lui-même car le nom du fichier peut changer au fil du temps contrairement aux url des pages qui sont stables.</p>
+                    <br/>
+                    <h6>Liens vers d’autres sites</h6>
+                    <p>De nombreux liens vers d’autres sites, privés ou officiels, français ou étrangers, sont proposés. Leur présence ne saurait engager le ministère quant à leur contenu et ne visent qu’à permettre à l’internaute de trouver plus facilement d’autres ressources documentaires sur le sujet consulté.</p>
+                    <br/>
+                                  
+                    <h5>Responsabilités sur les contenus</h5>
+                    <h6>Contenus du site</h6>
+                    <p>Malgré tout le soin apporté par nos équipes éditoriales et techniques à la rédaction et la mise en ligne des documents, 
+                    des erreurs typographiques ou des inexactitudes techniques ne peuvent être exclues. Le ministère de la Santé et de la Prévention 
+                    se réserve le droit de les corriger à tout moment dès qu’elles sont portées à sa connaissance.<br/>
+                    Les informations et les documents contenus sur le site <a href="/"><b>(Re)Sources Relationnelles.fr</b></a> sont susceptibles de 
+                    faire l’objet de mise à jour à tout moment. Notamment, elles peuvent faire l’objet de mises à jour entre le moment de leur 
+                    téléchargement par l’internaute et celui où il en prend connaissance.</p>
+                    <br/>
+                    <h6>Clause de responsabilité</h6>
+                    <p>Les informations proposées sur ce site le sont à titre de service rendu au public. Malgré tout le soin apporté à la 
+                    transcription des textes officiels, à la vérification des contenus et des informations, les éléments mis en ligne ne 
+                    sauraient, de quelque manière que ce soit, prétendre à l’exactitude et engager la responsabilité du ministère.</p>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
