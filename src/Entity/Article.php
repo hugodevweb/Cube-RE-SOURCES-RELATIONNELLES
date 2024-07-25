@@ -40,13 +40,23 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private Collection $categories;
 
-    
-
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentaire::class)]
     private Collection $commentaires;
 
-    #[ORM\OneToOne(mappedBy: 'article', cascade: ['persist', 'remove'])]
-    private ?Ressource $ressource = null;
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Ressource::class , cascade: ['persist', 'remove'])]
+    private Collection $ressources;
+
+    /**
+     * @var Collection<int, Favorie>
+     */
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Favorie::class)]
+    private Collection $favories;
+
+    /**
+     * @var Collection<int, EnAttente>
+     */
+    #[ORM\ManyToMany(targetEntity: EnAttente::class, mappedBy: 'articles')]
+    private Collection $enAttentes;
 
     public function __construct()
     {
@@ -55,6 +65,9 @@ class Article
         $this->created_at = new DateTimeImmutable(false, new DateTimeZone('Europe/Paris'));
         $this->categories = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->ressources = new ArrayCollection();
+        $this->favories = new ArrayCollection();
+        $this->enAttentes = new ArrayCollection();
     }
 
     public function __toString()
@@ -216,21 +229,9 @@ class Article
         return $this->user->getPseudo();
     }
 
-    public function setRessource(?Ressource $ressource): static
+    public function getIdAuteur(): string
     {
-        // unset the owning side of the relation if necessary
-        if ($ressource === null && $this->ressource !== null) {
-            $this->ressource->setArticle(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($ressource !== null && $ressource->getArticle() !== $this) {
-            $ressource->setArticle($this);
-        }
-
-        $this->ressource = $ressource;
-
-        return $this;
+        return $this->user->getId();
     }
 
     /**
@@ -238,16 +239,83 @@ class Article
      */
     public function getRessources(): Collection
     {
-        return new ArrayCollection([$this->ressource]);
+        return $this->ressources;
+    }
+
+    public function addRessource(Ressource $ressource): static
+    {
+        if (!$this->ressources->contains($ressource)) {
+            $this->ressources->add($ressource);
+            $ressource->setArticle($this);
+        }
+
+        return $this;
     }
 
     public function removeRessource(Ressource $ressource): static
     {
-        if ($this->ressource->removeElement($ressource)) {
+        if ($this->ressources->removeElement($ressource)) {
             // set the owning side to null (unless already changed)
             if ($ressource->getArticle() === $this) {
                 $ressource->setArticle(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favorie>
+     */
+    public function getFavories(): Collection
+    {
+        return $this->favories;
+    }
+
+    public function addFavory(Favorie $favory): self
+    {
+        if (!$this->favories->contains($favory)) {
+            $this->favories->add($favory);
+            $favory->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavory(Favorie $favory): self
+    {
+        if ($this->favories->removeElement($favory)) {
+            // set the owning side to null (unless already changed)
+            if ($favory->getArticle() === $this) {
+                $favory->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EnAttente>
+     */
+    public function getEnAttentes(): Collection
+    {
+        return $this->enAttentes;
+    }
+
+    public function addEnAttente(EnAttente $enAttente): static
+    {
+        if (!$this->enAttentes->contains($enAttente)) {
+            $this->enAttentes->add($enAttente);
+            $enAttente->addArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnAttente(EnAttente $enAttente): static
+    {
+        if ($this->enAttentes->removeElement($enAttente)) {
+            $enAttente->removeArticle($this);
         }
 
         return $this;

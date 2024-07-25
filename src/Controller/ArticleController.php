@@ -3,16 +3,22 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\EnAttente;
+use App\Entity\Favorie;
 use App\Entity\Ressource;
 use App\Entity\Commentaire;
 use App\Form\CommentaireFormType;
 use App\Form\ReponseFormType;
 use App\Form\ArticleType;
 use App\Repository\CommentaireRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Monolog\DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,6 +34,7 @@ class ArticleController extends AbstractController
         $this->tokenStorage = $tokenStorage;
     }
 
+    // Show all articles
     #[Route('/', name: 'articles')]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -54,19 +61,20 @@ class ArticleController extends AbstractController
             }
             $article->setTitre($form->get('titre')->getData());
             $article->setCorps($form->get('corps')->getData());
-            $article->setType($form->get('type')->getData());
             foreach ($liste_ressources as $ressource) {
                 $name = pathinfo($ressource->getClientOriginalName());
                 $ressource->move($this->getParameter('kernel.project_dir') . '/public/files/', basename($ressource));
                 $pathSymfony = $this->getParameter('kernel.project_dir') . '/public/files/' . basename($ressource);
-                $slug = 'files/' . $name['filename'] . '-' . rand(100000, 999999) . '-' . rand(100000, 999999) . '-' . rand(100000, 999999) . '.' . $name['extension'];
-                rename($pathSymfony, $this->getParameter('kernel.project_dir') . '/public/' . $slug);
+                $slug = $name['filename'] . '-' . rand(100000, 999999) . '-' . rand(100000, 999999) . '-' . rand(100000, 999999) . '.' . $name['extension'];
+                rename($pathSymfony, $this->getParameter('kernel.project_dir') . '/public/files/' . $slug);
 
                 $fichier = new Ressource();
+                $fichier->setType($form->get('type')->getData());
                 $fichier->setCreatedAt(new \DateTimeImmutable());
                 $fichier->setTitre($ressource->getClientOriginalName());
                 $fichier->setNom($slug);
                 $fichier->setArticle($article);
+                $fichier->setUser($this->getUser());
                 $article->setRessource($fichier);
                 $entityManager->persist($fichier);
             }
@@ -82,14 +90,18 @@ class ArticleController extends AbstractController
         return $res;
     }
 
+    // Delete an article
     #[Route('/deleteArticle/{id}', name: 'delete_article', methods: ['GET'])]
     public function DeleteArticle(int $id, EntityManagerInterface $entityManager): Response
     {
-        $repoA = $entityManager->getRepository(Article::class);
-        $article = $repoA->find($id);
-        $entityManager->remove($article->getId());
+        $article = $entityManager->getRepository(Article::class)->find($id);
 
-        return $this->redirectToRoute('home');
+        if ($article) {
+            $entityManager->remove($article);
+            $entityManager->flush();
+        }
+        
+        return $this->redirectToRoute('app_index');
     }
 
     // Visualisation d'un article
@@ -137,6 +149,8 @@ class ArticleController extends AbstractController
             $entityManager->flush();
         }
 
+        $user = $this->getUser();
+        // dd($user->getFavories()->toArray());
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'commentairesParent' => $commentaireRepository->findCommentsParents($article),
@@ -144,5 +158,106 @@ class ArticleController extends AbstractController
             'form' => $form->createView(),
             'reponse_form_token' => $reponse_form->createView()->children['_token']->vars['value'],
         ]);
+    }
+
+    // Add an article to favories
+    #[Route('/addFavorieArticle/{id}', name: 'add_favorie_article', methods: ['GET'])]
+    public function addFavorieArticle(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $article = $entityManager->getRepository(Article::class)->find($id);
+        $user = $this->getUser();
+        if ($article && $user) {
+            $favorie = new Favorie();
+            $favorie->setArticle($article);
+            $favorie->setUser($user);
+
+            $entityManager->persist($favorie);
+            $entityManager->flush();
+        }
+        
+        return $this->redirectToRoute('show_article', ['id' => $id]);
+    }
+    
+    // Delete an article to favories
+    #[Route('/deleteFavorieArticle/{id}', name: 'delete_favorie_article', methods: ['GET'])]
+    public function deleteFavorieArticle(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $article = $entityManager->getRepository(Article::class)->find($id);
+        $user = $this->getUser();
+        if ($article && $user) {
+            $favorie = $entityManager->getRepository(Favorie::class)->findOneBy(['user' => $user->getId(), 'article' => $article->getId()]);
+            if ($favorie) {
+                $entityManager->remove($favorie);
+                $entityManager->flush();
+            }
+        }
+        return $this->redirectToRoute('show_article', ['id' => $id]);
+    }
+    
+    // Add an article to en_attente
+    #[Route('/addEnAttenteArticle/{id}', name: 'add_en_attente_article', methods: ['GET'])]
+    public function addEnAttenteArticle(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $article = $entityManager->getRepository(Article::class)->find($id);
+        $user = $this->getUser();
+        if ($article && $user) {
+            $en_attente = new EnAttente();
+            $en_attente->setArticle($article);
+            $en_attente->setUser($user);
+
+            $entityManager->persist($en_attente);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('show_article', ['id' => $id]);
+    }
+    
+    // Delete an article to en_attente
+    #[Route('/deleteEnAttenteArticle/{id}', name: 'delete_en_attente_article', methods: ['GET'])]
+    public function deleteEnAttenteArticle(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $article = $entityManager->getRepository(Article::class)->find($id);
+        $user = $this->getUser();
+        if ($article && $user) {
+            $en_attente = $entityManager->getRepository(EnAttente::class)->findOneBy(['user' => $user->getId(), 'article' => $article->getId()]);
+            if ($en_attente) {
+                $entityManager->remove($en_attente);
+                $entityManager->flush();
+            }
+        }
+        return $this->redirectToRoute('show_article', ['id' => $id]);
+    }
+
+    // Download la ressource
+    #[Route('/download/{id}', name: 'download_file', methods: ['GET'])]
+    public function download(int $id, EntityManagerInterface $em)
+    {
+        $article = $em->getRepository(Article::class)->find($id);
+
+        if (!$article) {
+            throw $this->createNotFoundException('The article does not exist');
+        }
+        $zip = new \ZipArchive();
+        $zipFileName = $this->getParameter('kernel.project_dir') . '/public/zip/' . $article->getTitre() . '.zip';
+
+        if ($zip->open($zipFileName, \ZipArchive::CREATE) !== true) {
+            return $this->json(['message' => 'Cannot create a zip file'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        foreach ($article->getRessources()->toArray() as $ressource) {
+            $filePath = $this->getParameter('kernel.project_dir') . '/public/files/' . $ressource->getNom();
+
+            if (!file_exists($filePath)) {
+                return $this->json(['message' => "File $ressource->getTitle() does not exist"], Response::HTTP_NOT_FOUND);
+            }
+
+            $zip->addFile($filePath, basename($filePath));
+        }
+
+        $zip->close();
+
+        $response = new BinaryFileResponse($zipFileName);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $article->getTitre() . '.zip');
+
+        return $response;
     }
 }

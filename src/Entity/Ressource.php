@@ -19,7 +19,7 @@ class Ressource
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\ManyToOne(inversedBy: 'ressource')]
+    #[ORM\ManyToOne(inversedBy: 'ressources')]
     private ?Article $article = null;
 
     #[ORM\Column(length: 255)]
@@ -34,9 +34,6 @@ class Ressource
 
     #[ORM\ManyToOne(inversedBy: 'ressources')]
     private ?User $user = null;
-
-    #[ORM\ManyToOne(inversedBy: 'ressources')]
-    private ?Favorie $favorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'ressources')]
     private ?Exploitation $exploitation = null;
@@ -114,18 +111,6 @@ class Ressource
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getFavorie(): ?Favorie
-    {
-        return $this->favorie;
-    }
-
-    public function setFavorie(?Favorie $favorie): static
-    {
-        $this->favorie = $favorie;
 
         return $this;
     }

@@ -28,15 +28,13 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <p class="card-text"><a href="#">{{ ressource.titre }}</a></p>
-                        {% if nombreVu is defined %}
-                            <p class="card-text">Vu {{ article.nombreVu }} fois</p>
-                        {% endif %}
+                        <p class="card-text">Vu {{ ressource.article.nombreVu }} fois</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="{{ path('show_article', {'id': article.id}) }}" class="btn btn-sm btn-outline-secondary">Ouvrir</a>
+                                <a href="{{ path('show_article', {'id': ressource.article.id}) }}" class="btn btn-sm btn-outline-secondary">Ouvrir</a>
                                 <button type="button" class="btn btn-sm btn-outline-secondary">Partager</button>
                             </div>
-                            <small class="text-body-secondary">{{ article.getDate() }}</small>
+                            <small class="text-body-secondary">{{ ressource.article.getDate() }}</small>
                         </div>
                     </div>
                 </div>
