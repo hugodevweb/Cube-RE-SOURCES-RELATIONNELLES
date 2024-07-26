@@ -23,7 +23,7 @@
     <div class="collapse pb-4 pt-2" id="collapseExample">
       <!-- Options supplémentaires -->
       <button class="btn btn-outline-light btn-sm">
-        {% if app.user.getFavories().toArray()|filter(v => v.article.id == article.id) | length == 0 %}
+        {% if app.user and app.user.getFavories().toArray()|filter(v => v.article.id == article.id) | length == 0 %}
           <a href="{{ path('add_favorie_article', {'id': article.id}) }}" class="d-flex text-decoration-none text-reset">
             <svg xmlns="http://www.w3.org/2000/svg" style="margin-right:15px" width="24" height="24" fill="currentColor"
               class="bi bi-bookmark-heart-fill text-danger d-block mb-1 mr-2" viewBox="0 0 16 16">
@@ -45,7 +45,7 @@
       </button>
       
       <button class="btn btn-outline-light d-flex btn-sm mt-2"> 
-        {% if app.user.getEnAttentes().toArray()|filter(v => v.article.id == article.id) | length == 0 %}
+        {% if app.user and app.user.getEnAttentes().toArray()|filter(v => v.article.id == article.id) | length == 0 %}
           <a href="{{ path('add_en_attente_article', {'id': article.id}) }}" class="d-flex text-decoration-none text-reset">
             <svg xmlns="http://www.w3.org/2000/svg" width="24"style="margin-right:15px" height="24" fill="currentColor" class="bi bi-bookmark-star-fill d-block mb-1 mr-2" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5M8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098z" />
@@ -70,7 +70,7 @@
     <p>
       {{ article.corps|nl2br }}
     </p>
-    {% if app.user.id == article.getIdAuteur %}
+    {% if app.user and app.user.id == article.getIdAuteur %}
       <button type="button" class="btn btn-danger" onclick="confirmDelete({{ article.id }})">Supprimer</button>
     {% endif %}
 
